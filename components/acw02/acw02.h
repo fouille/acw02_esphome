@@ -282,7 +282,10 @@ class ACW02 : public Component, public uart::UARTDevice {
   uint32_t rx_max_depth_ = 0; // for check size rx buffer
   bool ack_wait_ = false;
   uint32_t ack_block_until_ = 0;
-
+  // Timing constants (already have these near your others)
+  static constexpr uint32_t ACK_RETRY_TIMEOUT_MS = 200;  // 200–300ms is fine
+  bool timeout_retry_pending_{false};
+  
   // variables AC
   Mode mode_ {Mode::COOL};
   bool power_on_ {false};
@@ -398,6 +401,9 @@ class ACW02 : public Component, public uart::UARTDevice {
 
   // Protected functions for command queue
   void process_tx_queue();
+
+  // Check and retry if cmd don't have ACK AC
+  void check_timeout_retry();
 
   // Protected functions for command UART
   Frame_with_Fingerprint build_frame(bool bypassMute = false) const;

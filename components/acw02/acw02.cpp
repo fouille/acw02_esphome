@@ -138,6 +138,8 @@ namespace esphome {
           rx_buffer_.erase(rx_buffer_.begin(), rx_buffer_.begin() + offset);
       }
 
+      check_timeout_retry();
+
       static uint32_t last_keepalive = 0;
       if (millis() - last_keepalive > 60000 && tx_queue_.empty()) {
         if (millis() - last_rx_byte_time_ > 200) {
@@ -2968,21 +2970,68 @@ namespace esphome {
         return;
       }
       ESP_LOGW(TAG, "TX: [%s]", format_hex_pretty(pkt.frame).c_str());
-      cmd_send_fingerprint_ = pkt;
-      if (pkt.fingerprint != 0) {
-       log_fingerprint("write_frame", cmd_send_fingerprint_);
-      }
       write_array(pkt.frame);
       last_tx_ = millis();
-      cmd_send_fingerprint_.timestamp_ms = last_tx_;
-      if (pkt.tryCnt == 0 && pkt.fingerprint != 0) {
-        ack_wait_ = true;
-      }
+
       if (pkt.fingerprint != 0) {
+        // Track only "real" AC commands (frames that carry a state change)
+        cmd_send_fingerprint_ = pkt;
+        log_fingerprint("write_frame", cmd_send_fingerprint_);
+        cmd_send_fingerprint_.timestamp_ms = last_tx_;
+
+        // New (re)TX of a real command → allow future timeout-based retries
+        timeout_retry_pending_ = false;
+
+        // ACK window only for a fresh real command
+        if (pkt.tryCnt == 0) {
+          ack_wait_ = true;
+        }
         ack_block_until_ = last_tx_ + ACK_WINDOW_MS;
+      } else {
+        // Keepalive / status poll: do not touch in-flight tracking
+        // (no cmd_send_fingerprint_, no ack_wait_, no ack_block_until_, no timeout flag)
       }
       tx_queue_.pop_front();
     }
+
+    void ACW02::check_timeout_retry() {
+      // Trigger a silent timeout-based retry if no 34B ACK-like RX was seen
+      // within the expected window after the last TX. This complements the
+      // fingerprint-based retry path inside decode_state().
+      const uint32_t now = millis();
+      const auto &p = cmd_send_fingerprint_;
+
+      if (p.fingerprint == 0) return;  // nothing in-flight
+
+      const uint32_t dt = (uint32_t)(now - p.timestamp_ms);
+
+      // Conditions:
+      // - we have waited long enough to allow the AC to respond (ACK_EVAL_MIN_MS)
+      // - we crossed the timeout (ACK_RETRY_TIMEOUT_MS)
+      // - we still have retries left
+      // - we have not already enqueued a timeout-based retry for this TX
+      if (dt >= ACK_EVAL_MIN_MS &&
+          dt >= ACK_RETRY_TIMEOUT_MS &&
+          p.tryCnt < maxRetry &&
+          !timeout_retry_pending_) {
+
+        Frame_with_Fingerprint retry = p;  // snapshot current in-flight
+        retry.tryCnt++;
+
+        // Make the frame "mute" only if it was not already mute, then fix CRC.
+        retry.frame = make_muted_with_fixed_crc(retry.frame);
+
+        // Your send_command_basic() already prioritizes retries (push_front when tryCnt>0).
+        send_command_basic(retry);
+
+        // Prevent multiple enqueues while we wait for the retry to actually TX.
+        timeout_retry_pending_ = true;
+
+        ESP_LOGW(TAG, "Retry on timeout: dt=%" PRIu32 "ms, try=%d/%d",
+                dt, (int)retry.tryCnt, (int)maxRetry);
+      }
+    }
+
 
     Frame_with_Fingerprint ACW02::build_frame(bool bypassMute) const {
       Frame_with_Fingerprint cmd_send = fingerprint();
@@ -3281,19 +3330,21 @@ namespace esphome {
             } else {
               ESP_LOGE(TAG, "Last tx cannot retry because max exceeded");
               ack_wait_ = false;
+              timeout_retry_pending_ = false;
             }
             
           } else {
             ack_wait_ = false;
+            timeout_retry_pending_ = false;
           }
-        }
-        if (cmd_send_fingerprint_tmp.fingerprint == cmd_send_fingerprint_.fingerprint &&
-          cmd_send_fingerprint_tmp.timestamp_ms == cmd_send_fingerprint_.timestamp_ms &&
-          cmd_send_fingerprint_tmp.tryCnt == cmd_send_fingerprint_.tryCnt) {
-          cmd_send_fingerprint_ = {0, "", {}, 0, 0};
-           ESP_LOGW(TAG, "Fingerprint Reset");
-        } else {
-          ESP_LOGE(TAG, "Fingerprint Not reset because cmd fp diff");
+          if (cmd_send_fingerprint_tmp.fingerprint == cmd_send_fingerprint_.fingerprint &&
+            cmd_send_fingerprint_tmp.timestamp_ms == cmd_send_fingerprint_.timestamp_ms &&
+            cmd_send_fingerprint_tmp.tryCnt == cmd_send_fingerprint_.tryCnt) {
+            cmd_send_fingerprint_ = {0, "", {}, 0, 0};
+            ESP_LOGW(TAG, "Fingerprint Reset");
+          } else {
+            ESP_LOGE(TAG, "Fingerprint Not reset because cmd fp diff");
+          }
         }
       } else {
         ESP_LOGE(TAG, "Fingerprint ignored because time < %lu ms", (unsigned long)ACK_EVAL_MIN_MS);
