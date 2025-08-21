@@ -870,6 +870,18 @@ namespace esphome {
                 mqtt_publish_queue_.pop_front();
               }
               });
+              this->set_interval("hb_last_seen", INTERVAL_INTERNAL_KEEPALIVE, [this]() {
+                // Get current UNIX time (epoch seconds)
+                time_t now = ::time(nullptr);
+
+                // Convert to string
+                std::string payload = std::to_string(static_cast<long>(now));
+
+                // Publish retained, QoS 1
+                publish_async(app_name_ + "/last_seen", payload, 1, true);
+
+                ESP_LOGW(TAG, "Heartbeat last_seen published (epoch): %s", payload.c_str());
+              });
               publish_discovery_climate();
               publish_discovery_mode_select();
               publish_discovery_fan_select();

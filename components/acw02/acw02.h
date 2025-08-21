@@ -274,6 +274,7 @@ class ACW02 : public Component, public uart::UARTDevice {
   uint32_t last_rx_byte_time_{0};
   std::deque<Frame_with_Fingerprint> tx_queue_;
   uint32_t last_tx_{0};
+  static constexpr uint32_t INTERVAL_INTERNAL_KEEPALIVE = 15000;
   static constexpr uint32_t SILENCE_RX_MS = 120;
   static constexpr uint32_t ACK_WINDOW_MS = 120;
   static constexpr uint32_t TX_INTERVAL_MS = 180;
