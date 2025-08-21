@@ -66,6 +66,7 @@ mqtt:
   password: ""
   enable_on_boot: false
   discovery: false
+  keepalive: 10s
   topic_prefix: ${dev_name}
   birth_message:
     topic: ${dev_name}/status

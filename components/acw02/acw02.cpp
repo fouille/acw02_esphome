@@ -839,7 +839,7 @@ namespace esphome {
 
       set_timeout("mqtt_connect", 2000, [this]() {
         if (wifi::global_wifi_component->is_connected()) {
-          ESP_LOGI(TAG, "Wi-Fi OK; attempting MQTT connection…");
+          ESP_LOGW(TAG, "Wi-Fi OK; attempting MQTT connection…");
           mqtt_->enable();
           mqtt_initializer();
           set_timeout("mqtt_retry", 5000, [this]() {
@@ -848,7 +848,7 @@ namespace esphome {
             }
           });
         } else {
-          ESP_LOGI(TAG, "Wi-Fi not connected; retrying in 5 s");
+          ESP_LOGW(TAG, "Wi-Fi not connected; retrying in 5 s");
           set_timeout("mqtt_retry", 2000, [this]() { mqtt_connexion(); });
         }
       });
@@ -857,7 +857,7 @@ namespace esphome {
     void ACW02::mqtt_initializer() {
       if (mqtt_) {
         mqtt_->set_on_connect([this](bool first) {
-          ESP_LOGI(TAG, "MQTT connected → publishing discovery and state");
+          ESP_LOGW(TAG, "MQTT connected → publishing discovery and state");
           if (mqtt_connected_sensor_) mqtt_connected_sensor_->publish_state(true);
           set_timeout("mqtt_discovery_delay", 100, [this]() {
             set_interval("mqtt_publish_flush", 50, [this]() {
