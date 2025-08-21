@@ -2966,7 +2966,12 @@ namespace esphome {
       return;
 
       const auto &pkt = tx_queue_.front();
-      if (ack_wait_ && pkt.tryCnt == 0 && millis() < ack_block_until_) {
+
+      if (millis() < ack_block_until_) {
+        return;
+      }
+
+      if (ack_wait_ && pkt.tryCnt == 0) {
         return;
       }
       ESP_LOGW(TAG, "TX: [%s]", format_hex_pretty(pkt.frame).c_str());
@@ -3029,6 +3034,23 @@ namespace esphome {
 
         ESP_LOGW(TAG, "Retry on timeout: dt=%" PRIu32 "ms, try=%d/%d",
                 dt, (int)retry.tryCnt, (int)maxRetry);
+      }
+
+      // --- Safety net / fail-safe ---------------------------------------------
+      // If no RX 34B ever arrives, decode_state() will never clear ack_wait_.
+      // After we have exhausted maxRetry, release the gate after a global timeout
+      // so that the system doesn't remain blocked forever.
+
+      if (p.tryCnt >= maxRetry) {
+        if (dt >= ACK_ABORT_MS) {
+          ESP_LOGE(TAG, "Ack timeout: aborting in-flight cmd after %u ms (tries=%d/%d)",
+             (unsigned)dt, (int)p.tryCnt, (int)maxRetry);
+
+          cmd_failure_counter_++;       // count a failure for observability
+          ack_wait_ = false;            // release the "fresh command" gate
+          timeout_retry_pending_ = false;
+          cmd_send_fingerprint_ = {0, "", {}, 0, 0};  // clear in-flight
+        }
       }
     }
 

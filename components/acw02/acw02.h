@@ -284,6 +284,7 @@ class ACW02 : public Component, public uart::UARTDevice {
   uint32_t ack_block_until_ = 0;
   // Timing constants (already have these near your others)
   static constexpr uint32_t ACK_RETRY_TIMEOUT_MS = 200;  // 200–300ms is fine
+  static constexpr uint32_t ACK_ABORT_MS = 1200;
   bool timeout_retry_pending_{false};
   
   // variables AC
