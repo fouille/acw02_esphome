@@ -141,7 +141,7 @@ namespace esphome {
       check_timeout_retry();
 
       static uint32_t last_keepalive = 0;
-      if (millis() - last_keepalive > 60000 && tx_queue_.empty()) {
+      if (!ack_wait_ && millis() - last_keepalive > INTERVAL_INTERNAL_AC_KEEPALIVE && tx_queue_.empty()) {
         if (millis() - last_rx_byte_time_ > 200) {
           last_keepalive = millis();
           send_static_command_basic(keepalive_frame_);
@@ -872,7 +872,7 @@ namespace esphome {
                 mqtt_publish_queue_.pop_front();
               }
               });
-              this->set_interval("hb_last_seen", INTERVAL_INTERNAL_KEEPALIVE, [this]() {
+              this->set_interval("hb_last_seen", INTERVAL_INTERNAL_MQTT_KEEPALIVE, [this]() {
                 // Get current UNIX time (epoch seconds)
                 time_t now = ::time(nullptr);
 
@@ -2971,7 +2971,7 @@ namespace esphome {
         return;
       }
 
-      if (ack_wait_ && pkt.tryCnt == 0) {
+      if (ack_wait_ && pkt.fingerprint != 0 && pkt.tryCnt == 0) {
         return;
       }
       ESP_LOGW(TAG, "TX: [%s]", format_hex_pretty(pkt.frame).c_str());
@@ -3032,8 +3032,8 @@ namespace esphome {
         // Prevent multiple enqueues while we wait for the retry to actually TX.
         timeout_retry_pending_ = true;
 
-        ESP_LOGW(TAG, "Retry on timeout: dt=%" PRIu32 "ms, try=%d/%d",
-                dt, (int)retry.tryCnt, (int)maxRetry);
+        ESP_LOGW(TAG, "Retry on timeout: dt=%lu ms, try=%d/%d",
+         (unsigned long)dt, (int)retry.tryCnt, (int)maxRetry);
       }
 
       // --- Safety net / fail-safe ---------------------------------------------
@@ -3045,11 +3045,14 @@ namespace esphome {
         if (dt >= ACK_ABORT_MS) {
           ESP_LOGE(TAG, "Ack timeout: aborting in-flight cmd after %u ms (tries=%d/%d)",
              (unsigned)dt, (int)p.tryCnt, (int)maxRetry);
-
+          cmd_send_fingerprint_ = {0, "", {}, 0, 0};  // clear in-flight
           cmd_failure_counter_++;       // count a failure for observability
           ack_wait_ = false;            // release the "fresh command" gate
+          ack_block_until_ = 0;
           timeout_retry_pending_ = false;
-          cmd_send_fingerprint_ = {0, "", {}, 0, 0};  // clear in-flight
+          // Fallback: force a quick state resync now (34B status frame)
+          send_static_command_basic(get_status_frame_);
+          ESP_LOGW(TAG, "Fingerprint Reset (abort)");
         }
       }
     }
@@ -3351,11 +3354,20 @@ namespace esphome {
               send_command_basic(cmd_send_fingerprint_before_send);
             } else {
               ESP_LOGE(TAG, "Last tx cannot retry because max exceeded");
+              // Drop in-flight tracking so we don't re-enter here
+              cmd_send_fingerprint_ = {0, "", {}, 0, 0};
+              cmd_failure_counter_++;
               ack_wait_ = false;
+              ack_block_until_ = 0;
               timeout_retry_pending_ = false;
+              // Fallback: resync immediately (fp==0 does not touch in-flight tracking)
+              send_static_command_basic(get_status_frame_);
+              ESP_LOGW(TAG, "Fingerprint Reset (max-retry fallback)");
             }
             
           } else {
+            const uint32_t rtt = (uint32_t)(now - cmd_send_fingerprint_tmp.timestamp_ms);
+            ESP_LOGW(TAG, "ACK matched after %lu ms", (unsigned long)rtt);
             ack_wait_ = false;
             timeout_retry_pending_ = false;
           }
