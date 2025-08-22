@@ -404,6 +404,9 @@ class ACW02 : public Component, public uart::UARTDevice {
   // Protected functions for command queue
   void process_tx_queue();
 
+  // jitter retry
+  uint32_t compute_retry_jitter(int tryCnt) const;
+
   // Check and retry if cmd don't have ACK AC
   void check_timeout_retry();
 

@@ -2991,12 +2991,30 @@ namespace esphome {
         if (pkt.tryCnt == 0) {
           ack_wait_ = true;
         }
-        ack_block_until_ = last_tx_ + ACK_WINDOW_MS;
+        uint32_t extra = 0;
+        if (pkt.tryCnt > 0) {
+          extra = compute_retry_jitter(pkt.tryCnt);
+        }
+        ack_block_until_ = last_tx_ + ACK_WINDOW_MS + extra;
       } else {
         // Keepalive / status poll: do not touch in-flight tracking
         // (no cmd_send_fingerprint_, no ack_wait_, no ack_block_until_, no timeout flag)
       }
       tx_queue_.pop_front();
+    }
+
+    uint32_t ACW02::compute_retry_jitter(int tryCnt) const {
+      const uint32_t jitter_min = 5;
+      const uint32_t jitter_max = 15;
+
+      // We mix millis() with tryCnt to vary
+      uint32_t seed = (millis() / 7u) + (tryCnt * 131u);
+
+      // Bounded pseudo-random value
+      uint32_t jitter = jitter_min + (seed % (jitter_max - jitter_min + 1));
+
+      ESP_LOGW(TAG, "Retry jitter (tryCnt=%d) = %u ms", tryCnt, jitter);
+      return jitter;
     }
 
     void ACW02::check_timeout_retry() {
@@ -3354,8 +3372,6 @@ namespace esphome {
               send_command_basic(cmd_send_fingerprint_before_send);
             } else {
               ESP_LOGE(TAG, "Last tx cannot retry because max exceeded");
-              // Drop in-flight tracking so we don't re-enter here
-              cmd_send_fingerprint_ = {0, "", {}, 0, 0};
               cmd_failure_counter_++;
               ack_wait_ = false;
               ack_block_until_ = 0;
