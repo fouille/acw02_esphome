@@ -7,7 +7,7 @@
 
 - Home Assistant with **MQTT integration** enabled and properly configured
 - A working MQTT broker (e.g., Mosquitto)
-- enable the WIFI with the ac remote
+- Enable the WIFI with the ac remote
 
 
 ## ⚙️ Settings
