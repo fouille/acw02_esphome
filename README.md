@@ -3,7 +3,9 @@ for Teknopoint and Airton AC units using the Tuya ACW02 Wi-Fi module
 
 ⚠️ **WARNING For airton :**  Should work on recent Airton models > 409934, below this reference, it is possible that the air conditioning does not send enough energy for the module to work.
 
-Symptom: impossible to activate the wifi on the air conditioner when the module is connected (the wifi logo does not appear)
+Symptom: 
+- impossible to activate the wifi on the air conditioner when the module is connected (the wifi logo does not appear)
+- the ESP LED lights up briefly then goes out
   
 model having this problem (Non-exhaustive list): 
  - 409733
