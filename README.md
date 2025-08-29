@@ -1,5 +1,10 @@
 # acw02_esphome  
-(for Teknopoint and Airton AC units using the Tuya ACW02 Wi-Fi module)
+for Teknopoint and Airton AC units using the Tuya ACW02 Wi-Fi module   
+
+⚠️ **WARNING For airton :**  Should work on recent Airton models > 409934, below this reference, it is possible that the air conditioning does not send enough energy for the module to work, symptom: impossible to activate the wifi on the air conditioner when the module is connected (the wifi logo does not appear)
+  
+model having this problem (Non-exhaustive list): 
+ - 409733
 
 ---
 
@@ -105,9 +110,6 @@ wifi_password3: "testesp32"
 - **[ESP32-WROOM-32 D1 Mini NodeMCU (micro usb version recommended (x1)](https://amzn.eu/d/3mS1B7W)**  
   ![ESP32](PCB/images/components/ESP32-WROOM-32%20D1%20Mini%20NodeMCU.PNG)
 
-  ⚠️ **WARNING For airton :**  Should work on recent Airton models > 409934, below this reference, it is possible that the air conditioning does not send enough energy for the module to work, symptom: impossible to activate the wifi on the air conditioner when the module is connected (the wifi logo does not appear)
-  
-  model having this problem: 409733
 
 - **[5 pins male 2.54mm (x1): MaleL7.5-1X5P](https://fr.aliexpress.com/item/1005007128029220.html)**  
   ![MaleL7.5-1X5P](PCB/images/components/5%20pin%20male%202.54.PNG)
