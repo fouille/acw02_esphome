@@ -102,8 +102,10 @@ wifi_password3: "testesp32"
 - **[4 Channels Logic Level Converter Bi-Directional Shifter (x1): CYT1076](https://amzn.eu/d/2MhG08s)**  
   ![CYT1076](PCB/images/components/4%20Channels%20Logic%20Level%20Converter%20Bi-Directional%20Shifter.PNG)
 
-- **[ESP32-WROOM-32 D1 Mini NodeMCU (x1)](https://amzn.eu/d/3mS1B7W)**  
+- **[ESP32-WROOM-32 D1 Mini NodeMCU (micro usb version recommended (x1)](https://amzn.eu/d/3mS1B7W)**  
   ![ESP32](PCB/images/components/ESP32-WROOM-32%20D1%20Mini%20NodeMCU.PNG)
+
+  ⚠️ **WARNING**  I have been informed that some esp32 D1 mini only power via usb and not via VCC due to a design issue (Personally, I have not encountered any problems with the AZDelivery purchased on Amazon in the link above on July 3, 2025.), if after assembly you find that the esp32 does not start when powered via AC, first check your soldering and verify that you have 5v between VCC and GND of the esp32. I found this but I don't know if it works, it's at your own risk : https://www.youtube.com/watch?v=0FKCbSzG5dM
 
 - **[5 pins male 2.54mm (x1): MaleL7.5-1X5P](https://fr.aliexpress.com/item/1005007128029220.html)**  
   ![MaleL7.5-1X5P](PCB/images/components/5%20pin%20male%202.54.PNG)
