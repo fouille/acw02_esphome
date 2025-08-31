@@ -17,10 +17,19 @@ body:
     id: model
     attributes:
       label: Exact Model
-      description: "Full reference as written on the indoor unit"
-      placeholder: "Teknopoint ARX35"
+      description: "Full model printed on the indoor unit label."
+      placeholder: "ex: SMVH12B-3A2A3NG(I), TW-SMVH07A-2C1A3NG(I)....."
     validations:
       required: true
+
+  - type: input
+    id: altref
+    attributes:
+      label: Alt Reference (REF/SKU/PN)
+      description: "Commercial reference, REF code, SKU, or part number."
+      placeholder: "ex: 409731, 409732, TW-SKIV-07, TW-SKIV-09..."
+    validations:
+      required: false
 
   - type: dropdown
     id: works
