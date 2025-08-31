@@ -1,0 +1,49 @@
+name: Update COMPATIBILITY.md
+
+on:
+  schedule:
+    - cron: "0 0 * * 0" # tous les dimanches
+  workflow_dispatch: # ou déclenchable manuellement
+
+permissions:
+  contents: write
+  issues: read
+
+jobs:
+  update-file:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Collect compatibility issues
+        run: |
+          echo "# ACW02 ESPHome Compatibility List" > COMPATIBILITY.md
+          echo "" >> COMPATIBILITY.md
+          echo "| Brand | Model | Status | Notes |" >> COMPATIBILITY.md
+          echo "|-------|-------|--------|-------|" >> COMPATIBILITY.md
+          
+          # Utilise l’API GitHub pour récupérer toutes les issues fermées avec label compatibility
+          gh issue list \
+            --repo $GITHUB_REPOSITORY \
+            --label "compatibility" \
+            --state all \
+            --json title,body \
+            --jq '.[] | [.title, (.body | gsub("\r"; ""))] | @tsv' \
+          | while IFS=$'\t' read -r title body; do
+              brand=$(echo "$body" | grep -i "Brand" | cut -d':' -f2- | xargs)
+              model=$(echo "$body" | grep -i "Model" | cut -d':' -f2- | xargs)
+              works=$(echo "$body" | grep -i "Works with ACW02" | cut -d':' -f2- | xargs)
+              notes=$(echo "$body" | grep -i "Additional Notes" | cut -d':' -f2- | xargs)
+              echo "| $brand | $model | $works | $notes |" >> COMPATIBILITY.md
+            done
+        env:
+          GH_TOKEN: ${{ github.token }}
+
+      - name: Commit changes
+        run: |
+          git config --global user.name "github-actions"
+          git config --global user.email "actions@github.com"
+          git add COMPATIBILITY.md
+          git commit -m "Update COMPATIBILITY.md [skip ci]" || echo "No changes"
+          git push
