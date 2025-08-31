@@ -1,6 +1,6 @@
 name: "📋 Indoor AC Unit Compatibility"
 description: "Report an indoor unit tested with the ACW02 ESPHome module."
-title: "[Compatibility] Commercial Model / Ref Model"
+title: "[Compatibility] brand / Commercial Model / Ref Model"
 labels: ["Compatibility"]
 body:
   - type: markdown
