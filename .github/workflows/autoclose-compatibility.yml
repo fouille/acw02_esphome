@@ -1,19 +1,27 @@
+# .github/workflows/autoclose-compatibility.yml
 name: Auto-close Compatibility Reports
 
 on:
   issues:
-    types:
-      - opened
+    types: [opened, labeled]
+
+permissions:
+  contents: read
+  issues: write
 
 jobs:
   close_compat:
+    # Si l'événement est "labeled", on vérifie le nom du label.
+    # Si l'événement est "opened", on inspecte la liste des labels attachés dès la création.
+    if: >
+      (github.event.action == 'labeled' && github.event.label.name == 'compatibility')
+      || (github.event.action == 'opened' && contains(toJson(github.event.issue.labels), '"compatibility"'))
     runs-on: ubuntu-latest
     steps:
       - name: Close compatibility issues automatically
-        if: contains(github.event.issue.labels.*.name, 'compatibility')
         uses: peter-evans/close-issue@v3
         with:
           comment: |
-            🔒 Thanks for submitting a compatibility report!  
-            This issue is automatically closed to keep the tracker clean.  
-            Your entry will still remain visible in the repository.
+            🔒 Thanks for submitting a compatibility report!
+            This issue is closed automatically to keep the tracker clean.
+            Your report remains visible and will be aggregated into `COMPATIBILITY.md`.
