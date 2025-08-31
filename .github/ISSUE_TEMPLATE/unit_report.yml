@@ -18,7 +18,7 @@ body:
     attributes:
       label: Commercial Model
       description: "Full model printed on the indoor unit label."
-      placeholder: "None, 409731, 409732, TW-SKIV-07, TW-SKIV-09.."
+      placeholder: "ex: 409731, 409732, TW-SKIV-07, TW-SKIV-09.."
     validations:
       required: true
 
