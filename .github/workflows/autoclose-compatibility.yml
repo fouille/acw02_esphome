@@ -1,0 +1,19 @@
+name: Auto-close Compatibility Reports
+
+on:
+  issues:
+    types:
+      - opened
+
+jobs:
+  close_compat:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Close compatibility issues automatically
+        if: contains(github.event.issue.labels.*.name, 'compatibility')
+        uses: peter-evans/close-issue@v3
+        with:
+          comment: |
+            🔒 Thanks for submitting a compatibility report!  
+            This issue is automatically closed to keep the tracker clean.  
+            Your entry will still remain visible in the repository.
