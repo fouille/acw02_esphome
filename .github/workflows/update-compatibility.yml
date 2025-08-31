@@ -2,48 +2,77 @@ name: Update COMPATIBILITY.md
 
 on:
   schedule:
-    - cron: "0 0 * * 0" # tous les dimanches
-  workflow_dispatch: # ou déclenchable manuellement
+    - cron: "0 0 * * 0"   # chaque dimanche à 00:00 UTC
+  workflow_dispatch:       # déclenchement manuel
 
 permissions:
   contents: write
   issues: read
 
 jobs:
-  update-file:
+  build-list:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repo
         uses: actions/checkout@v4
 
-      - name: Collect compatibility issues
-        run: |
-          echo "# ACW02 ESPHome Compatibility List" > COMPATIBILITY.md
-          echo "" >> COMPATIBILITY.md
-          echo "| Brand | Model | Status | Notes |" >> COMPATIBILITY.md
-          echo "|-------|-------|--------|-------|" >> COMPATIBILITY.md
-          
-          # Utilise l’API GitHub pour récupérer toutes les issues fermées avec label compatibility
-          gh issue list \
-            --repo $GITHUB_REPOSITORY \
-            --label "compatibility" \
-            --state all \
-            --json title,body \
-            --jq '.[] | [.title, (.body | gsub("\r"; ""))] | @tsv' \
-          | while IFS=$'\t' read -r title body; do
-              brand=$(echo "$body" | grep -i "Brand" | cut -d':' -f2- | xargs)
-              model=$(echo "$body" | grep -i "Model" | cut -d':' -f2- | xargs)
-              works=$(echo "$body" | grep -i "Works with ACW02" | cut -d':' -f2- | xargs)
-              notes=$(echo "$body" | grep -i "Additional Notes" | cut -d':' -f2- | xargs)
-              echo "| $brand | $model | $works | $notes |" >> COMPATIBILITY.md
-            done
+      - name: Generate COMPATIBILITY.md from issues
         env:
           GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+        run: |
+          set -euo pipefail
+
+          # En-tête
+          {
+            echo "# ACW02 ESPHome Compatibility List"
+            echo
+            echo "| Brand | Model | Status | Notes |"
+            echo "|-------|-------|--------|-------|"
+          } > COMPATIBILITY.md
+
+          # Récupère toutes les issues (ouvertes/fermées) labellisées 'compatibility'
+          mapfile -t ISSUES < <(gh issue list --repo "$REPO" --label "compatibility" --state all --json number --jq '.[].number')
+
+          # Fonction d'extraction d'un bloc entre deux titres "###"
+          extract_block () {
+            # $1 = body, $2 = section title (exact)
+            printf "%s" "$1" \
+              | awk -v key="$2" '
+                BEGIN{ RS="\r?\n"; insec=0 }
+                {
+                  if ($0 ~ "^###[ ]+" key "$") { insec=1; next }
+                  if (insec && $0 ~ "^###[ ]+") { insec=0 }
+                  if (insec) print
+                }' \
+              | sed ':a;N;$!ba;s/\n/ /g' \
+              | sed 's/|/\\|/g' \
+              | sed 's/^[[:space:]]*$/-/'
+          }
+
+          for num in "${ISSUES[@]}"; do
+            body="$(gh issue view "$num" --repo "$REPO" --json body --jq .body)"
+
+            # Les labels de section correspondent aux labels de ton Issue Form
+            brand="$(extract_block "$body" "Brand")"
+            model="$(extract_block "$body" "Exact Model")"
+            works="$(extract_block "$body" "Works with ACW02 ESPHome\\?")"
+            notes="$(extract_block "$body" "Additional Notes")"
+
+            # Valeurs par défaut si vide
+            [ -z "$brand" ] && brand="-"
+            [ -z "$model" ] && model="-"
+            [ -z "$works" ] && works="-"
+            [ -z "$notes" ] && notes="-"
+
+            echo "| $brand | $model | $works | $notes |" >> COMPATIBILITY.md
+          done
 
       - name: Commit changes
         run: |
-          git config --global user.name "github-actions"
-          git config --global user.email "actions@github.com"
+          set -e
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
           git add COMPATIBILITY.md
           git commit -m "Update COMPATIBILITY.md [skip ci]" || echo "No changes"
           git push
