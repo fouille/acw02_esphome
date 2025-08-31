@@ -17,7 +17,7 @@ body:
     id: model
     attributes:
       label: Commercial Model
-      description: "Full model printed on the indoor unit label."
+      description: "Brand name ref"
       placeholder: "ex: 409731, 409732, TW-SKIV-07, TW-SKIV-09.."
     validations:
       required: true
@@ -26,7 +26,7 @@ body:
     id: altref
     attributes:
       label: Ref Model
-      description: "Ref Model"
+      description: "indoor AC REF"
       placeholder: "ex: None, SMVH12B-3A2A3NG(I), TW-SMVH07A-2C1A3NG(I)..."
     validations:
       required: true
