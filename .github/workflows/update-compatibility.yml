@@ -2,7 +2,7 @@ name: Update COMPATIBILITY.md
 
 on:
   schedule:
-    - cron: "0 0 * * 0"   # chaque dimanche à 00:00 UTC
+    - cron: "0 0 * * 0"   # chaque dimanche 00:00 UTC
   workflow_dispatch:       # déclenchement manuel
 
 permissions:
@@ -23,9 +23,8 @@ jobs:
         run: |
           set -euo pipefail
 
-          # --- helpers ---
           extract_block () {
-            # $1 = body, $2 = section title (exact)
+            # $1 = body, $2 = section title (exact, regex-friendly)
             printf "%s" "$1" \
               | awk -v key="$2" '
                 BEGIN{ RS="\r?\n"; insec=0 }
@@ -40,7 +39,8 @@ jobs:
               | sed 's/^[[:space:]]*$/-/'
           }
 
-          extract_works () {
+          extract_status () {
+            # Titre avec ou sans "?"
             awk '
               BEGIN{ RS="\r?\n"; insec=0 }
               /^###[[:space:]]+Works with ACW02 ESPHome(\?)?$/ { insec=1; next }
@@ -52,32 +52,32 @@ jobs:
             | sed 's/|/\\|/g'
           }
 
-          # --- intro du fichier ---
           {
             echo "# ACW02 ESPHome Compatibility List"
             echo
-            echo "_This file is generated from issues labeled \`compatibility\`._"
+            echo "_This file is generated from issues labeled \`Compatibility\`._"
             echo
           } > COMPATIBILITY.md
 
-          # Récupère toutes les issues (ouvertes/fermées) labellisées 'compatibility'
-          mapfile -t ISSUES < <(gh issue list --repo "$REPO" --label "compatibility" --state all --json number --jq '.[].number')
+          # Récupère toutes les issues (ouvertes/fermées) labellisées 'Compatibility'
+          mapfile -t ISSUES < <(gh issue list --repo "$REPO" --label "Compatibility" --state all --json number --jq '.[].number')
 
-          # Stockage par marque
           declare -A ROWS_BY_BRAND
 
           for num in "${ISSUES[@]}"; do
             body="$(gh issue view "$num" --repo "$REPO" --json body --jq .body)"
 
             brand="$(extract_block "$body" "Brand")"
-            model="$(extract_block "$body" "Exact Model")"
-            works="$(printf "%s" "$body" | extract_works)"
+            cmodel="$(extract_block "$body" "Commercial Model")"
+            rmodel="$(extract_block "$body" "Ref Model")"
+            works="$(printf "%s" "$body" | extract_status)"
             notes="$(extract_block "$body" "Additional Notes")"
 
-            [ -z "$brand" ] && brand="Unknown"
-            [ -z "$model" ] && model="-"
-            [ -z "$works" ] && works="-"
-            [ -z "$notes" ] && notes="-"
+            [ -z "$brand" ]  && brand="Unknown"
+            [ -z "$cmodel" ] && cmodel="-"
+            [ -z "$rmodel" ] && rmodel="-"
+            [ -z "$works" ]  && works="-"
+            [ -z "$notes" ]  && notes="-"
 
             case "$works" in
               "Yes") works="✅ Yes" ;;
@@ -85,9 +85,8 @@ jobs:
               "Partially"|"Partially (some functions missing)") works="⚠️ Partially (some functions missing)" ;;
             esac
 
-            row="| ${model} | ${works} | ${notes} |"
+            row="| ${cmodel} | ${rmodel} | ${works} | ${notes} |"
 
-            # Concatène les lignes pour cette marque (séparateur \n)
             if [[ -n "${ROWS_BY_BRAND[$brand]+x}" ]]; then
               ROWS_BY_BRAND[$brand]="${ROWS_BY_BRAND[$brand]}"$'\n'"$row"
             else
@@ -95,15 +94,14 @@ jobs:
             fi
           done
 
-          # Tri des marques A→Z (case-insensitive)
+          # Tri des marques A→Z
           mapfile -t BRANDS < <(printf "%s\n" "${!ROWS_BY_BRAND[@]}" | sort -f)
 
-          # Rendu : un tableau par marque
           for b in "${BRANDS[@]}"; do
             echo "## ${b}" >> COMPATIBILITY.md
             echo >> COMPATIBILITY.md
-            echo "| Model | Status | Notes |" >> COMPATIBILITY.md
-            echo "|-------|--------|-------|" >> COMPATIBILITY.md
+            echo "| Commercial Model | Ref Model | Status | Notes |" >> COMPATIBILITY.md
+            echo "|------------------|----------|--------|-------|" >> COMPATIBILITY.md
             printf "%s\n" "${ROWS_BY_BRAND[$b]}" >> COMPATIBILITY.md
             echo >> COMPATIBILITY.md
           done
