@@ -11,9 +11,47 @@ permissions:
 
 jobs:
   close_compat:
-    if: github.event.label.name == 'compatibility'
+    if: github.event.label.name == 'Compatibility'
     runs-on: ubuntu-latest
     steps:
+      - name: Set issue title
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          ISSUE: ${{ github.event.issue.number }}
+        run: |
+          body="$(gh issue view "$ISSUE" --repo "$REPO" --json body --jq .body)"
+
+          # Récupère les champs depuis les sections ### Commercial Model / Ref Model
+          extract_block () {
+            printf "%s" "$body" \
+              | awk -v key="$1" '
+                BEGIN{ RS="\r?\n"; insec=0 }
+                {
+                  if ($0 ~ "^###[ ]+" key "$") { insec=1; next }
+                  if (insec && $0 ~ "^###") { insec=0 }
+                  if (insec) print
+                }' \
+              | sed ':a;N;$!ba;s/\n/ /g' \
+              | sed 's/^[[:space:]]*-\s*//; s/^[[:space:]]*//; s/[[:space:]]*$//'
+          }
+
+          cmodel="$(extract_block "Commercial Model")"
+          rmodel="$(extract_block "Ref Model")"
+
+          [ -z "$cmodel" ] && cmodel="-"
+          [ -z "$rmodel" ] && rmodel="-"
+
+          # Si ref model vaut none / None / - => on force "-"
+          case "$(echo "$rmodel" | tr '[:upper:]' '[:lower:]')" in
+            "none"|"-") rmodel="-" ;;
+          esac
+
+          newtitle="[Compatibility] ${cmodel} / ${rmodel}"
+
+          echo "Renaming issue #$ISSUE to: $newtitle"
+          gh issue edit "$ISSUE" --repo "$REPO" --title "$newtitle"
+
       - uses: peter-evans/close-issue@v3
         with:
           comment: |
