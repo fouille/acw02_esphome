@@ -1,18 +1,16 @@
 # ACW02 ESPHome Compatibility List
 
-_This file is generated from issues labeled `compatibility`._
+_This file is generated from issues labeled `Compatibility`._
 
 ## Airton
 
-| Model | Status | Notes |
-|-------|--------|-------|
-| 9876 | ✅ Yes | _No response_ |
-| 1234 | ✅ Yes | _No response_ |
+| Commercial Model | Ref Model | Status | Notes |
+|------------------|----------|--------|-------|
+| 409731 | SMVH12B-2A2A3NH(I) | ✅ Yes | _No response_ |
 
-## TeknoPoint
+## Teknopoint
 
-| Model | Status | Notes |
-|-------|--------|-------|
-| 4321 | ❌ No | _No response_ |
-| TW-SKIV-07 TW-SMVH07A-2C1A3NG(I) | ✅ Yes | _No response_ |
+| Commercial Model | Ref Model | Status | Notes |
+|------------------|----------|--------|-------|
+| TW-SKIV-07 | N-TW-SMVH07A-2C1A3NG(I) | ✅ Yes | _No response_ |
 
