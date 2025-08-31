@@ -7,12 +7,13 @@ Custom ESPHome component for **Teknopoint** and **Airton** AC units using the **
 ## ⚠️ Compatibility Warning  
 
 > **Important**  
-> This integration should work on recent Airton models **above reference 409934**.  
-> On older models (≤ 409934), the AC unit may not supply enough power for the module to operate.  
+> - Works on most **Teknopoint** units *(unconfirmed but no known issues so far, see the [Community Compatibility List](#-community-compatibility-list))*.  
+> - For **Airton**, confirmed to work on models **above reference 409934**.  
+> - On older Airton units (≤ 409934), the AC may not provide enough power for the module to operate (see the [Community Compatibility List](#-community-compatibility-list)).  
 
-### Symptoms on incompatible units:
-- ❌ Impossible to activate Wi-Fi on the AC (Wi-Fi logo never appears).  
-- ❌ ESP LED lights up briefly, then turns off.  
+### ❌ Symptoms of incompatibility
+- Wi-Fi cannot be enabled on the AC (Wi-Fi logo never appears).  
+- ESP LED turns on briefly, then shuts off.  
 
 ---
 
@@ -25,8 +26,8 @@ A non-exhaustive list of tested models is available here:
 
 ## 📌 Contribute  
 
-You can help improve this project by reporting your unit compatibility.  
-If your model is not referenced, please open a report (only if **tested**):  
+Help improve this project by reporting your unit compatibility.  
+If your model is not referenced, please submit a report (**tested units only**):  
 👉 [Submit your unit](https://github.com/devildant/acw02_esphome/issues/new?template=unit_report.yml)  
 
 ---
