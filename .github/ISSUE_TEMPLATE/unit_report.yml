@@ -16,20 +16,20 @@ body:
   - type: input
     id: model
     attributes:
-      label: Exact Model
+      label: Commercial Model
       description: "Full model printed on the indoor unit label."
-      placeholder: "ex: SMVH12B-3A2A3NG(I), TW-SMVH07A-2C1A3NG(I)....."
+      placeholder: "None, 409731, 409732, TW-SKIV-07, TW-SKIV-09.."
     validations:
       required: true
 
   - type: input
     id: altref
     attributes:
-      label: Alt Reference (REF/SKU/PN)
-      description: "Commercial reference, REF code, SKU, or part number."
-      placeholder: "ex: 409731, 409732, TW-SKIV-07, TW-SKIV-09..."
+      label: Ref Model
+      description: "Ref Model"
+      placeholder: "ex: None, SMVH12B-3A2A3NG(I), TW-SMVH07A-2C1A3NG(I)..."
     validations:
-      required: false
+      required: true
 
   - type: dropdown
     id: works
