@@ -2,8 +2,8 @@ name: Update COMPATIBILITY.md
 
 on:
   schedule:
-    - cron: "0 0 * * 0"   # chaque dimanche 00:00 UTC
-  workflow_dispatch:       # déclenchement manuel
+    - cron: "0 0 * * 0"
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -24,7 +24,6 @@ jobs:
           set -euo pipefail
 
           extract_block () {
-            # $1 = body, $2 = section title (exact, regex-friendly)
             printf "%s" "$1" \
               | awk -v key="$2" '
                 BEGIN{ RS="\r?\n"; insec=0 }
@@ -40,7 +39,6 @@ jobs:
           }
 
           extract_status () {
-            # Titre avec ou sans "?"
             awk '
               BEGIN{ RS="\r?\n"; insec=0 }
               /^###[[:space:]]+Works with ACW02 ESPHome(\?)?$/ { insec=1; next }
@@ -59,7 +57,6 @@ jobs:
             echo
           } > COMPATIBILITY.md
 
-          # Récupère toutes les issues (ouvertes/fermées) labellisées 'Compatibility'
           mapfile -t ISSUES < <(gh issue list --repo "$REPO" --label "Compatibility" --state all --json number --jq '.[].number')
 
           declare -A ROWS_BY_BRAND
@@ -73,12 +70,21 @@ jobs:
             works="$(printf "%s" "$body" | extract_status)"
             notes="$(extract_block "$body" "Additional Notes")"
 
+            # Valeurs par défaut
             [ -z "$brand" ]  && brand="Unknown"
             [ -z "$cmodel" ] && cmodel="-"
             [ -z "$rmodel" ] && rmodel="-"
             [ -z "$works" ]  && works="-"
             [ -z "$notes" ]  && notes="-"
 
+            # Nettoyage du Ref Model : None / none / - => "-"
+            case "$(echo "$rmodel" | tr '[:upper:]' '[:lower:]')" in
+              "none"|" - "|"none " )
+                rmodel="-"
+                ;;
+            esac
+
+            # Normalisation Status
             case "$works" in
               "Yes") works="✅ Yes" ;;
               "No") works="❌ No" ;;
@@ -94,14 +100,13 @@ jobs:
             fi
           done
 
-          # Tri des marques A→Z
           mapfile -t BRANDS < <(printf "%s\n" "${!ROWS_BY_BRAND[@]}" | sort -f)
 
           for b in "${BRANDS[@]}"; do
             echo "## ${b}" >> COMPATIBILITY.md
             echo >> COMPATIBILITY.md
             echo "| Commercial Model | Ref Model | Status | Notes |" >> COMPATIBILITY.md
-            echo "|------------------|----------|--------|-------|" >> COMPATIBILITY.md
+            echo "|------------------|-----------|--------|-------|" >> COMPATIBILITY.md
             printf "%s\n" "${ROWS_BY_BRAND[$b]}" >> COMPATIBILITY.md
             echo >> COMPATIBILITY.md
           done
