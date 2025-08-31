@@ -1,8 +1,14 @@
 name: "📋 Indoor AC Unit Compatibility"
-description: "Report an indoor unit tested with the ACW02 ESPHome module.\nPlease check that your model has not already been published before publishing."
+description: "Report an indoor unit tested with the ACW02 ESPHome module."
 title: "[Compatibility] Commercial Model / Ref Model"
 labels: ["Compatibility"]
 body:
+  - type: markdown
+    attributes:
+      value: |
+        **Before you submit**: please check if your model is already listed here (closed issues):
+        https://github.com/devildant/acw02_esphome/issues?q=is%3Aissue+state%3Aclosed+label%3ACompatibility
+
   - type: dropdown
     id: brand
     attributes:
