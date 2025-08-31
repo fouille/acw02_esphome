@@ -11,8 +11,6 @@ permissions:
 
 jobs:
   close_compat:
-    # Si l'événement est "labeled", on vérifie le nom du label.
-    # Si l'événement est "opened", on inspecte la liste des labels attachés dès la création.
     if: >
       (github.event.action == 'labeled' && github.event.label.name == 'compatibility')
       || (github.event.action == 'opened' && contains(toJson(github.event.issue.labels), '"compatibility"'))
@@ -24,4 +22,4 @@ jobs:
           comment: |
             🔒 Thanks for submitting a compatibility report!
             This issue is closed automatically to keep the tracker clean.
-            Your report remains visible and will be aggregated into `COMPATIBILITY.md`.
+            Your report remains visible and will be aggregated into COMPATIBILITY.md.
