@@ -26,9 +26,9 @@ body:
     attributes:
       label: Works with ACX02 ESPHome?
       options:
-        - Yes
-        - Partially (some functions missing)
-        - No
+        - "Yes"
+        - "Partially (some functions missing)"
+        - "No"
     validations:
       required: true
 
