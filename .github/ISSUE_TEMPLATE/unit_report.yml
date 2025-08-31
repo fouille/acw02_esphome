@@ -1,4 +1,4 @@
-name: "Indoor AC Unit Compatibility"
+name: "📋 Indoor AC Unit Compatibility"
 description: "Report an indoor unit tested with the ACW02 ESPHome module"
 title: "[Compatibility] Brand Model"
 labels: ["compatibility"]
