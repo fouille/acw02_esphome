@@ -51,30 +51,25 @@ jobs:
               | sed 's/^[[:space:]]*$/-/'
           }
 
+          # Fonction spécifique pour Status (titre avec ou sans "?")
+          extract_works () {
+            awk '
+              BEGIN{ RS="\r?\n"; insec=0 }
+              /^###[[:space:]]+Works with ACW02 ESPHome(\?)?$/ { insec=1; next }
+              insec && /^###/ { insec=0 }
+              insec { print }
+            ' \
+            | sed ':a;N;$!ba;s/\n/ /g' \
+            | sed 's/^[[:space:]]*-\s*//; s/^[[:space:]]*//; s/[[:space:]]*$//' \
+            | sed 's/|/\\|/g'
+          }
+
           for num in "${ISSUES[@]}"; do
             body="$(gh issue view "$num" --repo "$REPO" --json body --jq .body)"
 
             brand="$(extract_block "$body" "Brand")"
             model="$(extract_block "$body" "Exact Model")"
-
-            # --- Status (avec fallbacks sur le titre) ---
-            works="$(extract_block "$body" "Works with ACW02 ESPHome\\?")"
-            if [ -z "$works" ] || [ "$works" = "-" ]; then
-              works="$(extract_block "$body" "Works with ACW02 ESPHome")"
-            fi
-            if [ -z "$works" ] || [ "$works" = "-" ]; then
-              works="$(extract_block "$body" "Works with ACW02")"
-            fi
-            if [ -z "$works" ] || [ "$works" = "-" ]; then
-              works="$(extract_block "$body" "Status")"
-            fi
-            # Nettoyage léger : remplace "Yes"/"No" nus par versions emoji si tu veux
-            case "$works" in
-              "Yes") works="✅ Yes" ;;
-              "No") works="❌ No" ;;
-              "Partially"|"Partially (some functions missing)") works="⚠️ Partially (some functions missing)" ;;
-            esac
-
+            works="$(printf "%s" "$body" | extract_works)"
             notes="$(extract_block "$body" "Additional Notes")"
 
             # Valeurs par défaut si vide
@@ -82,6 +77,13 @@ jobs:
             [ -z "$model" ] && model="-"
             [ -z "$works" ] && works="-"
             [ -z "$notes" ] && notes="-"
+
+            # Normalisation sympa
+            case "$works" in
+              "Yes") works="✅ Yes" ;;
+              "No") works="❌ No" ;;
+              "Partially"|"Partially (some functions missing)") works="⚠️ Partially (some functions missing)" ;;
+            esac
 
             echo "| $brand | $model | $works | $notes |" >> COMPATIBILITY.md
           done
