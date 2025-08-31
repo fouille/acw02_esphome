@@ -6,9 +6,8 @@ for Teknopoint and Airton AC units using the Tuya ACW02 Wi-Fi module
 Symptom: 
 - impossible to activate the wifi on the air conditioner when the module is connected (the wifi logo does not appear)
 - the ESP LED lights up briefly then goes out
-  
-model having this problem (Non-exhaustive list): 
- - 409733
+
+Community-provided compatibility list  (Non-exhaustive list): https://github.com/devildant/acw02_esphome/blob/main/COMPATIBILITY.md
 
 ---
 
