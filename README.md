@@ -1,13 +1,33 @@
-# acw02_esphome  
-for Teknopoint and Airton AC units using the Tuya ACW02 Wi-Fi module   
+# ACW02 ESPHome Module  
 
-⚠️ **WARNING For airton :**  Should work on recent Airton models > 409934, below this reference, it is possible that the air conditioning does not send enough energy for the module to work.
+Custom ESPHome component for **Teknopoint** and **Airton** AC units using the **Tuya ACW02 Wi-Fi module**.  
 
-Symptom: 
-- impossible to activate the wifi on the air conditioner when the module is connected (the wifi logo does not appear)
-- the ESP LED lights up briefly then goes out
+---
 
-Community-provided compatibility list  (Non-exhaustive list): https://github.com/devildant/acw02_esphome/blob/main/COMPATIBILITY.md
+## ⚠️ Compatibility Warning  
+
+> **Important**  
+> This integration should work on recent Airton models **above reference 409934**.  
+> On older models (≤ 409934), the AC unit may not supply enough power for the module to operate.  
+
+### Symptoms on incompatible units:
+- ❌ Impossible to activate Wi-Fi on the AC (Wi-Fi logo never appears).  
+- ❌ ESP LED lights up briefly, then turns off.  
+
+---
+
+## ✅ Community Compatibility List  
+
+A non-exhaustive list of tested models is available here:  
+👉 [COMPATIBILITY.md](https://github.com/devildant/acw02_esphome/blob/main/COMPATIBILITY.md)  
+
+---
+
+## 📌 Contribute  
+
+You can help improve this project by reporting your unit compatibility.  
+If your model is not referenced, please open a report (only if **tested**):  
+👉 [Submit your unit](https://github.com/devildant/acw02_esphome/issues/new?template=unit_report.yml)  
 
 ---
 
