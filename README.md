@@ -8,12 +8,7 @@ Custom ESPHome component for **Teknopoint** and **Airton** AC units using the **
 
 > **Important**  
 > - Works on most **Teknopoint** units *(unconfirmed but no known issues so far, see the [Community Compatibility List](#-community-compatibility-list))*.  
-> - For **Airton**, confirmed to work on models **above reference 409934**.  
-> - On older Airton units (≤ 409934), the AC may not provide enough power for the module to operate (see the [Community Compatibility List](#-community-compatibility-list)).  
-
-### ❌ Symptoms of incompatibility
-- Wi-Fi cannot be enabled on the AC (Wi-Fi logo never appears).  
-- ESP LED turns on briefly, then shuts off.  
+> - Works on most **Airton** units *(unconfirmed but no known issues so far, see the [Community Compatibility List](#-community-compatibility-list))*.  
 
 ---
 
@@ -131,8 +126,37 @@ wifi_password3: "testesp32"
 - **[4 Channels Logic Level Converter Bi-Directional Shifter (x1): CYT1076](https://amzn.eu/d/2MhG08s)**  
   ![CYT1076](PCB/images/components/4%20Channels%20Logic%20Level%20Converter%20Bi-Directional%20Shifter.PNG)
 
-- **[ESP32-WROOM-32 D1 Mini NodeMCU (micro usb version recommended (x1)](https://amzn.eu/d/3mS1B7W)**  
-  ![ESP32](PCB/images/components/ESP32-WROOM-32%20D1%20Mini%20NodeMCU.PNG)
+- **[ESP32-WROOM-32 D1 Mini NodeMCU (micro usb version recommended (x1))](https://amzn.eu/d/3mS1B7W)**  
+  ![ESP32](PCB/images/components/ESP32-WROOM-32%20D1%20Mini%20NodeMCU2.PNG)
+
+  > ⚠️ **Compatibility Warning**  
+  > Avoid very cheap ESP32 D1 Mini clones (often found on AliExpress).  
+  > Several users reported issues with these boards.  
+  > Prefer trusted brands such as **AZDelivery** or other well-reviewed suppliers.  
+
+  **❌ Symptoms of low-cost ESP32 incompatibility**  
+  - Wi-Fi cannot be enabled on the AC (Wi-Fi logo never appears).  
+  - ESP LED turns on briefly, then shuts off.  
+  - Voltage on VCC drops from 5 V to ~1.8–2 V when connected to the AC board.  
+
+  **🛠️ Why does this happen?**  
+  Cheap ESP32 D1 Mini clones often cut corners in **power regulation** and **stability**:  
+  1. *Weak 5 V → 3.3 V regulator* — old AMS1117 regulators waste power and cannot handle Wi-Fi current peaks.  
+  2. *Poor decoupling capacitors* — cheap boards lack the capacitors needed to smooth fast spikes.  
+  3. *Inconsistent ESP32 modules* — some clones use non-genuine or B-grade chips.  
+
+  **✅ Why AZDelivery & trusted brands work**  
+  - Use original **Espressif WROOM-32** modules.  
+  - Include a **modern LDO regulator** that tolerates bursts up to 500–600 mA.  
+  - Proper capacitors ensure stable operation during Wi-Fi activity.  
+  - As a result, even when powered from the AC’s limited 12 V port, they stay stable and connect without issue.
+
+  **🔍 Observation**  
+  By comparing ESP32 boards that work and those that don’t, I noticed visible differences.  
+  If your ESP has the same configuration as in the image below (red square), it should *theoretically* be compatible.  
+  ![ESP32 config](PCB/images/components/ESP32-config-maybe-ok.PNG) 
+
+  Note: The images on the official AZDelivery website are not up to date, but they are on Amazon.
 
 
 - **[5 pins male 2.54mm (x1): MaleL7.5-1X5P](https://fr.aliexpress.com/item/1005007128029220.html)**  
@@ -162,7 +186,7 @@ wifi_password3: "testesp32"
 - GREEN = GND
 
 🔧 Solder pins between ESP32 and PCB (red square):  
-![solder](PCB/images/components/esp32%20solder%20pins.png)
+![solder](PCB/images/components/esp32%20solder%20pins2.png)
 
 📌 [See Solder Board Helper section](#solder-board-helper)
 
