@@ -7,7 +7,7 @@ _This file is generated from issues labeled `Compatibility`._
 | Commercial Model | Ref Model | Status | Notes |
 |------------------|-----------|--------|-------|
 | 409730 | SMVH09B-2A2A3NH(I) | ✅ Yes | _No response_ |
-| 409733 | SMVH12B-3A2A3NG(I) | ❌ No | This indoor unit does not send enough energy to power the module |
+| 409733 | SMVH12B-3A2A3NG(I) | ✅ Yes | _No response_ |
 | 409731 | SMVH12B-2A2A3NH(I) | ✅ Yes | _No response_ |
 
 ## Teknopoint
