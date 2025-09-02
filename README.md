@@ -195,9 +195,7 @@ wifi_password3: "testesp32"
 
 ## 🧱 3D Files
 
-### 📂 Available in the `3Dfiles/` directory:
-
-#### 🖨️ Printing Material  
+### 🖨️ Printing Material  
 
 | Material | Compatible | Notes |
 |----------|------------|-------|
@@ -211,6 +209,8 @@ wifi_password3: "testesp32"
 > - PLA has a glass transition temperature of only **45–50 °C (or even lower)**.  
 > - By contrast, **PETG can withstand up to ~80 °C**, making it much more reliable.  
 > - For electronic components that generate heat, PLA is unsafe in warm environments — especially if your AC unit also provides **heating**.  
+
+### 📂 Available in the `3Dfiles/` directory:
 
 #### Version 1
 
