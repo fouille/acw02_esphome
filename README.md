@@ -141,9 +141,9 @@ wifi_password3: "testesp32"
 
   **🛠️ Why does this happen?**  
   Cheap ESP32 D1 Mini clones often cut corners in **power regulation** and **stability**:  
-  1. *Weak 5 V → 3.3 V regulator* — old AMS1117 regulators waste power and cannot handle Wi-Fi current peaks.  
-  2. *Poor decoupling capacitors* — cheap boards lack the capacitors needed to smooth fast spikes.  
-  3. *Inconsistent ESP32 modules* — some clones use non-genuine or B-grade chips.  
+  - *Weak 5 V → 3.3 V regulator* — old AMS1117 regulators waste power and cannot handle Wi-Fi current peaks.  
+  - *Poor decoupling capacitors* — cheap boards lack the capacitors needed to smooth fast spikes.  
+  - *Inconsistent ESP32 modules* — some clones use non-genuine or B-grade chips.  
 
   **✅ Why AZDelivery & trusted brands work**  
   - Use original **Espressif WROOM-32** modules.  
