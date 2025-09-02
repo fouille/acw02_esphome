@@ -154,6 +154,7 @@ wifi_password3: "testesp32"
   **🔍 Observation**  
   By comparing ESP32 boards that work and those that don’t, I noticed visible differences.  
   If your ESP has the same configuration as in the image below (red square), it should *theoretically* be compatible.  
+  It's just an observation, I don't know how to differentiate the good esp32 d1 mini cards from the bad ones, it's possible that cards with differences work
   ![ESP32 config](PCB/images/components/ESP32-config-maybe-ok.PNG) 
 
   Note: The images on the official AZDelivery website are not up to date, but they are on Amazon.
