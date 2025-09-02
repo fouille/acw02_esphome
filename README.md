@@ -197,6 +197,21 @@ wifi_password3: "testesp32"
 
 ### 📂 Available in the `3Dfiles/` directory:
 
+#### 🖨️ Printing Material  
+
+| Material | Compatible | Notes |
+|----------|------------|-------|
+| PLA      | ❌ No       | Not recommended (low heat resistance) |
+| PETG     | ✅ Yes (recommended) | Good balance of strength & printability |
+| ABS      | ✅ Yes      | Better heat resistance |
+| ASA      | ✅ Yes      | UV resistant, suitable for outdoors |
+| PC       | ✅ Yes      | Very strong & heat resistant |
+
+> ⚠️ **Why not use PLA?**  
+> - PLA has a glass transition temperature of only **45–50 °C (or even lower)**.  
+> - By contrast, **PETG can withstand up to ~80 °C**, making it much more reliable.  
+> - For electronic components that generate heat, PLA is unsafe in warm environments — especially if your AC unit also provides **heating**.  
+
 #### Version 1
 
 - [acw02 case bottom (.stl)](https://github.com/devildant/acw02_esphome/raw/main/3Dfiles/Version%201/acw02%20case%20bot.stl)
@@ -222,7 +237,7 @@ wifi_password3: "testesp32"
 
 ![airflow5](3Dfiles/images/airflow5.jpg)
 
-![airflow6](3Dfiles/images/airflow6.jpg)
+![airflow6](3Dfiles/images/airflow6.jpg) 
 
 #### BONUS: for airton support
 You don't seem to have a mounting bracket for the module, so I'll provide one for you to stick on your air conditioner. :) (fix with double-sided tape)
