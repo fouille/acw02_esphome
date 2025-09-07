@@ -4,7 +4,7 @@ Custom ESPHome component for **Teknopoint** and **Airton** AC units using the **
 
 ---
 
-![Weekly Build](https://github.com/devildant/acw02_esphome/actions/workflows/esphome-auto-build.yml/badge.svg)
+![Weekly Build](https://github.com/devildant/acw02_esphome/actions/workflows/esphome-autobuild.yml/badge.svg)
 
 ![ESPHome](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/devildant/acw02_esphome/main/.ci/badges/esphome.json)
 ![Build](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/devildant/acw02_esphome/main/.ci/badges/build.json)
