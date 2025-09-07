@@ -36,7 +36,6 @@ If your model is not referenced, please submit a report (**tested units only**):
 ## 📋 Requirements
 
 - Home Assistant with **MQTT integration** enabled and properly configured
-- A working MQTT broker (e.g., Mosquitto)
 - Enable the WIFI with the AC remote
 
 
