@@ -1,9 +1,12 @@
-name: ESPHome Auto-Build (Latest Version)
+name: ESPHome Auto-Build (Latest)
 
 on:
   schedule:
-    - cron: '0 6 * * 6'
+    - cron: '0 6 * * 6'         # chaque samedi à 06:00 UTC
   workflow_dispatch:
+
+permissions:
+  contents: write               # nécessaire pour commit/push les badges et le fichier "last success"
 
 jobs:
   build:
@@ -11,15 +14,105 @@ jobs:
 
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
-          python-version: 3.11
+          python-version: '3.11'
 
       - name: Install latest ESPHome
         run: pip install --upgrade esphome
 
+      - name: Capture ESPHome version
+        id: ver
+        shell: bash
+        run: |
+          set -e
+          V=$(python - << 'PY'
+import importlib
+m = importlib.import_module("esphome")
+print(getattr(m, "__version__", "unknown"))
+PY
+)
+          echo "ESPHOME_VERSION=$V" | tee -a "$GITHUB_ENV"
+          echo "version=$V" >> "$GITHUB_OUTPUT"
+
+      - name: Read last passing version (if any)
+        id: last
+        shell: bash
+        run: |
+          LAST=$(cat .ci/last_success_esphome.txt 2>/dev/null || true)
+          echo "last=$LAST" >> "$GITHUB_OUTPUT"
+
       - name: Compile firmware
-        run: esphome compile esphome-acw02-fr.yaml
+        id: compile
+        shell: bash
+        run: |
+          set +e
+          esphome compile esphome-acw02-fr.yaml
+          status=$?
+          echo "status=$status" >> "$GITHUB_OUTPUT"
+          if [ $status -ne 0 ]; then
+            echo "failed=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "failed=false" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Prepare/update badge JSON files
+        if: always()
+        shell: bash
+        run: |
+          mkdir -p .ci/badges
+
+          # Badge Version ESPHome utilisée
+          cat > .ci/badges/esphome.json <<JSON
+          {"schemaVersion":1,"label":"ESPHome","message":"${ESPHOME_VERSION}","color":"blue"}
+          JSON
+
+          if [ "${{ steps.compile.outputs.failed }}" = "false" ]; then
+            # Build OK : on mémorise cette version comme "dernière version OK"
+            echo "${ESPHOME_VERSION}" > .ci/last_success_esphome.txt
+
+            # Badges "build" et "last passing"
+            cat > .ci/badges/build.json <<JSON
+            {"schemaVersion":1,"label":"Build","message":"passing","color":"brightgreen"}
+            JSON
+            cat > .ci/badges/last_passing.json <<JSON
+            {"schemaVersion":1,"label":"Last passing","message":"${ESPHOME_VERSION}","color":"brightgreen"}
+            JSON
+
+            # Nettoyage d'un éventuel badge "problem"
+            rm -f .ci/badges/problem.json || true
+          else
+            # Build KO : on garde "last_success_esphome.txt" tel quel
+            cat > .ci/badges/build.json <<JSON
+            {"schemaVersion":1,"label":"Build","message":"failing","color":"red"}
+            JSON
+
+            if [ -n "${{ steps.last.outputs.last }}" ]; then
+              cat > .ci/badges/last_passing.json <<JSON
+              {"schemaVersion":1,"label":"Last passing","message":"${{ steps.last.outputs.last }}","color":"blue"}
+              JSON
+            fi
+
+            cat > .ci/badges/problem.json <<JSON
+            {"schemaVersion":1,"label":"Problem version","message":"${ESPHOME_VERSION}","color":"red"}
+            JSON
+          fi
+
+      - name: Commit & push badge updates
+        if: always()
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add .ci/last_success_esphome.txt .ci/badges/*.json || true
+          git commit -m "CI: badges for ESPHome ${ESPHOME_VERSION} (failed=${{ steps.compile.outputs.failed }})" || echo "No changes to commit"
+          git push || echo "Nothing to push"
+
+      - name: Fail job if compile failed
+        if: steps.compile.outputs.failed == 'true'
+        run: |
+          echo "Compilation failed with ESPHome ${ESPHOME_VERSION}. Last passing: ${{ steps.last.outputs.last }}"
+          exit 1
