@@ -58,33 +58,25 @@ jobs:
         if: always()
         shell: bash
         run: |
+          set -e
           mkdir -p .ci/badges
+
           # Badge version ESPHome
-          cat > .ci/badges/esphome.json <<JSON
-          {"schemaVersion":1,"label":"ESPHome","message":"${ESPHOME_VERSION}","color":"blue"}
-          JSON
+          printf '%s' '{"schemaVersion":1,"label":"ESPHome","message":"'"${ESPHOME_VERSION}"'","color":"blue"}' > .ci/badges/esphome.json
 
           if [ "${{ steps.compile.outputs.failed }}" = "false" ]; then
-            echo "${ESPHOME_VERSION}" > .ci/last_success_esphome.txt
-            cat > .ci/badges/build.json <<JSON
-            {"schemaVersion":1,"label":"Build","message":"passing","color":"brightgreen"}
-            JSON
-            cat > .ci/badges/last_passing.json <<JSON
-            {"schemaVersion":1,"label":"Last passing","message":"${ESPHOME_VERSION}","color":"brightgreen"}
-            JSON
+            # Build OK : maj last_success + badges verts
+            printf '%s' "${ESPHOME_VERSION}" > .ci/last_success_esphome.txt
+            printf '%s' '{"schemaVersion":1,"label":"Build","message":"passing","color":"brightgreen"}' > .ci/badges/build.json
+            printf '%s' '{"schemaVersion":1,"label":"Last passing","message":"'"${ESPHOME_VERSION}"'","color":"brightgreen"}' > .ci/badges/last_passing.json
             rm -f .ci/badges/problem.json || true
           else
-            cat > .ci/badges/build.json <<JSON
-            {"schemaVersion":1,"label":"Build","message":"failing","color":"red"}
-            JSON
+            # Build KO : badges rouges + last passing si connu
+            printf '%s' '{"schemaVersion":1,"label":"Build","message":"failing","color":"red"}' > .ci/badges/build.json
             if [ -n "${{ steps.last.outputs.last }}" ]; then
-              cat > .ci/badges/last_passing.json <<JSON
-              {"schemaVersion":1,"label":"Last passing","message":"${{ steps.last.outputs.last }}","color":"blue"}
-              JSON
+              printf '%s' '{"schemaVersion":1,"label":"Last passing","message":"'"${{ steps.last.outputs.last }}"'","color":"blue"}' > .ci/badges/last_passing.json
             fi
-            cat > .ci/badges/problem.json <<JSON
-            {"schemaVersion":1,"label":"Problem version","message":"${ESPHOME_VERSION}","color":"red"}
-            JSON
+            printf '%s' '{"schemaVersion":1,"label":"Problem version","message":"'"${ESPHOME_VERSION}"'","color":"red"}' > .ci/badges/problem.json
           fi
 
       - name: Commit & push badge updates
