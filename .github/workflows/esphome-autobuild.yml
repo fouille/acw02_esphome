@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write               # nécessaire pour commit/push les badges et le fichier "last success"
+  contents: write
 
 jobs:
   build:
@@ -29,13 +29,8 @@ jobs:
         shell: bash
         run: |
           set -e
-          V=$(python - << 'PY'
-import importlib
-m = importlib.import_module("esphome")
-print(getattr(m, "__version__", "unknown"))
-PY
-)
-          echo "ESPHOME_VERSION=$V" | tee -a "$GITHUB_ENV"
+          V=$(python -c "import esphome, sys; sys.stdout.write(getattr(esphome, '__version__', 'unknown'))")
+          echo "ESPHOME_VERSION=$V" >> "$GITHUB_ENV"
           echo "version=$V" >> "$GITHUB_OUTPUT"
 
       - name: Read last passing version (if any)
@@ -64,38 +59,29 @@ PY
         shell: bash
         run: |
           mkdir -p .ci/badges
-
-          # Badge Version ESPHome utilisée
+          # Badge version ESPHome
           cat > .ci/badges/esphome.json <<JSON
           {"schemaVersion":1,"label":"ESPHome","message":"${ESPHOME_VERSION}","color":"blue"}
           JSON
 
           if [ "${{ steps.compile.outputs.failed }}" = "false" ]; then
-            # Build OK : on mémorise cette version comme "dernière version OK"
             echo "${ESPHOME_VERSION}" > .ci/last_success_esphome.txt
-
-            # Badges "build" et "last passing"
             cat > .ci/badges/build.json <<JSON
             {"schemaVersion":1,"label":"Build","message":"passing","color":"brightgreen"}
             JSON
             cat > .ci/badges/last_passing.json <<JSON
             {"schemaVersion":1,"label":"Last passing","message":"${ESPHOME_VERSION}","color":"brightgreen"}
             JSON
-
-            # Nettoyage d'un éventuel badge "problem"
             rm -f .ci/badges/problem.json || true
           else
-            # Build KO : on garde "last_success_esphome.txt" tel quel
             cat > .ci/badges/build.json <<JSON
             {"schemaVersion":1,"label":"Build","message":"failing","color":"red"}
             JSON
-
             if [ -n "${{ steps.last.outputs.last }}" ]; then
               cat > .ci/badges/last_passing.json <<JSON
               {"schemaVersion":1,"label":"Last passing","message":"${{ steps.last.outputs.last }}","color":"blue"}
               JSON
             fi
-
             cat > .ci/badges/problem.json <<JSON
             {"schemaVersion":1,"label":"Problem version","message":"${ESPHOME_VERSION}","color":"red"}
             JSON
