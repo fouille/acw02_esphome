@@ -22,14 +22,15 @@ jobs:
           python-version: '3.11'
 
       - name: Install latest ESPHome
-        run: pip install --upgrade esphome
+        run: python -m pip install --upgrade esphome
 
       - name: Capture ESPHome version
         id: ver
         shell: bash
         run: |
           set -e
-          V=$(python -c "import esphome, sys; sys.stdout.write(getattr(esphome, '__version__', 'unknown'))")
+          V=$(esphome version | tr -d '\r' | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')
+          [ -z "$V" ] && V="unknown"
           echo "ESPHOME_VERSION=$V" >> "$GITHUB_ENV"
           echo "version=$V" >> "$GITHUB_OUTPUT"
 
@@ -60,23 +61,29 @@ jobs:
         run: |
           set -e
           mkdir -p .ci/badges
+          FAILED="${{ steps.compile.outputs.failed }}"
+          LAST="${{ steps.last.outputs.last }}"
+          VER="${ESPHOME_VERSION}"
 
           # Badge version ESPHome
-          printf '%s' '{"schemaVersion":1,"label":"ESPHome","message":"'"${ESPHOME_VERSION}"'","color":"blue"}' > .ci/badges/esphome.json
+          printf '%s' '{"schemaVersion":1,"label":"ESPHome","message":"'"$VER"'","color":"blue"}' > .ci/badges/esphome.json
 
-          if [ "${{ steps.compile.outputs.failed }}" = "false" ]; then
+          if [ "$FAILED" = "false" ]; then
             # Build OK : maj last_success + badges verts
-            printf '%s' "${ESPHOME_VERSION}" > .ci/last_success_esphome.txt
+            printf '%s' "$VER" > .ci/last_success_esphome.txt
             printf '%s' '{"schemaVersion":1,"label":"Build","message":"passing","color":"brightgreen"}' > .ci/badges/build.json
-            printf '%s' '{"schemaVersion":1,"label":"Last passing","message":"'"${ESPHOME_VERSION}"'","color":"brightgreen"}' > .ci/badges/last_passing.json
-            rm -f .ci/badges/problem.json || true
+            printf '%s' '{"schemaVersion":1,"label":"Last passing","message":"'"$VER"'","color":"brightgreen"}' > .ci/badges/last_passing.json
+            # Toujours créer problem.json avec un état neutre
+            printf '%s' '{"schemaVersion":1,"label":"Problem version","message":"-","color":"lightgrey"}' > .ci/badges/problem.json
           else
             # Build KO : badges rouges + last passing si connu
             printf '%s' '{"schemaVersion":1,"label":"Build","message":"failing","color":"red"}' > .ci/badges/build.json
-            if [ -n "${{ steps.last.outputs.last }}" ]; then
-              printf '%s' '{"schemaVersion":1,"label":"Last passing","message":"'"${{ steps.last.outputs.last }}"'","color":"blue"}' > .ci/badges/last_passing.json
+            if [ -n "$LAST" ]; then
+              printf '%s' '{"schemaVersion":1,"label":"Last passing","message":"'"$LAST"'","color":"blue"}' > .ci/badges/last_passing.json
+            else
+              printf '%s' '{"schemaVersion":1,"label":"Last passing","message":"-","color":"lightgrey"}' > .ci/badges/last_passing.json
             fi
-            printf '%s' '{"schemaVersion":1,"label":"Problem version","message":"'"${ESPHOME_VERSION}"'","color":"red"}' > .ci/badges/problem.json
+            printf '%s' '{"schemaVersion":1,"label":"Problem version","message":"'"$VER"'","color":"red"}' > .ci/badges/problem.json
           fi
 
       - name: Commit & push badge updates
