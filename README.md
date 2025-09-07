@@ -13,6 +13,7 @@ Custom ESPHome component for **Teknopoint** and **Airton** AC units using the **
 ![Last passing](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/devildant/acw02_esphome/main/.ci/badges/last_passing.json)
 ![Problem version](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/devildant/acw02_esphome/main/.ci/badges/problem.json)
 
+
 ---
 
 ## ⚠️ Compatibility Warning  
