@@ -206,7 +206,7 @@ wifi_password3: "testesp32"
 🔧 Solder pins between ESP32 and PCB (red square):  
 ![solder](PCB/images/components/esp32%20solder%20pins2.png)
 
-📌 [See Solder Board Helper section](#solder-board-helper)
+📌 [See Solder Board Helper section](#-solder-board-helper)
 
 ---
 
