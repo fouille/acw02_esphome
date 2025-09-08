@@ -116,10 +116,22 @@ wifi_password3: "testesp32"
 
 ### 📂 Gerber files available in the `PCB/` directory:
 
-📥 [Download GERBER file](https://github.com/devildant/acw02_esphome/raw/main/PCB/Gerber_climEspHome_esp32_d1_mini_PCB_climEspHome_esp32_d1_mini_2025-07-03.zip)
+#### 🟢 Stable version (v1.0) :
+📥 [Download GERBER file](https://github.com/devildant/acw02_esphome/raw/main/PCB/v1.0/Gerber_climEspHome_esp32_d1_mini_PCB_climEspHome_esp32_d1_mini_2025-07-03.zip)
 
 ![front](PCB/images/pcb/front.PNG)  
 ![back](PCB/images/pcb/back.PNG)
+
+#### 🧪 Beta version (v1.1) :
+📥 [Download BETA GERBER file](https://github.com/devildant/acw02_esphome/raw/main/PCB/v1.1/Gerber_climEspHome_esp32_d1_mini_v1.1_PCB_climEspHome_esp32_d1_mini_v1.1_2025-09-08.zip)
+
+> ⚠️ **Experimental PCB**  
+> This revision removes the traces and copper layers under the **ESP32 antenna** to potentially improve Wi-Fi signal.  
+> However, since the antenna is already raised above the PCB by the pin headers, the improvement may be negligible.  
+> The PCB is **ordered but not yet tested**. 
+
+![front](PCB/images/pcb/frontv1.1.PNG)  
+![back](PCB/images/pcb/backv1.1.PNG)
 
 ---
 
