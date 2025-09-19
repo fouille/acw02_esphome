@@ -120,15 +120,19 @@ wifi_password3: "testesp32"
 - **Channels Logic Level Converter**
 
   > **2 options available:**  
-  > You can either choose a ready-made module based on the CYT1076, or use a custom board (designed by me) that you can have assembled by JLCPCB, based on two SN74LVC2T45DCUR chips.  
-  > In practice, the second option is much more optimized for UART communication. It’s slightly more expensive, but more efficient. I’ll admit, I’m not entirely objective since I designed it myself :)
+  > You can either choose a ready-made module based on the CYT1076,  
+  > or use a custom board (to be assembled by JLCPCB) designed around two SN74LVC2T45DCUR.  
+  > In practice, the second solution is far more optimized for UART communication.  
+  > Personally, I recommend this option: a bit more expensive but much more efficient.  
+  > (Of course, I might be slightly biased since I designed it myself 🙂)
 
   - **[4 Channels Logic Level Converter Bi-Directional Shifter (x1): CYT1076](https://amzn.eu/d/2MhG08s)**  
     ![CYT1076](PCB/images/components/4%20Channels%20Logic%20Level%20Converter%20Bi-Directional%20Shifter.PNG)
 
   - **Channels Logic Level Converter (x1): SN74LVC2T45DCUR**  
-    ![SN74LVC2T45DCUR](PCB/images/components/SN74LVC2T45DCUR.PNG)  
+    ![SN74LVC2T45DCUR](PCB/logic_level_converter/annexe/image.PNG)  
     - 📥 [Download ZIP (GERBER, BOM, Pick & Place)](https://github.com/devildant/acw02_esphome/raw/main/PCB/logic_level_converter/uart_conv_gerber_BOM_PickAndPlace.zip)
+    - 👉 [JLCPCB Assembly Guide](docs/uart_convert_jlcpcb.md)
 
 - **PCB and ESP32 (2 options available)**
 
