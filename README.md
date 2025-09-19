@@ -148,9 +148,9 @@ wifi_password3: "testesp32"
     ![CYT1076](PCB/images/components/4%20Channels%20Logic%20Level%20Converter%20Bi-Directional%20Shifter.PNG)
   - **Channels Logic Level Converter (x1): SN74LVC2T45DCUR**  
     ![SN74LVC2T45DCUR](PCB/images/components/SN74LVC2T45DCUR.PNG)
-    - 📥 [Download GERBER file](https://github.com/devildant/acw02_esphome/blob/main/PCB/logic_level_converter/Gerber_uart-conv_PCB_uart-conv_2025-09-10.zip)
-    - 📥 [Download BOM file](https://github.com/devildant/acw02_esphome/blob/main/PCB/logic_level_converter/BOM_uart-conv_2025-08-23.csv)
-    - 📥 [Download Pick And Place file](https://github.com/devildant/acw02_esphome/blob/main/PCB/logic_level_converter/PickAndPlace_PCB_uart-conv_2025-08-23.csv)
+    - 📥 [Download GERBER file](https://github.com/devildant/acw02_esphome/raw/main/PCB/logic_level_converter/Gerber_uart-conv_PCB_uart-conv_2025-09-10.zip)
+    - 📥 [Download BOM file](https://github.com/devildant/acw02_esphome/raw/main/PCB/logic_level_converter/BOM_uart-conv_2025-08-23.csv)
+    - 📥 [Download Pick And Place file](https://github.com/devildant/acw02_esphome/raw/main/PCB/logic_level_converter/PickAndPlace_PCB_uart-conv_2025-08-23.csv)
 
 - **[ESP32-WROOM-32 D1 Mini NodeMCU (micro usb version recommended (x1))](https://amzn.eu/d/3mS1B7W)**  
   ![ESP32](PCB/images/components/ESP32-WROOM-32%20D1%20Mini%20NodeMCU2.PNG)
