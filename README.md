@@ -116,15 +116,14 @@ wifi_password3: "testesp32"
 ### 📂 Gerber files available in the `PCB/` directory:
 
 #### 🟢 Stable version (v1.0) :
-📥 [Download GERBER file](https://github.com/devildant/acw02_esphome/raw/main/PCB/v1.0/Gerber_climEspHome_esp32_d1_mini_PCB_climEspHome_esp32_d1_mini_2025-07-03.zip)
+📥 [Download GERBER file](https://github.com/devildant/acw02_esphome/raw/main/PCB/esp32_D1_mini_wroom32/v1.0/Gerber_climEspHome_esp32_d1_mini_PCB_climEspHome_esp32_d1_mini_2025-07-03.zip)
 
 ![front](PCB/images/pcb/front.PNG)  
 ![back](PCB/images/pcb/back.PNG)
 
-#### 🧪 Beta version (v1.1) :
-📥 [Download BETA GERBER file](https://github.com/devildant/acw02_esphome/raw/main/PCB/v1.1/Gerber_climEspHome_esp32_d1_mini_v1.1_PCB_climEspHome_esp32_d1_mini_v1.1_2025-09-08.zip)
-
-> ⚠️ **Experimental PCB**  
+#### 🟢 Stable version (v1.1) :
+📥 [Download GERBER file](https://github.com/devildant/acw02_esphome/raw/main/PCB/esp32_D1_mini_wroom32/v1.1/Gerber_climEspHome_esp32_d1_mini_v1.1_PCB_climEspHome_esp32_d1_mini_v1.1_2025-09-08.zip)
+ 
 > This revision removes the traces and copper layers under the **ESP32 antenna** to potentially improve Wi-Fi signal.  
 > However, since the antenna is already raised above the PCB by the pin headers, the improvement may be negligible.  
 > The PCB is **ordered but not yet tested**. 
@@ -140,8 +139,18 @@ wifi_password3: "testesp32"
   [Manufacturer](https://www.pololu.com/product/2831)  
   ![D24V10F5](PCB/images/components/D24V10F5.PNG)
 
-- **[4 Channels Logic Level Converter Bi-Directional Shifter (x1): CYT1076](https://amzn.eu/d/2MhG08s)**  
-  ![CYT1076](PCB/images/components/4%20Channels%20Logic%20Level%20Converter%20Bi-Directional%20Shifter.PNG)
+- Channels Logic Level Converter
+
+  > **2 options are available:**  
+  > You can either get a ready-made model based on the CYT1076, or I'm providing a DIY board from jlcpcb based on two SN74LVC2T45DCURs, which are much more optimized for UART communication. It's up to you!
+  > Personally, I recommend the latter option; it's more expensive but more powerful. But I'm biased because I designed it myself. :)
+  - **[4 Channels Logic Level Converter Bi-Directional Shifter (x1): CYT1076](https://amzn.eu/d/2MhG08s)**  
+    ![CYT1076](PCB/images/components/4%20Channels%20Logic%20Level%20Converter%20Bi-Directional%20Shifter.PNG)
+  - **Channels Logic Level Converter (x1): SN74LVC2T45DCUR**  
+    ![SN74LVC2T45DCUR](PCB/images/components/SN74LVC2T45DCUR.PNG)
+    - 📥 [Download GERBER file](https://github.com/devildant/acw02_esphome/blob/main/PCB/logic_level_converter/Gerber_uart-conv_PCB_uart-conv_2025-09-10.zip)
+    - 📥 [Download BOM file](https://github.com/devildant/acw02_esphome/blob/main/PCB/logic_level_converter/BOM_uart-conv_2025-08-23.csv)
+    - 📥 [Download Pick And Place file](https://github.com/devildant/acw02_esphome/blob/main/PCB/logic_level_converter/PickAndPlace_PCB_uart-conv_2025-08-23.csv)
 
 - **[ESP32-WROOM-32 D1 Mini NodeMCU (micro usb version recommended (x1))](https://amzn.eu/d/3mS1B7W)**  
   ![ESP32](PCB/images/components/ESP32-WROOM-32%20D1%20Mini%20NodeMCU2.PNG)
