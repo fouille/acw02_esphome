@@ -111,28 +111,6 @@ wifi_password3: "testesp32"
 
 ---
 
-## 🧩 PCB
-
-### 📂 Gerber files available in the `PCB/` directory:
-
-#### 🟢 Stable version (v1.0) :
-📥 [Download GERBER file](https://github.com/devildant/acw02_esphome/raw/main/PCB/esp32_D1_mini_wroom32/v1.0/Gerber_climEspHome_esp32_d1_mini_PCB_climEspHome_esp32_d1_mini_2025-07-03.zip)
-
-![front](PCB/images/pcb/front.PNG)  
-![back](PCB/images/pcb/back.PNG)
-
-#### 🟢 Stable version (v1.1) :
-📥 [Download GERBER file](https://github.com/devildant/acw02_esphome/raw/main/PCB/esp32_D1_mini_wroom32/v1.1/Gerber_climEspHome_esp32_d1_mini_v1.1_PCB_climEspHome_esp32_d1_mini_v1.1_2025-09-08.zip)
- 
-> This revision removes the traces and copper layers under the **ESP32 antenna** to potentially improve Wi-Fi signal.  
-> However, since the antenna is already raised above the PCB by the pin headers, the improvement may be negligible.  
-> The PCB is **ordered but not yet tested**. 
-
-![front](PCB/images/pcb/frontv1.1.PNG)  
-![back](PCB/images/pcb/backv1.1.PNG)
-
----
-
 ### 📦 Components
 
 - **[12V → 5V Regulator D24V10F5](https://shop.mchobby.be/fr/regulateurs/554--regul-5v-1a-step-down-d24v10f5-3232100005549-pololu.html)**  
@@ -142,56 +120,28 @@ wifi_password3: "testesp32"
 - Channels Logic Level Converter
 
   > **2 options are available:**  
-  > You can either get a ready-made model based on the CYT1076, or I'm providing a DIY board from jlcpcb based on two SN74LVC2T45DCURs, which are much more optimized for UART communication. It's up to you!
-  > Personally, I recommend the latter option; it's more expensive but more powerful. But I'm biased because I designed it myself. :)
+  > You can either use a ready-made module based on the CYT1076, or I can offer you a board to have assembled by JLCPCB, which is based on two SN74LVC2T45DCUR.
+
+  > In practice, these are much more optimized for UART communication it’s up to you! Personally.
+  
+  > I recommend the second option: more expensive but more efficient. However, I’m not entirely objective since I designed it myself :)
   - **[4 Channels Logic Level Converter Bi-Directional Shifter (x1): CYT1076](https://amzn.eu/d/2MhG08s)**  
     ![CYT1076](PCB/images/components/4%20Channels%20Logic%20Level%20Converter%20Bi-Directional%20Shifter.PNG)
   - **Channels Logic Level Converter (x1): SN74LVC2T45DCUR**  
     ![SN74LVC2T45DCUR](PCB/images/components/SN74LVC2T45DCUR.PNG)
     - 📥 [Download zip GERBER, BOM, Pick And Place file](https://github.com/devildant/acw02_esphome/raw/main/PCB/logic_level_converter/uart_conv_gerber_BOM_PickAndPlace.zip)
 
-- **[ESP32-WROOM-32 D1 Mini NodeMCU (micro usb version recommended (x1))](https://amzn.eu/d/3mS1B7W)**  
-  ![ESP32](PCB/images/components/ESP32-WROOM-32%20D1%20Mini%20NodeMCU2.PNG)
-
-  > ⚠️ **Compatibility Warning**  
-  > Avoid very cheap ESP32 D1 Mini clones (often found on AliExpress).  
-  > Several users reported issues with these boards.  
-  > Prefer trusted brands such as **AZDelivery** or other well-reviewed suppliers.  
-
-  **❌ Symptoms of low-cost ESP32 incompatibility**  
-  - Wi-Fi cannot be enabled on the AC (Wi-Fi logo never appears).  
-  - ESP LED turns on briefly, then shuts off.  
-  - Voltage on VCC drops from 5 V to ~1.8–2 V when connected to the AC board.  
-
-  **🛠️ Why does this happen?**  
-  Cheap ESP32 D1 Mini clones often cut corners in **power regulation** and **stability**:  
-  - *Weak 5 V → 3.3 V regulator* — old AMS1117 regulators waste power and cannot handle Wi-Fi current peaks.  
-  - *Poor decoupling capacitors* — cheap boards lack the capacitors needed to smooth fast spikes.  
-  - *Inconsistent ESP32 modules* — some clones use non-genuine or B-grade chips.  
-
-  **✅ Why AZDelivery & trusted brands work**  
-  - Use original **Espressif WROOM-32** modules.  
-  - Include a **modern LDO regulator** that tolerates bursts up to 500–600 mA.  
-  - Proper capacitors ensure stable operation during Wi-Fi activity.  
-  - As a result, even when powered from the AC’s limited 12 V port, they stay stable and connect without issue.
-
-  **🔍 Observation**  
-  By comparing ESP32 boards that work and those that don’t, I noticed visible differences.  
-  If your ESP has the same configuration as in the image below (red square), it should *theoretically* be compatible.  
-  It's just an observation, I don't know how to differentiate the good esp32 d1 mini cards from the bad ones, it's possible that cards with differences work
-  ![ESP32 config](PCB/images/components/ESP32-config-maybe-ok.PNG) 
-
-  Note: The images on the official AZDelivery website are not up to date, but they are on Amazon.
-
+- **PCB and ESP32 (2 options are available)**
+  -  [ESP32 D1 MINI WROOM 32](https://github.com/devildant/acw02_esphome/blob/main/docs/version_esp32_D1_mini_wroom32.md) 
+    ![front](PCB/images/pcb/front.PNG) 
+    ![front](PCB/images/pcb/frontv1.1.PNG) 
+  - ESP32 lolin C3, xiao C3 or xiao C6 (comming soon) 
 
 - **[5 pins male 2.54mm (x1): MaleL7.5-1X5P](https://fr.aliexpress.com/item/1005007128029220.html)**  
   ![MaleL7.5-1X5P](PCB/images/components/5%20pin%20male%202.54.PNG)
 
 - **[6 pins male 2.54mm (x2): MaleL7.5-1X6P](https://fr.aliexpress.com/item/1005007128029220.html)**  
   ![MaleL7.5-1X5P](PCB/images/components/6%20pin%20male%202.54.PNG)
-
-- **[10 pins male 2.54mm (x2): MaleL7.5-1X10P](https://fr.aliexpress.com/item/1005007128029220.html)**  
-  ![MaleL7.5-1X5P](PCB/images/components/10%20pin%20male%202.54.PNG)
 
 - **[Connector: JST XA 2.5 male 4 pins (Reverse direction) (x1)](https://www.aliexpress.com/item/1005008857984831.html)**  
   ![JST](PCB/images/components/connector.PNG)
@@ -203,17 +153,10 @@ wifi_password3: "testesp32"
 
 ### 🧵 PCB Soldering & Wiring
 
-![pcb front](PCB/images/components/pcb%20front.PNG)  
-
 - RED = 12V  
 - BLACK = RX  
 - YELLOW = TX  
 - GREEN = GND
-
-🔧 Solder pins between ESP32 and PCB (red square):  
-![solder](PCB/images/components/esp32%20solder%20pins2.png)
-
-📌 [See Solder Board Helper section](#-solder-board-helper)
 
 ---
 
@@ -313,14 +256,6 @@ You don't seem to have a mounting bracket for the module, so I'll provide one fo
 4. ![support4](3Dfiles/images/support2.jpg)
 
 5. ![support5](3Dfiles/images/support3.jpg)
-
----
-
-### 🧰 Solder Board Helper
-
-[solder_board.stl](3Dfiles/solder%20board%2016%20hold.stl)  
-![solder1](3Dfiles/images/solder%20board1.jpg)  
-![solder2](3Dfiles/images/solder%20board2.jpg)
 
 ---
 
