@@ -117,25 +117,26 @@ wifi_password3: "testesp32"
   [Manufacturer](https://www.pololu.com/product/2831)  
   ![D24V10F5](PCB/images/components/D24V10F5.PNG)
 
-- Channels Logic Level Converter
+- **Channels Logic Level Converter**
 
-  > **2 options are available:**  
-  > You can either use a ready-made module based on the CYT1076, or I can offer you a board to have assembled by JLCPCB, which is based on two SN74LVC2T45DCUR.
+  > **2 options available:**  
+  > You can either choose a ready-made module based on the CYT1076, or use a custom board (designed by me) that you can have assembled by JLCPCB, based on two SN74LVC2T45DCUR chips.  
+  > In practice, the second option is much more optimized for UART communication. It’s slightly more expensive, but more efficient. I’ll admit, I’m not entirely objective since I designed it myself :)
 
-  > In practice, these are much more optimized for UART communication it’s up to you! Personally.
-  
-  > I recommend the second option: more expensive but more efficient. However, I’m not entirely objective since I designed it myself :)
   - **[4 Channels Logic Level Converter Bi-Directional Shifter (x1): CYT1076](https://amzn.eu/d/2MhG08s)**  
     ![CYT1076](PCB/images/components/4%20Channels%20Logic%20Level%20Converter%20Bi-Directional%20Shifter.PNG)
-  - **Channels Logic Level Converter (x1): SN74LVC2T45DCUR**  
-    ![SN74LVC2T45DCUR](PCB/images/components/SN74LVC2T45DCUR.PNG)
-    - 📥 [Download zip GERBER, BOM, Pick And Place file](https://github.com/devildant/acw02_esphome/raw/main/PCB/logic_level_converter/uart_conv_gerber_BOM_PickAndPlace.zip)
 
-- **PCB and ESP32 (2 options are available)**
-  -  [ESP32 D1 MINI WROOM 32](https://github.com/devildant/acw02_esphome/blob/main/docs/version_esp32_D1_mini_wroom32.md) 
-    ![front](PCB/images/pcb/front.PNG) 
-    ![front](PCB/images/pcb/frontv1.1.PNG) 
-  - ESP32 lolin C3, xiao C3 or xiao C6 (comming soon) 
+  - **Channels Logic Level Converter (x1): SN74LVC2T45DCUR**  
+    ![SN74LVC2T45DCUR](PCB/images/components/SN74LVC2T45DCUR.PNG)  
+    - 📥 [Download ZIP (GERBER, BOM, Pick & Place)](https://github.com/devildant/acw02_esphome/raw/main/PCB/logic_level_converter/uart_conv_gerber_BOM_PickAndPlace.zip)
+
+- **PCB and ESP32 (2 options available)**
+
+  - **[ESP32 D1 MINI WROOM 32](https://github.com/devildant/acw02_esphome/blob/main/docs/version_esp32_D1_mini_wroom32.md)**  
+    ![front](PCB/images/pcb/front.PNG)  
+    ![front](PCB/images/pcb/frontv1.1.PNG)
+
+  - **ESP32 Lolin C3, Xiao C3, or Xiao C6** *(coming soon)*
 
 - **[5 pins male 2.54mm (x1): MaleL7.5-1X5P](https://fr.aliexpress.com/item/1005007128029220.html)**  
   ![MaleL7.5-1X5P](PCB/images/components/5%20pin%20male%202.54.PNG)
