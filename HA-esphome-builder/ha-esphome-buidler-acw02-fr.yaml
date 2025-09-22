@@ -68,6 +68,7 @@ mqtt:
   enable_on_boot: false
   discovery: false
   keepalive: 30s
+  log_topic: null
   clean_session: false
   idf_send_async: false
   wait_for_connection: false
