@@ -22,13 +22,13 @@ jobs:
       matrix:
         include:
           - id: d1-mini
-            path: test-build/ha-esphome-builder-acw02-fr-d1-mini.yaml
+            path: test-build/builder-acw02-fr-d1-mini.yaml
           - id: lolin-c3
-            path: test-build/ha-esphome-builder-acw02-fr-lolin-c3.yaml
+            path: test-build/builder-acw02-fr-lolin-c3.yaml
           - id: xiao-c3
-            path: test-build/ha-esphome-builder-acw02-fr-xiao-c3.yaml
+            path: test-build/builder-acw02-fr-xiao-c3.yaml
           - id: xiao-c6
-            path: test-build/ha-esphome-builder-acw02-fr-xiao-c6.yaml
+            path: test-build/builder-acw02-fr-xiao-c6.yaml
 
     steps:
       - name: Checkout repo
