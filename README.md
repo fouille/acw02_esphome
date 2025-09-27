@@ -252,7 +252,7 @@ wifi_password3: "testesp32"
     ![solder1](3Dfiles/images/antenna-flexV2.PNG)
 
 
-  - [support antenna flex free.stl](https://github.com/devildant/acw02_esphome/raw/main/3Dfiles/LOLIN-C3-XIAO-C3-C6/support antenna%20flex%20free.stl)
+  - [support antenna flex free.stl](https://github.com/devildant/acw02_esphome/raw/main/3Dfiles/LOLIN-C3-XIAO-C3-C6/support%20antenna%20flex%20free.stl)
 
     ![solder1](3Dfiles/images/antenna-flexF.PNG)
     ![solder1](3Dfiles/images/antenna-flexF2.PNG)
