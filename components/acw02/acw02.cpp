@@ -2,6 +2,10 @@
 #include "esphome/core/log.h"
 #include "esphome/core/helpers.h"
 
+#ifdef CONFIG_IDF_TARGET_ESP32C6
+#include "driver/gpio.h"
+#endif
+
 namespace esphome {
   namespace acw02 {
 
@@ -13,6 +17,21 @@ namespace esphome {
       #endif
       #if defined(DBOARD)
         app_board_ = DBOARD;
+      #endif
+
+      // force use external Wi-Fi antenna (XIAO ESP32-C6)
+      #if CONFIG_IDF_TARGET_ESP32C6
+        // GPIO3 -> LOW
+        gpio_reset_pin(GPIO_NUM_3);
+        gpio_set_direction(GPIO_NUM_3, GPIO_MODE_OUTPUT);
+        gpio_set_level(GPIO_NUM_3, 0);
+
+        // GPIO14 -> HIGH
+        gpio_reset_pin(GPIO_NUM_14);
+        gpio_set_direction(GPIO_NUM_14, GPIO_MODE_OUTPUT);
+        gpio_set_level(GPIO_NUM_14, 1);
+
+        ESP_LOGW(TAG, "RF switch set for XIAO ESP32-C6: external Wi-Fi antenna enabled");
       #endif
 
       mqtt_connexion();

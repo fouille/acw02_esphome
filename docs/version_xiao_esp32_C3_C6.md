@@ -18,7 +18,7 @@
   ![ESP32](../PCB/images/components/XIAO-ESP32-C3.PNG)
   - **[LOLIN ESP32 C6 (x1)](https://www.seeedstudio.com/Seeed-Studio-XIAO-ESP32C6-p-5884.html)**  
   ![ESP32](../PCB/images/components/XIAO-ESP32-C6.PNG)
-    - **[external antenna (for c6 only because not provide) (x1)](https://www.seeedstudio.com/2-4GHz-FPC-Antenna-2-9dBi-for-XIAO-ESP32C3-p-6439.html)**  
+    - **[external antenna (for c6 only because not provide, and internal antenna has very poor reception) (x1)](https://www.seeedstudio.com/2-4GHz-FPC-Antenna-2-9dBi-for-XIAO-ESP32C3-p-6439.html)**  
     ![ESP32](../PCB/images/components/XIAO-ESP32-C6-antenna.PNG)
 
 - **[7 pins male 2.54mm (x2): MaleL7.5-1X7P](https://fr.aliexpress.com/item/1005007128029220.html)**  

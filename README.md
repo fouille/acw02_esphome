@@ -231,9 +231,9 @@ Several ESP32 boards can be used with this module. Each has its own pros and con
 
 #### XIAO ESP32 C6 *(not recommended)*
 - ✅ External antenna support  
-- ❌ Antenna **not included** (must be purchased separately) 
+- ❌ Antenna **not included** (must be purchased separately, internal antenna has very poor reception) 
 - ❌ No **reset** button on the case  
-- ❌ Average Wi-Fi signal, often weaker than ESP32 D1 MINI WROOM 32 despite external antenna  
+- ❌ Average Wi-Fi signal, often weaker than ESP32 D1 MINI WROOM 32 with internal antenna (that's why you need buy the external antenna)
 
 ---
 
