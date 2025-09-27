@@ -8,7 +8,7 @@ on:
 permissions:
   contents: write
 
-# Empêche que DEUX workflows se chevauchent (mais laisse les jobs matrix en //)
+# Empêche deux runs de ce workflow de se chevaucher
 concurrency:
   group: esphome-autobuild-badges
   cancel-in-progress: false
@@ -19,6 +19,7 @@ jobs:
 
     strategy:
       fail-fast: false
+      max-parallel: 1   # <-- exécution séquentielle
       matrix:
         include:
           - id: d1-mini
@@ -73,6 +74,7 @@ jobs:
           else
             echo "failed=false" >> "$GITHUB_OUTPUT"
           fi
+          exit 0
 
       - name: Prepare/update badge JSON files for ${{ matrix.id }}
         if: always()
@@ -85,10 +87,8 @@ jobs:
           VER="${ESPHOME_VERSION}"
           BID="${{ matrix.id }}"
 
-          # ATTENTION : un seul job écrit l'esphome.json pour éviter les conflits
-          if [ "${BID}" = "d1-mini" ]; then
-            printf '%s' '{"schemaVersion":1,"label":"ESPHome","message":"'"$VER"'","color":"blue"}' > .ci/badges/esphome.json
-          fi
+          # Ecrit la version ESPHome (séquentiel -> pas de conflit)
+          printf '%s' '{"schemaVersion":1,"label":"ESPHome","message":"'"$VER"'","color":"blue"}' > .ci/badges/esphome.json
 
           if [ "$FAILED" = "false" ]; then
             printf '%s' "$VER" > ".ci/last_success/${BID}.txt"
@@ -113,42 +113,17 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          # N'ajouter QUE les fichiers de la board courante (et esphome.json si d1-mini)
-          FILES=".ci/badges/build-${{ matrix.id }}.json .ci/badges/last_passing-${{ matrix.id }}.json .ci/badges/problem-${{ matrix.id }}.json .ci/last_success/${{ matrix.id }}.txt"
-          if [ "${{ matrix.id }}" = "d1-mini" ]; then
-            FILES="$FILES .ci/badges/esphome.json"
-          fi
-
-          # Certains fichiers peuvent ne pas exister selon le cas -> add tolérant
-          git add $FILES 2>/dev/null || true
+          # Ajoute tout le dossier .ci (on est en séquentiel, plus simple/robuste)
+          git add -A .ci || true
 
           if git diff --cached --quiet; then
             echo "No changes to commit"
             exit 0
           fi
 
-          # Boucle de retry push pour absorber les conflits de commits parallèles
-          n=0
-          until [ $n -ge 5 ]
-          do
-            if git commit -m "CI(${{ matrix.id }}): badges for ESPHome ${ESPHOME_VERSION} (failed=${{ steps.compile.outputs.failed }})"; then
-              git pull --rebase || true
-              if git push; then
-                echo "Pushed successfully"
-                break
-              fi
-            fi
-            n=$((n+1))
-            echo "Push conflict, retry $n/5..."
-            sleep 2
-            git pull --rebase || true
-            git add $FILES 2>/dev/null || true
-          done
-
-          if [ $n -ge 5 ]; then
-            echo "Failed to push after retries"
-            # On n'échoue pas le job pour un conflit de badge
-          fi
+          git commit -m "CI(${{ matrix.id }}): badges for ESPHome ${ESPHOME_VERSION} (failed=${{ steps.compile.outputs.failed }})"
+          git pull --rebase || true
+          git push || echo "Nothing to push"
 
       - name: Fail job if compile failed (${{ matrix.id }})
         if: steps.compile.outputs.failed == 'true'
