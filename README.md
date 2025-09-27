@@ -209,6 +209,33 @@ wifi_password3: "testesp32"
 
 ---
 
+### ⚙️ Choosing the ESP32 Board
+
+Several ESP32 boards can be used with this module. Each has its own pros and cons depending on your needs.
+
+#### ESP32 D1 MINI WROOM 32
+- ✅ Used for development, therefore the most tested version  
+- ✅ Built-in **reset** button on the case  
+- ❌ Many cheap clones with poor 5V → 3.3V regulator (may cause malfunction)  
+- ❌ Slightly weaker Wi-Fi signal due to component layout and antenna position  
+- ❌ No external antenna support  
+
+#### LOLIN ESP32 C3
+- ✅ Built-in **reset** button on the case  
+- ✅ Better Wi-Fi signal compared to ESP32 D1 MINI WROOM 32  
+- ❌ No external antenna support  
+
+#### XIAO ESP32 C3
+- ✅ External antenna support (Wi-Fi signal ≥ LOLIN ESP32 C3)  
+- ❌ No **reset** button on the case  
+
+#### XIAO ESP32 C6 *(not recommended)*
+- ✅ External antenna support  
+- ❌ No **reset** button on the case  
+- ❌ Average Wi-Fi signal, often weaker than ESP32 D1 MINI WROOM 32 despite external antenna  
+
+---
+
 ### 🧵 PCB Soldering & Wiring
 
 - RED = 12V  
