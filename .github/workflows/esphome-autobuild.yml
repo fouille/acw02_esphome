@@ -8,7 +8,7 @@ on:
 permissions:
   contents: write
 
-# On sérialise pour éviter les conflits de commit entre jobs du matrix
+# Empêche que DEUX workflows se chevauchent (mais laisse les jobs matrix en //)
 concurrency:
   group: esphome-autobuild-badges
   cancel-in-progress: false
@@ -47,7 +47,7 @@ jobs:
         shell: bash
         run: |
           set -e
-          V=$(esphome version | tr -d '\r' | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')
+          V=$(esphome version | tr -d '\r' | sed 's/^Version:[[:space:]]*//;s/^[[:space:]]*//;s/[[:space:]]*$//')
           [ -z "$V" ] && V="unknown"
           echo "ESPHOME_VERSION=$V" >> "$GITHUB_ENV"
           echo "version=$V" >> "$GITHUB_OUTPUT"
@@ -79,17 +79,18 @@ jobs:
         shell: bash
         run: |
           set -e
-          mkdir -p .ci/badges
+          mkdir -p .ci/badges .ci/last_success
           FAILED="${{ steps.compile.outputs.failed }}"
           LAST="${{ steps.last.outputs.last }}"
           VER="${ESPHOME_VERSION}"
           BID="${{ matrix.id }}"
 
-          # Badge version ESPHome (commun à toutes les boards)
-          printf '%s' '{"schemaVersion":1,"label":"ESPHome","message":"'"$VER"'","color":"blue"}' > .ci/badges/esphome.json
+          # ATTENTION : un seul job écrit l'esphome.json pour éviter les conflits
+          if [ "${BID}" = "d1-mini" ]; then
+            printf '%s' '{"schemaVersion":1,"label":"ESPHome","message":"'"$VER"'","color":"blue"}' > .ci/badges/esphome.json
+          fi
 
           if [ "$FAILED" = "false" ]; then
-            mkdir -p .ci/last_success
             printf '%s' "$VER" > ".ci/last_success/${BID}.txt"
             printf '%s' '{"schemaVersion":1,"label":"Build ('"$BID"')","message":"passing","color":"brightgreen"}' > ".ci/badges/build-${BID}.json"
             printf '%s' '{"schemaVersion":1,"label":"Last passing ('"$BID"')","message":"'"$VER"'","color":"brightgreen"}' > ".ci/badges/last_passing-${BID}.json"
@@ -112,19 +113,47 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          # Ajouter tous les changements dans .ci
-          git add -A .ci || true
+          # N'ajouter QUE les fichiers de la board courante (et esphome.json si d1-mini)
+          FILES=".ci/badges/build-${{ matrix.id }}.json .ci/badges/last_passing-${{ matrix.id }}.json .ci/badges/problem-${{ matrix.id }}.json .ci/last_success/${{ matrix.id }}.txt"
+          if [ "${{ matrix.id }}" = "d1-mini" ]; then
+            FILES="$FILES .ci/badges/esphome.json"
+          fi
 
-          if ! git diff --cached --quiet; then
-            git commit -m "CI(${{ matrix.id }}): badges for ESPHome ${ESPHOME_VERSION} (failed=${{ steps.compile.outputs.failed }})"
-            git pull --rebase || true
-            git push || echo "Nothing to push"
-          else
+          # Certains fichiers peuvent ne pas exister selon le cas -> add tolérant
+          git add $FILES 2>/dev/null || true
+
+          if git diff --cached --quiet; then
             echo "No changes to commit"
+            exit 0
+          fi
+
+          # Boucle de retry push pour absorber les conflits de commits parallèles
+          n=0
+          until [ $n -ge 5 ]
+          do
+            if git commit -m "CI(${{ matrix.id }}): badges for ESPHome ${ESPHOME_VERSION} (failed=${{ steps.compile.outputs.failed }})"; then
+              git pull --rebase || true
+              if git push; then
+                echo "Pushed successfully"
+                break
+              fi
+            fi
+            n=$((n+1))
+            echo "Push conflict, retry $n/5..."
+            sleep 2
+            git pull --rebase || true
+            git add $FILES 2>/dev/null || true
+          done
+
+          if [ $n -ge 5 ]; then
+            echo "Failed to push after retries"
+            # On n'échoue pas le job pour un conflit de badge
           fi
 
       - name: Fail job if compile failed (${{ matrix.id }})
         if: steps.compile.outputs.failed == 'true'
         run: |
-          echo "Compilation failed for '${{ matrix.id }}' with ESPHome ${ESPHOME_VERSION}. Last passing: ${{ steps.last.outputs.last }}"
+          LAST="${{ steps.last.outputs.last }}"
+          [ -z "$LAST" ] && LAST="-"
+          echo "Compilation failed for '${{ matrix.id }}' with ESPHome ${ESPHOME_VERSION}. Last passing: $LAST"
           exit 1
