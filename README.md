@@ -233,15 +233,23 @@ wifi_password3: "testesp32"
   - support antenna rigid
     - [support antenna rigid part A.stl](https://github.com/devildant/acw02_esphome/raw/main/3Dfiles/LOLIN-C3-XIAO-C3-C6/support%20antenna%20rigid%20part%20A.stl)
     - [support antenna rigid part B.stl](https://github.com/devildant/acw02_esphome/raw/main/3Dfiles/LOLIN-C3-XIAO-C3-C6/support%20antenna%20rigid%20part%20B.stl)
+    
       ![solder1](3Dfiles/images/antenna-rigid.PNG)
       ![solder1](3Dfiles/images/antenna-rigid-assembly.PNG)
+
   - [support antenna flex horizontal.stl](https://github.com/devildant/acw02_esphome/raw/main/3Dfiles/LOLIN-C3-XIAO-C3-C6/support%20antenna%20flex%20horizontal.stl)
+
     ![solder1](3Dfiles/images/antenna-flexH.PNG)
     ![solder1](3Dfiles/images/antenna-flexH2.PNG)
+
   - [support antenna flex vertical.stl](https://github.com/devildant/acw02_esphome/raw/main/3Dfiles/LOLIN-C3-XIAO-C3-C6/support%20antenna%20flex%20vertical.stl)
+
     ![solder1](3Dfiles/images/antenna-flexV.PNG)
     ![solder1](3Dfiles/images/antenna-flexV2.PNG)
+
+
   - [support antenna flex free.stl](https://github.com/devildant/acw02_esphome/raw/main/3Dfiles/LOLIN-C3-XIAO-C3-C6/support antenna%20flex%20free.stl)
+
     ![solder1](3Dfiles/images/antenna-flexF.PNG)
     ![solder1](3Dfiles/images/antenna-flexF2.PNG)
 
