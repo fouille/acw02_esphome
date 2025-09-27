@@ -1,4 +1,4 @@
-# LOLIN ESP32 C3 version
+# LOLIN ESP32 C3 MINI version
 ## 🧩 PCB
 
 ### 📂 Gerber files available in the `PCB/` directory:
