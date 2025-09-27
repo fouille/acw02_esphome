@@ -2,7 +2,7 @@
 | Board   | Build | Last passing | Problem version |
 |---------|-------|--------------|-----------------|
 | D1 Mini WROOM 32 | ![Build d1-mini](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/devildant/acw02_esphome/main/.ci/badges/build-d1-mini.json) | ![Last d1-mini](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/devildant/acw02_esphome/main/.ci/badges/last_passing-d1-mini.json) | ![Problem d1-mini](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/devildant/acw02_esphome/main/.ci/badges/problem-d1-mini.json) |
-| Lolin C3 | ![Build lolin-c3](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/devildant/acw02_esphome/main/.ci/badges/build-lolin-c3.json) | ![Last lolin-c3](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/devildant/acw02_esphome/main/.ci/badges/last_passing-lolin-c3.json) | ![Problem lolin-c3](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/devildant/acw02_esphome/main/.ci/badges/problem-lolin-c3.json) |
+| Lolin C3 | ![Build lolin-c3-mini](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/devildant/acw02_esphome/main/.ci/badges/build-lolin-c3.json) | ![Last lolin-c3](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/devildant/acw02_esphome/main/.ci/badges/last_passing-lolin-c3.json) | ![Problem lolin-c3](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/devildant/acw02_esphome/main/.ci/badges/problem-lolin-c3.json) |
 | XIAO C3 | ![Build xiao-c3](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/devildant/acw02_esphome/main/.ci/badges/build-xiao-c3.json) | ![Last xiao-c3](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/devildant/acw02_esphome/main/.ci/badges/last_passing-xiao-c3.json) | ![Problem xiao-c3](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/devildant/acw02_esphome/main/.ci/badges/problem-xiao-c3.json) |
 | XIAO C6 | ![Build xiao-c6](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/devildant/acw02_esphome/main/.ci/badges/build-xiao-c6.json) | ![Last xiao-c6](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/devildant/acw02_esphome/main/.ci/badges/last_passing-xiao-c6.json) | ![Problem xiao-c6](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/devildant/acw02_esphome/main/.ci/badges/problem-xiao-c6.json) |
 
@@ -190,7 +190,7 @@ wifi_password3: "testesp32"
     ![front](PCB/images/pcb/front.PNG)  
     ![front](PCB/images/pcb/frontv1.1.PNG)
 
-  - **[LOLIN ESP32 C3](https://github.com/devildant/acw02_esphome/blob/main/docs/version_lolin_esp32_C3.md)**  
+  - **[LOLIN ESP32 C3 MINI](https://github.com/devildant/acw02_esphome/blob/main/docs/version_lolin_esp32_C3.md)**  
     ![front](PCB/images/pcb/front-v1.0-C3-C6.PNG)
 
   - **[XIAO ESP32 C3-C6](https://github.com/devildant/acw02_esphome/blob/main/docs/version_xiao_esp32_C3_C6.md)**  

@@ -13,7 +13,7 @@
 
 ### 📦 Components
 
-- **[LOLIN ESP32 C3 (x1)](https://www.wemos.cc/en/latest/c3/c3_mini.html)**  
+- **[LOLIN ESP32 C3 mini (x1)](https://www.wemos.cc/en/latest/c3/c3_mini.html)**  
   ![ESP32](../PCB/images/components/LOLIN-ESP32-C-MINI.PNG)
 
 - **[8 pins male 2.54mm (x2): MaleL7.5-1X8P](https://fr.aliexpress.com/item/1005007128029220.html)**  
