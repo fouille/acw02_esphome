@@ -2,15 +2,33 @@ name: ESPHome Auto-Build (Latest)
 
 on:
   schedule:
-    - cron: '0 6 * * 6'         # chaque samedi à 06:00 UTC
+    - cron: '0 6 * * 6'   # chaque samedi à 06:00 UTC
   workflow_dispatch:
 
 permissions:
   contents: write
 
+# On sérialise pour éviter les conflits de commit entre jobs du matrix
+concurrency:
+  group: esphome-autobuild-badges
+  cancel-in-progress: false
+
 jobs:
   build:
     runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - id: d1-mini
+            path: test-build/builder-acw02-fr-d1-mini.yaml
+          - id: lolin-c3
+            path: test-build/builder-acw02-fr-lolin-c3.yaml
+          - id: xiao-c3
+            path: test-build/builder-acw02-fr-xiao-c3.yaml
+          - id: xiao-c6
+            path: test-build/builder-acw02-fr-xiao-c6.yaml
 
     steps:
       - name: Checkout repo
@@ -34,19 +52,20 @@ jobs:
           echo "ESPHOME_VERSION=$V" >> "$GITHUB_ENV"
           echo "version=$V" >> "$GITHUB_OUTPUT"
 
-      - name: Read last passing version (if any)
+      - name: Read last passing version (if any) for ${{ matrix.id }}
         id: last
         shell: bash
         run: |
-          LAST=$(cat .ci/last_success_esphome.txt 2>/dev/null || true)
+          mkdir -p .ci/last_success
+          LAST=$(cat ".ci/last_success/${{ matrix.id }}.txt" 2>/dev/null || true)
           echo "last=$LAST" >> "$GITHUB_OUTPUT"
 
-      - name: Compile firmware
+      - name: Compile firmware (${{ matrix.id }})
         id: compile
         shell: bash
         run: |
           set +e
-          esphome compile esphome-acw02-fr.yaml
+          esphome compile "${{ matrix.path }}"
           status=$?
           echo "status=$status" >> "$GITHUB_OUTPUT"
           if [ $status -ne 0 ]; then
@@ -55,7 +74,7 @@ jobs:
             echo "failed=false" >> "$GITHUB_OUTPUT"
           fi
 
-      - name: Prepare/update badge JSON files
+      - name: Prepare/update badge JSON files for ${{ matrix.id }}
         if: always()
         shell: bash
         run: |
@@ -64,40 +83,48 @@ jobs:
           FAILED="${{ steps.compile.outputs.failed }}"
           LAST="${{ steps.last.outputs.last }}"
           VER="${ESPHOME_VERSION}"
+          BID="${{ matrix.id }}"
 
-          # Badge version ESPHome
+          # Badge version ESPHome (commun à toutes les boards)
           printf '%s' '{"schemaVersion":1,"label":"ESPHome","message":"'"$VER"'","color":"blue"}' > .ci/badges/esphome.json
 
           if [ "$FAILED" = "false" ]; then
-            # Build OK : maj last_success + badges verts
-            printf '%s' "$VER" > .ci/last_success_esphome.txt
-            printf '%s' '{"schemaVersion":1,"label":"Build","message":"passing","color":"brightgreen"}' > .ci/badges/build.json
-            printf '%s' '{"schemaVersion":1,"label":"Last passing","message":"'"$VER"'","color":"brightgreen"}' > .ci/badges/last_passing.json
-            # Toujours créer problem.json avec un état neutre
-            printf '%s' '{"schemaVersion":1,"label":"Problem version","message":"-","color":"lightgrey"}' > .ci/badges/problem.json
+            mkdir -p .ci/last_success
+            printf '%s' "$VER" > ".ci/last_success/${BID}.txt"
+            printf '%s' '{"schemaVersion":1,"label":"Build ('"$BID"')","message":"passing","color":"brightgreen"}' > ".ci/badges/build-${BID}.json"
+            printf '%s' '{"schemaVersion":1,"label":"Last passing ('"$BID"')","message":"'"$VER"'","color":"brightgreen"}' > ".ci/badges/last_passing-${BID}.json"
+            printf '%s' '{"schemaVersion":1,"label":"Problem version ('"$BID"')","message":"-","color":"lightgrey"}' > ".ci/badges/problem-${BID}.json"
           else
-            # Build KO : badges rouges + last passing si connu
-            printf '%s' '{"schemaVersion":1,"label":"Build","message":"failing","color":"red"}' > .ci/badges/build.json
+            printf '%s' '{"schemaVersion":1,"label":"Build ('"$BID"')","message":"failing","color":"red"}' > ".ci/badges/build-${BID}.json"
             if [ -n "$LAST" ]; then
-              printf '%s' '{"schemaVersion":1,"label":"Last passing","message":"'"$LAST"'","color":"blue"}' > .ci/badges/last_passing.json
+              printf '%s' '{"schemaVersion":1,"label":"Last passing ('"$BID"')","message":"'"$LAST"'","color":"blue"}' > ".ci/badges/last_passing-${BID}.json"
             else
-              printf '%s' '{"schemaVersion":1,"label":"Last passing","message":"-","color":"lightgrey"}' > .ci/badges/last_passing.json
+              printf '%s' '{"schemaVersion":1,"label":"Last passing ('"$BID"')","message":"-","color":"lightgrey"}' > ".ci/badges/last_passing-${BID}.json"
             fi
-            printf '%s' '{"schemaVersion":1,"label":"Problem version","message":"'"$VER"'","color":"red"}' > .ci/badges/problem.json
+            printf '%s' '{"schemaVersion":1,"label":"Problem version ('"$BID"')","message":"'"$VER"'","color":"red"}' > ".ci/badges/problem-${BID}.json"
           fi
 
-      - name: Commit & push badge updates
+      - name: Commit & push badge updates for ${{ matrix.id }}
         if: always()
         shell: bash
         run: |
+          set -e
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add .ci/last_success_esphome.txt .ci/badges/*.json || true
-          git commit -m "CI: badges for ESPHome ${ESPHOME_VERSION} (failed=${{ steps.compile.outputs.failed }})" || echo "No changes to commit"
-          git push || echo "Nothing to push"
 
-      - name: Fail job if compile failed
+          # Ajouter tous les changements dans .ci
+          git add -A .ci || true
+
+          if ! git diff --cached --quiet; then
+            git commit -m "CI(${{ matrix.id }}): badges for ESPHome ${ESPHOME_VERSION} (failed=${{ steps.compile.outputs.failed }})"
+            git pull --rebase || true
+            git push || echo "Nothing to push"
+          else
+            echo "No changes to commit"
+          fi
+
+      - name: Fail job if compile failed (${{ matrix.id }})
         if: steps.compile.outputs.failed == 'true'
         run: |
-          echo "Compilation failed with ESPHome ${ESPHOME_VERSION}. Last passing: ${{ steps.last.outputs.last }}"
+          echo "Compilation failed for '${{ matrix.id }}' with ESPHome ${ESPHOME_VERSION}. Last passing: ${{ steps.last.outputs.last }}"
           exit 1
