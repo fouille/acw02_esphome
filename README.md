@@ -140,7 +140,12 @@ wifi_password3: "testesp32"
     ![front](PCB/images/pcb/front.PNG)  
     ![front](PCB/images/pcb/frontv1.1.PNG)
 
-  - **ESP32 Lolin C3, Xiao C3, or Xiao C6** *(coming soon)*
+  - **[LOLIN ESP32 C3](https://github.com/devildant/acw02_esphome/blob/main/docs/version_lolin_esp32_C3.md)**  
+    ![front](PCB/images/pcb/front-v1.0-C3-C6.PNG)
+
+  - **[XIAO ESP32 C3-C6](https://github.com/devildant/acw02_esphome/blob/main/docs/version_xiao_esp32_C3_C6.md)**  
+    ![front](PCB/images/pcb/front-v1.0-C3-C6.PNG)
+
 
 - **[5 pins male 2.54mm (x1): MaleL7.5-1X5P](https://fr.aliexpress.com/item/1005007128029220.html)**  
   ![MaleL7.5-1X5P](PCB/images/components/5%20pin%20male%202.54.PNG)
@@ -186,18 +191,18 @@ wifi_password3: "testesp32"
 
 #### Version 1
 
-- [acw02 case bottom (.stl)](https://github.com/devildant/acw02_esphome/raw/main/3Dfiles/Version%201/acw02%20case%20bot.stl)
-- [acw02 case top (.stl)](https://github.com/devildant/acw02_esphome/raw/main/3Dfiles/Version%201/acw02%20case%20top.stl)
-- [Alternative: top case with thermo cable hole](https://github.com/devildant/acw02_esphome/raw/main/3Dfiles/Version%201/acw02%20case%20top%20cable%20with%20thermo.stl)
+- [acw02 case bottom (.stl)](https://github.com/devildant/acw02_esphome/raw/main/3Dfiles/D1-MIMI/Version%201/acw02%20case%20bot.stl)
+- [acw02 case top (.stl)](https://github.com/devildant/acw02_esphome/raw/main/3Dfiles/D1-MIMI/Version%201/acw02%20case%20top.stl)
+- [Alternative: top case with thermo cable hole](https://github.com/devildant/acw02_esphome/raw/main/3Dfiles/D1-MIMI/Version%201/acw02%20case%20top%20cable%20with%20thermo.stl)
 
 #### Version 2
 
-- [acw02 case bot with air flow (.stl)](https://github.com/devildant/acw02_esphome/raw/main/3Dfiles/Version%202/acw02%20case%20bot%20with%20air%20flow.stl)
-- [acw02 case top air flow (.stl)](https://github.com/devildant/acw02_esphome/raw/main/3Dfiles/Version%202/acw02%20case%20top%20air%20flow.stl)
-- [acw02 case top cable with thermo air flow (.stl)](https://github.com/devildant/acw02_esphome/raw/main/3Dfiles/Version%202/acw02%20case%20top%20cable%20with%20thermo%20air%20flow.stl)
-- [acw02 case top cable with thermo plastic card (.stl)](https://github.com/devildant/acw02_esphome/raw/main/3Dfiles/Version%202/acw02%20case%20top%20cable%20with%20thermo%20plastic%20card.stl)
-- [acw02 case top plastic card (.stl)](https://github.com/devildant/acw02_esphome/raw/main/3Dfiles/Version%202/acw02%20case%20top%20plastic%20card.stl)
-- [card (.stl)](https://github.com/devildant/acw02_esphome/raw/main/3Dfiles/Version%202/card.stl)
+- [acw02 case bot with air flow (.stl)](https://github.com/devildant/acw02_esphome/raw/main/3Dfiles/D1-MIMI/Version%202/acw02%20case%20bot%20with%20air%20flow.stl)
+- [acw02 case top air flow (.stl)](https://github.com/devildant/acw02_esphome/raw/main/3Dfiles/D1-MIMI/Version%202/acw02%20case%20top%20air%20flow.stl)
+- [acw02 case top cable with thermo air flow (.stl)](https://github.com/devildant/acw02_esphome/raw/main/3Dfiles/D1-MIMI/Version%202/acw02%20case%20top%20cable%20with%20thermo%20air%20flow.stl)
+- [acw02 case top cable with thermo plastic card (.stl)](https://github.com/devildant/acw02_esphome/raw/main/3Dfiles/D1-MIMI/Version%202/acw02%20case%20top%20cable%20with%20thermo%20plastic%20card.stl)
+- [acw02 case top plastic card (.stl)](https://github.com/devildant/acw02_esphome/raw/main/3Dfiles/D1-MIMI/Version%202/acw02%20case%20top%20plastic%20card.stl)
+- [card (.stl)](https://github.com/devildant/acw02_esphome/raw/main/3Dfiles/D1-MIMI/Version%202/card.stl)
 
 ![airflow1](3Dfiles/images/airflow1.jpg)
 
@@ -211,15 +216,21 @@ wifi_password3: "testesp32"
 
 ![airflow6](3Dfiles/images/airflow6.jpg) 
 
+#### For ESP32 D1 MINI WROOM 32
+- [button.stl](https://github.com/devildant/acw02_esphome/raw/main/3Dfiles/D1-MIMI/button.stl)
+- [solder board ESP32 D1 MINI.stl](https://github.com/devildant/acw02_esphome/raw/main/3Dfiles/D1-MIMI/solder%20board%20ESP32%20D1%20MINI.stl)
+
+#### For LOLIN ESP32 C3
+- [button lolin c3.stl](https://github.com/devildant/acw02_esphome/raw/main/3Dfiles/LOLIN-C3-XIAO-C3-C6/button%20lolin%20c3.stl)
+- [solder board ESP32 C3-C6.stl](https://github.com/devildant/acw02_esphome/raw/main/3Dfiles/LOLIN-C3-XIAO-C3-C6/solder%20board%20ESP32%20C3-C6.stl)
+
+#### For XIAO ESP32 C3-C6
+- [solder board ESP32 C3-C6.stl](https://github.com/devildant/acw02_esphome/raw/main/3Dfiles/LOLIN-C3-XIAO-C3-C6/solder%20board%20ESP32%20C3-C6.stl)
+
 #### BONUS: for airton support
 You don't seem to have a mounting bracket for the module, so I'll provide one for you to stick on your air conditioner. :) (fix with double-sided tape)
 
 - [support airton (.stl)](https://github.com/devildant/acw02_esphome/raw/main/3Dfiles/support%20for%20airton/support%20airton.stl)
-
-
-#### Common
-- [button.stl](https://github.com/devildant/acw02_esphome/raw/main/3Dfiles/button.stl)
-- [solder board holder](https://github.com/devildant/acw02_esphome/raw/main/3Dfiles/solder%20board%2016%20hold.stl)
 
 ---
 
