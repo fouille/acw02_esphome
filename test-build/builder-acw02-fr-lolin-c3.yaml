@@ -26,6 +26,8 @@ substitutions:
   # board: seeed_xiao_esp32c6
   # TX: GPIO16
   # RX: GPIO17
+  
+  acw02_ref: main
 
 esphome:
   name: ${dev_name}
@@ -110,12 +112,13 @@ uart:
 
 external_components:
   - source:
-      type: local
-      path: ../components
+      type: git
+      url: https://github.com/devildant/acw02_esphome
+      ref: ${acw02_ref}
 
 packages:
-  acw02_entities: !include ../components/acw02/acw02_fr.yaml
-  
+  acw02_entities: github://devildant/acw02_esphome/components/acw02/acw02_fr.yaml@${acw02_ref}
+
 acw02:
   id: ac_ctrl
   uart_id: uart_acw02
