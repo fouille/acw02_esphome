@@ -1,4 +1,4 @@
-# LOLIN ESP32 C3 version
+# XIAO ESP32 C3-C6 version
 ## 🧩 PCB
 
 ### 📂 Gerber files available in the `PCB/` directory:
