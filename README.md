@@ -231,7 +231,7 @@ wifi_password3: "testesp32"
 #### For XIAO ESP32 C3-C6
 - [solder board ESP32 C3-C6.stl](https://github.com/devildant/acw02_esphome/raw/main/3Dfiles/LOLIN-C3-XIAO-C3-C6/solder%20board%20ESP32%20C3-C6.stl)
 
-  ![solder1](3Dfiles/images/solder%20board1-lolin-c3.jpg)
+  ![solder1](3Dfiles/images/solder%20board1-xiao-c3-c6.jpg)
 
 - support antenna (multiple config possible)
   - support antenna rigid
