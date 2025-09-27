@@ -111,10 +111,10 @@ uart:
 external_components:
   - source:
       type: local
-      path: components
+      path: ../components
 
 packages:
-  acw02_entities: !include components/acw02/acw02_fr.yaml
+  acw02_entities: !include ../components/acw02/acw02_fr.yaml
   
 acw02:
   id: ac_ctrl
