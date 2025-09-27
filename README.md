@@ -229,7 +229,7 @@ Several ESP32 boards can be used with this module. Each has its own pros and con
 - ✅ External antenna support (Wi-Fi signal ≥ LOLIN ESP32 C3)  
 - ❌ No **reset** button on the case  
 
-#### XIAO ESP32 C6 *(not recommended)*
+#### XIAO ESP32 C6
 - ✅ External antenna support  
 - ❌ Antenna **not included** (must be purchased separately, internal antenna has very poor reception) 
 - ❌ No **reset** button on the case  
