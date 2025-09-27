@@ -19,7 +19,7 @@ jobs:
 
     strategy:
       fail-fast: false
-      max-parallel: 1   # <-- exécution séquentielle
+      max-parallel: 1   # exécution séquentielle (évite tout conflit de push/commit)
       matrix:
         include:
           - id: d1-mini
@@ -74,6 +74,7 @@ jobs:
           else
             echo "failed=false" >> "$GITHUB_OUTPUT"
           fi
+          # On ne casse pas la CI ici; la step finale gère l'échec
           exit 0
 
       - name: Prepare/update badge JSON files for ${{ matrix.id }}
@@ -87,7 +88,7 @@ jobs:
           VER="${ESPHOME_VERSION}"
           BID="${{ matrix.id }}"
 
-          # Ecrit la version ESPHome (séquentiel -> pas de conflit)
+          # Version ESPHome (séquentiel => pas de conflit)
           printf '%s' '{"schemaVersion":1,"label":"ESPHome","message":"'"$VER"'","color":"blue"}' > .ci/badges/esphome.json
 
           if [ "$FAILED" = "false" ]; then
@@ -105,6 +106,10 @@ jobs:
             printf '%s' '{"schemaVersion":1,"label":"Problem version ('"$BID"')","message":"'"$VER"'","color":"red"}' > ".ci/badges/problem-${BID}.json"
           fi
 
+          echo "== Files generated =="
+          ls -l .ci/badges || true
+          ls -l .ci/last_success || true
+
       - name: Commit & push badge updates for ${{ matrix.id }}
         if: always()
         shell: bash
@@ -113,7 +118,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          # Ajoute tout le dossier .ci (on est en séquentiel, plus simple/robuste)
+          # Ajoute TOUT le dossier .ci (séquentiel => safe)
           git add -A .ci || true
 
           if git diff --cached --quiet; then
