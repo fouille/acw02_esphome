@@ -1,9 +1,11 @@
-![Weekly Build](https://github.com/devildant/acw02_esphome/actions/workflows/esphome-autobuild.yml/badge.svg)
 ![ESPHome](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/devildant/acw02_esphome/main/.ci/badges/esphome.json)
-![Build](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/devildant/acw02_esphome/main/.ci/badges/build.json)
-![Last passing](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/devildant/acw02_esphome/main/.ci/badges/last_passing.json)
-![Problem version](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/devildant/acw02_esphome/main/.ci/badges/problem.json)
 
+| Board | Build | Last passing | Problem version |
+|------|-------|--------------|-----------------|
+| D1 Mini | ![Build d1-mini](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/devildant/acw02_esphome/main/.ci/badges/build-d1-mini.json) | ![Last d1-mini](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/devildant/acw02_esphome/main/.ci/badges/last_passing-d1-mini.json) | ![Problem d1-mini](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/devildant/acw02_esphome/main/.ci/badges/problem-d1-mini.json) |
+| Lolin C3 | ![Build lolin-c3](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/devildant/acw02_esphome/main/.ci/badges/build-lolin-c3.json) | ![Last lolin-c3](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/devildant/acw02_esphome/main/.ci/badges/last_passing-lolin-c3.json) | ![Problem lolin-c3](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/devildant/acw02_esphome/main/.ci/badges/problem-lolin-c3.json) |
+| XIAO C3 | ![Build xiao-c3](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/devildant/acw02_esphome/main/.ci/badges/build-xiao-c3.json) | ![Last xiao-c3](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/devildant/acw02_esphome/main/.ci/badges/last_passing-xiao-c3.json) | ![Problem xiao-c3](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/devildant/acw02_esphome/main/.ci/badges/problem-xiao-c3.json) |
+| XIAO C6 | ![Build xiao-c6](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/devildant/acw02_esphome/main/.ci/badges/build-xiao-c6.json) | ![Last xiao-c6](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/devildant/acw02_esphome/main/.ci/badges/last_passing-xiao-c6.json) | ![Problem xiao-c6](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/devildant/acw02_esphome/main/.ci/badges/problem-xiao-c6.json) |
 # ACW02 ESPHome Module  
 
 Custom ESPHome component for **Teknopoint** and **Airton** AC units using the **Tuya ACW02 Wi-Fi module**.  
