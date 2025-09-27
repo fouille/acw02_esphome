@@ -29,6 +29,8 @@ substitutions:
 
   acw02_ref: main
 
+sdsdsdsderror
+  
 esphome:
   name: ${dev_name}
   friendly_name: ${dev_friendly}
