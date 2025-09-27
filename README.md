@@ -98,9 +98,9 @@ substitutions:
     TX: GPIO17
     RX: GPIO16
     ```
- - **LOLIN ESP32 C3**
+ - **LOLIN ESP32 C3 MINI**
     ```
-    # LOLIN ESP32 C3
+    # LOLIN ESP32 C3 MINI
     board: lolin_c3_mini
     TX: GPIO21
     RX: GPIO20
@@ -228,7 +228,7 @@ Several ESP32 boards can be used with this module. Each has its own pros and con
 - ❌ No external antenna support  
 
 #### XIAO ESP32 C3
-- ✅ External antenna support (Wi-Fi signal ≥ LOLIN ESP32 C3)  
+- ✅ External antenna support (Wi-Fi signal ≥ LOLIN ESP32 C3 MINI)  
 - ❌ No **reset** button on the case  
 
 #### XIAO ESP32 C6
