@@ -74,7 +74,7 @@ substitutions:
   TX: GPIO17
   RX: GPIO16
   
-  ## LOLIN ESP32 C3
+  ## LOLIN ESP32 C3 MINI
   # board: lolin_c3_mini
   # TX: GPIO21
   # RX: GPIO20
@@ -222,7 +222,7 @@ Several ESP32 boards can be used with this module. Each has its own pros and con
 - ❌ Slightly weaker Wi-Fi signal due to component layout and antenna position  
 - ❌ No external antenna support  
 
-#### LOLIN ESP32 C3
+#### LOLIN ESP32 C3 MINI
 - ✅ Built-in **reset** button on the case  
 - ✅ Better Wi-Fi signal compared to ESP32 D1 MINI WROOM 32  
 - ❌ No external antenna support  
@@ -300,7 +300,7 @@ Several ESP32 boards can be used with this module. Each has its own pros and con
 
   ![solder1](3Dfiles/images/solder%20board1.jpg)
 
-#### For LOLIN ESP32 C3
+#### For LOLIN ESP32 C3 MINI
 - [button lolin c3.stl](https://github.com/devildant/acw02_esphome/raw/main/3Dfiles/LOLIN-C3-XIAO-C3-C6/button%20lolin%20c3.stl)
 - [solder board ESP32 C3-C6.stl](https://github.com/devildant/acw02_esphome/raw/main/3Dfiles/LOLIN-C3-XIAO-C3-C6/solder%20board%20ESP32%20C3-C6.stl)
 

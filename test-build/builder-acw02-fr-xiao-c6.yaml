@@ -12,7 +12,7 @@ substitutions:
   # TX: GPIO17
   # RX: GPIO16
   
-  ## LOLIN ESP32 C3
+  ## LOLIN ESP32 C3 MINI
   # board: lolin_c3_mini
   # TX: GPIO21
   # RX: GPIO20
