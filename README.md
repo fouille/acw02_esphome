@@ -219,21 +219,25 @@ wifi_password3: "testesp32"
 #### For ESP32 D1 MINI WROOM 32
 - [button.stl](https://github.com/devildant/acw02_esphome/raw/main/3Dfiles/D1-MIMI/button.stl)
 - [solder board ESP32 D1 MINI.stl](https://github.com/devildant/acw02_esphome/raw/main/3Dfiles/D1-MIMI/solder%20board%20ESP32%20D1%20MINI.stl)
+
   ![solder1](3Dfiles/images/solder%20board1.jpg)
 
 #### For LOLIN ESP32 C3
 - [button lolin c3.stl](https://github.com/devildant/acw02_esphome/raw/main/3Dfiles/LOLIN-C3-XIAO-C3-C6/button%20lolin%20c3.stl)
 - [solder board ESP32 C3-C6.stl](https://github.com/devildant/acw02_esphome/raw/main/3Dfiles/LOLIN-C3-XIAO-C3-C6/solder%20board%20ESP32%20C3-C6.stl)
+
   ![solder1](3Dfiles/images/solder%20board1-lolin-c3.jpg)
 
 #### For XIAO ESP32 C3-C6
 - [solder board ESP32 C3-C6.stl](https://github.com/devildant/acw02_esphome/raw/main/3Dfiles/LOLIN-C3-XIAO-C3-C6/solder%20board%20ESP32%20C3-C6.stl)
+
   ![solder1](3Dfiles/images/solder%20board1-lolin-c3.jpg)
+
 - support antenna (multiple config possible)
   - support antenna rigid
     - [support antenna rigid part A.stl](https://github.com/devildant/acw02_esphome/raw/main/3Dfiles/LOLIN-C3-XIAO-C3-C6/support%20antenna%20rigid%20part%20A.stl)
     - [support antenna rigid part B.stl](https://github.com/devildant/acw02_esphome/raw/main/3Dfiles/LOLIN-C3-XIAO-C3-C6/support%20antenna%20rigid%20part%20B.stl)
-    
+
       ![solder1](3Dfiles/images/antenna-rigid.PNG)
       ![solder1](3Dfiles/images/antenna-rigid-assembly.PNG)
 
