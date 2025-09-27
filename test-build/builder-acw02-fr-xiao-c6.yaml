@@ -7,10 +7,10 @@ substitutions:
   ap_password: "fallbackpassword"
   web_server_username: admin
   web_server_password: admin
-  # ESP32 D1 mini WROOM 32
-  board: esp32dev
-  TX: GPIO17
-  RX: GPIO16
+  ## ESP32 D1 mini WROOM 32
+  # board: esp32dev
+  # TX: GPIO17
+  # RX: GPIO16
   
   ## LOLIN ESP32 C3
   # board: lolin_c3_mini
@@ -22,12 +22,10 @@ substitutions:
   # TX: GPIO21
   # RX: GPIO20
 
-  ## XIAO (seeeds studio) ESP32 C6
-  # board: seeed_xiao_esp32c6
-  # TX: GPIO16
-  # RX: GPIO17
-
-  acw02_ref: main
+  # XIAO (seeeds studio) ESP32 C6
+  board: seeed_xiao_esp32c6
+  TX: GPIO16
+  RX: GPIO17
 
 esphome:
   name: ${dev_name}
@@ -112,13 +110,12 @@ uart:
 
 external_components:
   - source:
-      type: git
-      url: https://github.com/devildant/acw02_esphome
-      ref: ${acw02_ref}
+      type: local
+      path: components
 
 packages:
-  acw02_entities: github://devildant/acw02_esphome/components/acw02/acw02_fr.yaml@${acw02_ref}
-
+  acw02_entities: !include components/acw02/acw02_fr.yaml
+  
 acw02:
   id: ac_ctrl
   uart_id: uart_acw02
