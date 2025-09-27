@@ -19,7 +19,6 @@ jobs:
 
     strategy:
       fail-fast: false
-      # Déclare ici tes boards : un id court et le chemin vers le YAML
       matrix:
         include:
           - id: d1-mini
@@ -90,15 +89,12 @@ jobs:
           printf '%s' '{"schemaVersion":1,"label":"ESPHome","message":"'"$VER"'","color":"blue"}' > .ci/badges/esphome.json
 
           if [ "$FAILED" = "false" ]; then
-            # Build OK : maj last_success + badges verts
             mkdir -p .ci/last_success
             printf '%s' "$VER" > ".ci/last_success/${BID}.txt"
             printf '%s' '{"schemaVersion":1,"label":"Build ('"$BID"')","message":"passing","color":"brightgreen"}' > ".ci/badges/build-${BID}.json"
             printf '%s' '{"schemaVersion":1,"label":"Last passing ('"$BID"')","message":"'"$VER"'","color":"brightgreen"}' > ".ci/badges/last_passing-${BID}.json"
-            # Toujours créer problem.json (board) en neutre
             printf '%s' '{"schemaVersion":1,"label":"Problem version ('"$BID"')","message":"-","color":"lightgrey"}' > ".ci/badges/problem-${BID}.json"
           else
-            # Build KO : badges rouges + last passing si connu
             printf '%s' '{"schemaVersion":1,"label":"Build ('"$BID"')","message":"failing","color":"red"}' > ".ci/badges/build-${BID}.json"
             if [ -n "$LAST" ]; then
               printf '%s' '{"schemaVersion":1,"label":"Last passing ('"$BID"')","message":"'"$LAST"'","color":"blue"}' > ".ci/badges/last_passing-${BID}.json"
@@ -112,12 +108,20 @@ jobs:
         if: always()
         shell: bash
         run: |
+          set -e
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add .ci/last_success/${{ matrix.id }}.txt .ci/badges/*.json || true
-          git commit -m "CI(${ { matrix.id } }): badges for ESPHome ${ESPHOME_VERSION} (failed=${{ steps.compile.outputs.failed }})" || echo "No changes to commit"
-          git pull --rebase || true
-          git push || echo "Nothing to push"
+
+          # Ajouter tous les changements dans .ci
+          git add -A .ci || true
+
+          if ! git diff --cached --quiet; then
+            git commit -m "CI(${{ matrix.id }}): badges for ESPHome ${ESPHOME_VERSION} (failed=${{ steps.compile.outputs.failed }})"
+            git pull --rebase || true
+            git push || echo "Nothing to push"
+          else
+            echo "No changes to commit"
+          fi
 
       - name: Fail job if compile failed (${{ matrix.id }})
         if: steps.compile.outputs.failed == 'true'
