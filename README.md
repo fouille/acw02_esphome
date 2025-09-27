@@ -67,8 +67,56 @@ substitutions:
   ap_password: "fallbackpassword"
   web_server_username: admin
   web_server_password: admin
+  # ESP32 D1 mini WROOM 32
   board: esp32dev
+  TX: GPIO17
+  RX: GPIO16
+  
+  ## LOLIN ESP32 C3
+  # board: lolin_c3_mini
+  # TX: GPIO21
+  # RX: GPIO20
+
+  ## XIAO (seeeds studio) ESP32 C3
+  # board: seeed_xiao_esp32c3
+  # TX: GPIO21
+  # RX: GPIO20
+
+  ## XIAO (seeeds studio) ESP32 C6
+  # board: seeed_xiao_esp32c6
+  # TX: GPIO16
+  # RX: GPIO17
 ```
+
+⚠️ **The configuration depends on the ESP32 card chosen (Comment/uncomment the blocks)**  
+ - **ESP32 D1 mini WROOM 32**
+    ```
+    # ESP32 D1 mini WROOM 32
+    board: esp32dev
+    TX: GPIO17
+    RX: GPIO16
+    ```
+ - **LOLIN ESP32 C3**
+    ```
+    # LOLIN ESP32 C3
+    board: lolin_c3_mini
+    TX: GPIO21
+    RX: GPIO20
+    ```
+ - **XIAO (seeeds studio) ESP32 C3**
+    ```
+    # XIAO (seeeds studio) ESP32 C3
+    board: seeed_xiao_esp32c3
+    TX: GPIO21
+    RX: GPIO20
+    ```
+ - **XIAO (seeeds studio) ESP32 C6**
+    ```
+    # XIAO (seeeds studio) ESP32 C6
+    board: seeed_xiao_esp32c6
+    TX: GPIO16
+    RX: GPIO17
+    ```
 
 🔑 I recommend visiting [this page](https://esphome.io/components/api.html) to generate a unique `api_encrypted_key`.
 
