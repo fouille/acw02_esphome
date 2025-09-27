@@ -1,5 +1,3 @@
-![ESPHome](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/devildant/acw02_esphome/main/.ci/badges/esphome.json)
-![Weekly Build](https://github.com/devildant/acw02_esphome/actions/workflows/esphome-autobuild.yml/badge.svg)
 
 | Board   | Build | Last passing | Problem version |
 |---------|-------|--------------|-----------------|
