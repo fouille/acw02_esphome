@@ -77,6 +77,6 @@
 
 ### 🧰 Solder Board Helper
 
-[solder board ESP32 D1 MINI.stl](../3Dfiles/D1-MIMI/solder%20board%20ESP32%20D1%20MINI.stl)  
+[solder board ESP32 D1 MINI.stl](https://github.com/devildant/acw02_esphome/raw/main/3Dfiles/D1-MIMI/solder%20board%20ESP32%20D1%20MINI.stl)  
 ![solder1](../3Dfiles/images/solder%20board1.jpg)  
 ![solder2](../3Dfiles/images/solder%20board2.jpg)

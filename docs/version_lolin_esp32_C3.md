@@ -35,6 +35,6 @@
 
 ### 🧰 Solder Board Helper
 
-[solder board ESP32 C3-C6.stl](../3Dfiles/LOLIN-C3-XIAO-C3-C6/solder%20board%20ESP32%20C3-C6.stl)  
+[solder board ESP32 C3-C6.stl](https://github.com/devildant/acw02_esphome/raw/main/3Dfiles/LOLIN-C3-XIAO-C3-C6/solder%20board%20ESP32%20C3-C6.stl)  
 ![solder1](../3Dfiles/images/solder%20board1-lolin-c3.jpg)  
 ![solder2](../3Dfiles/images/solder%20board2-lolin-c3.jpg)
