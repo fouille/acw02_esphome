@@ -93,17 +93,17 @@ jobs:
 
           if [ "$FAILED" = "false" ]; then
             printf '%s' "$VER" > ".ci/last_success/${BID}.txt"
-            printf '%s' '{"schemaVersion":1,"label":"Build ('"$BID"')","message":"passing","color":"brightgreen"}' > ".ci/badges/build-${BID}.json"
-            printf '%s' '{"schemaVersion":1,"label":"Last passing ('"$BID"')","message":"'"$VER"'","color":"brightgreen"}' > ".ci/badges/last_passing-${BID}.json"
+            printf '%s' '{"schemaVersion":1,"label":"Build ('"$BID"')","message":"passing","color":"darkgreen"}' > ".ci/badges/build-${BID}.json"
+            printf '%s' '{"schemaVersion":1,"label":"Last passing ('"$BID"')","message":"'"$VER"'","color":"darkgreen"}' > ".ci/badges/last_passing-${BID}.json"
             printf '%s' '{"schemaVersion":1,"label":"Problem version ('"$BID"')","message":"-","color":"lightgrey"}' > ".ci/badges/problem-${BID}.json"
           else
-            printf '%s' '{"schemaVersion":1,"label":"Build ('"$BID"')","message":"failing","color":"red"}' > ".ci/badges/build-${BID}.json"
+            printf '%s' '{"schemaVersion":1,"label":"Build ('"$BID"')","message":"failing","color":"darkred"}' > ".ci/badges/build-${BID}.json"
             if [ -n "$LAST" ]; then
               printf '%s' '{"schemaVersion":1,"label":"Last passing ('"$BID"')","message":"'"$LAST"'","color":"blue"}' > ".ci/badges/last_passing-${BID}.json"
             else
               printf '%s' '{"schemaVersion":1,"label":"Last passing ('"$BID"')","message":"-","color":"lightgrey"}' > ".ci/badges/last_passing-${BID}.json"
             fi
-            printf '%s' '{"schemaVersion":1,"label":"Problem version ('"$BID"')","message":"'"$VER"'","color":"red"}' > ".ci/badges/problem-${BID}.json"
+            printf '%s' '{"schemaVersion":1,"label":"Problem version ('"$BID"')","message":"'"$VER"'","color":"darkred"}' > ".ci/badges/problem-${BID}.json"
           fi
 
           echo "== Files generated =="
