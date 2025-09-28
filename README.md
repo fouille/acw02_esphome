@@ -6,24 +6,25 @@ Custom ESPHome component for **Teknopoint** and **Airton** AC units using the **
 
 ## Build status
 ### D1 Mini WROOM 32
-![Build d1-mini](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/devildant/acw02_esphome/main/.ci/badges/build-d1-mini.json&style=for-the-badge)<br>
-![Last d1-mini](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/devildant/acw02_esphome/main/.ci/badges/last_passing-d1-mini.json&style=for-the-badge)<br>
-![Problem d1-mini](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/devildant/acw02_esphome/main/.ci/badges/problem-d1-mini.json&style=for-the-badge)
+![Build d1-mini](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/devildant/acw02_esphome/main/.ci/badges/build-d1-mini.json&style=for-the-badge&label=Build)<br>
+![Last d1-mini](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/devildant/acw02_esphome/main/.ci/badges/last_passing-d1-mini.json&style=for-the-badge&label=Last%20passing)<br>
+![Problem d1-mini](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/devildant/acw02_esphome/main/.ci/badges/problem-d1-mini.json&style=for-the-badge&label=Problem%20version)
 
 ### Lolin C3 mini
-![Build lolin-c3](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/devildant/acw02_esphome/main/.ci/badges/build-lolin-c3.json&style=for-the-badge)<br>
-![Last lolin-c3](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/devildant/acw02_esphome/main/.ci/badges/last_passing-lolin-c3.json&style=for-the-badge)<br>
-![Problem lolin-c3](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/devildant/acw02_esphome/main/.ci/badges/problem-lolin-c3.json&style=for-the-badge)
+![Build lolin-c3](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/devildant/acw02_esphome/main/.ci/badges/build-lolin-c3.json&style=for-the-badge&label=Build)<br>
+![Last lolin-c3](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/devildant/acw02_esphome/main/.ci/badges/last_passing-lolin-c3.json&style=for-the-badge&label=Last%20passing)<br>
+![Problem lolin-c3](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/devildant/acw02_esphome/main/.ci/badges/problem-lolin-c3.json&style=for-the-badge&label=Problem%20version)
 
 ### XIAO C3
-![Build xiao-c3](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/devildant/acw02_esphome/main/.ci/badges/build-xiao-c3.json&style=for-the-badge)<br>
-![Last xiao-c3](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/devildant/acw02_esphome/main/.ci/badges/last_passing-xiao-c3.json&style=for-the-badge)<br>
-![Problem xiao-c3](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/devildant/acw02_esphome/main/.ci/badges/problem-xiao-c3.json&style=for-the-badge)
+![Build xiao-c3](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/devildant/acw02_esphome/main/.ci/badges/build-xiao-c3.json&style=for-the-badge&label=Build)<br>
+![Last xiao-c3](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/devildant/acw02_esphome/main/.ci/badges/last_passing-xiao-c3.json&style=for-the-badge&label=Last%20passing)<br>
+![Problem xiao-c3](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/devildant/acw02_esphome/main/.ci/badges/problem-xiao-c3.json&style=for-the-badge&label=Problem%20version)
 
 ### XIAO C6
-![Build xiao-c6](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/devildant/acw02_esphome/main/.ci/badges/build-xiao-c6.json&style=for-the-badge)<br>
-![Last xiao-c6](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/devildant/acw02_esphome/main/.ci/badges/last_passing-xiao-c6.json&style=for-the-badge)<br>
-![Problem xiao-c6](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/devildant/acw02_esphome/main/.ci/badges/problem-xiao-c6.json&style=for-the-badge)
+![Build xiao-c6](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/devildant/acw02_esphome/main/.ci/badges/build-xiao-c6.json&style=for-the-badge&label=Build)<br>
+![Last xiao-c6](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/devildant/acw02_esphome/main/.ci/badges/last_passing-xiao-c6.json&style=for-the-badge&label=Last%20passing)<br>
+![Problem xiao-c6](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/devildant/acw02_esphome/main/.ci/badges/problem-xiao-c6.json&style=for-the-badge&label=Problem%20version)
+
 
 ---
 
