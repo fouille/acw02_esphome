@@ -21,7 +21,7 @@
 
 ## Build status
 
-<table style="table-layout:fixed;" width="100%">
+<table style="table-layout:fixed;    display: inline-table;" width="100%">
    <tr>
     <td valign="top" width="50%">
       <h3>D1 Mini WROOM 32</h3>
