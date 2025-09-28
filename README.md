@@ -31,12 +31,12 @@
     </td>
   <tr>
     <td valign="top" width="50%">
-      <img src="https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/devildant/acw02_esphome/main/.ci/badges/build-d1-mini.json&style=for-the-badge"><br>
+      <img src="https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/devildant/acw02_esphome/main/.ci/badges/build-d1-mini.json&style=for-the-badge&label=Build"><br>
       <img src="https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/devildant/acw02_esphome/main/.ci/badges/last_passing-d1-mini.json&style=for-the-badge"><br>
       <img src="https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/devildant/acw02_esphome/main/.ci/badges/problem-d1-mini.json&style=for-the-badge">
     </td>
     <td valign="top" width="50%">
-      <img src="https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/devildant/acw02_esphome/main/.ci/badges/build-lolin-c3.json&style=for-the-badge"><br>
+      <img src="https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/devildant/acw02_esphome/main/.ci/badges/build-lolin-c3.json&style=for-the-badge&label=Build"><br>
       <img src="https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/devildant/acw02_esphome/main/.ci/badges/last_passing-lolin-c3.json&style=for-the-badge"><br>
       <img src="https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/devildant/acw02_esphome/main/.ci/badges/problem-lolin-c3.json&style=for-the-badge">
     </td>
@@ -51,12 +51,12 @@
   <tr>
   <tr>
     <td valign="top" width="50%">
-      <img src="https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/devildant/acw02_esphome/main/.ci/badges/build-xiao-c3.json&style=for-the-badge"><br>
+      <img src="https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/devildant/acw02_esphome/main/.ci/badges/build-xiao-c3.json&style=for-the-badge&label=Build"><br>
       <img src="https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/devildant/acw02_esphome/main/.ci/badges/last_passing-xiao-c3.json&style=for-the-badge"><br>
       <img src="https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/devildant/acw02_esphome/main/.ci/badges/problem-xiao-c3.json&style=for-the-badge">
     </td>
     <td valign="top" width="50%">
-      <img src="https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/devildant/acw02_esphome/main/.ci/badges/build-xiao-c6.json&style=for-the-badge"><br>
+      <img src="https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/devildant/acw02_esphome/main/.ci/badges/build-xiao-c6.json&style=for-the-badge&label=Build"><br>
       <img src="https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/devildant/acw02_esphome/main/.ci/badges/last_passing-xiao-c6.json&style=for-the-badge"><br>
       <img src="https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/devildant/acw02_esphome/main/.ci/badges/problem-xiao-c6.json&style=for-the-badge">
     </td>
