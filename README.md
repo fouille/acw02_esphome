@@ -7,24 +7,24 @@ Custom ESPHome component for **Teknopoint** and **Airton** AC units using the **
 ## Build status
 
 **D1 Mini WROOM 32**  
-<img src="https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/devildant/acw02_esphome/main/.ci/badges/build-d1-mini.json&style=flat&label=Build&labelColor=1f2328" height="20"> &nbsp;&nbsp;
-<img src="https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/devildant/acw02_esphome/main/.ci/badges/last_passing-d1-mini.json&style=flat&label=Last%20passing&labelColor=1f2328" height="20"> &nbsp;&nbsp;
-<img src="https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/devildant/acw02_esphome/main/.ci/badges/problem-d1-mini.json&style=flat&label=Problem%20version&labelColor=1f2328" height="20">
+<img src="https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/devildant/acw02_esphome/main/.ci/badges/build-d1-mini.json&style=flat-square&label=Build&labelColor=1f2328" height="20"> &nbsp;&nbsp;
+<img src="https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/devildant/acw02_esphome/main/.ci/badges/last_passing-d1-mini.json&style=flat-square&label=Last%20passing&labelColor=1f2328" height="20"> &nbsp;&nbsp;
+<img src="https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/devildant/acw02_esphome/main/.ci/badges/problem-d1-mini.json&style=flat-square&label=Problem%20version&labelColor=1f2328" height="20">
 
 **Lolin C3 mini**  
-<img src="https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/devildant/acw02_esphome/main/.ci/badges/build-lolin-c3.json&style=flat&label=Build&labelColor=1f2328" height="20"> &nbsp;&nbsp;
-<img src="https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/devildant/acw02_esphome/main/.ci/badges/last_passing-lolin-c3.json&style=flat&label=Last%20passing&labelColor=1f2328" height="20"> &nbsp;&nbsp;
-<img src="https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/devildant/acw02_esphome/main/.ci/badges/problem-lolin-c3.json&style=flat&label=Problem%20version&labelColor=1f2328" height="20">
+<img src="https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/devildant/acw02_esphome/main/.ci/badges/build-lolin-c3.json&style=flat-square&label=Build&labelColor=1f2328" height="20"> &nbsp;&nbsp;
+<img src="https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/devildant/acw02_esphome/main/.ci/badges/last_passing-lolin-c3.json&style=flat-square&label=Last%20passing&labelColor=1f2328" height="20"> &nbsp;&nbsp;
+<img src="https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/devildant/acw02_esphome/main/.ci/badges/problem-lolin-c3.json&style=flat-square&label=Problem%20version&labelColor=1f2328" height="20">
 
 **XIAO C3**  
-<img src="https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/devildant/acw02_esphome/main/.ci/badges/build-xiao-c3.json&style=flat&label=Build&labelColor=1f2328" height="20"> &nbsp;&nbsp;
-<img src="https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/devildant/acw02_esphome/main/.ci/badges/last_passing-xiao-c3.json&style=flat&label=Last%20passing&labelColor=1f2328" height="20"> &nbsp;&nbsp;
-<img src="https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/devildant/acw02_esphome/main/.ci/badges/problem-xiao-c3.json&style=flat&label=Problem%20version&labelColor=1f2328" height="20">
+<img src="https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/devildant/acw02_esphome/main/.ci/badges/build-xiao-c3.json&style=flat-square&label=Build&labelColor=1f2328" height="20"> &nbsp;&nbsp;
+<img src="https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/devildant/acw02_esphome/main/.ci/badges/last_passing-xiao-c3.json&style=flat-square&label=Last%20passing&labelColor=1f2328" height="20"> &nbsp;&nbsp;
+<img src="https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/devildant/acw02_esphome/main/.ci/badges/problem-xiao-c3.json&style=flat-square&label=Problem%20version&labelColor=1f2328" height="20">
 
 **XIAO C6**  
-<img src="https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/devildant/acw02_esphome/main/.ci/badges/build-xiao-c6.json&style=flat&label=Build&labelColor=1f2328" height="20"> &nbsp;&nbsp;
-<img src="https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/devildant/acw02_esphome/main/.ci/badges/last_passing-xiao-c6.json&style=flat&label=Last%20passing&labelColor=1f2328" height="20"> &nbsp;&nbsp;
-<img src="https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/devildant/acw02_esphome/main/.ci/badges/problem-xiao-c6.json&style=flat&label=Problem%20version&labelColor=1f2328" height="20">
+<img src="https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/devildant/acw02_esphome/main/.ci/badges/build-xiao-c6.json&style=flat-square&label=Build&labelColor=1f2328" height="20"> &nbsp;&nbsp;
+<img src="https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/devildant/acw02_esphome/main/.ci/badges/last_passing-xiao-c6.json&style=flat-square&label=Last%20passing&labelColor=1f2328" height="20"> &nbsp;&nbsp;
+<img src="https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/devildant/acw02_esphome/main/.ci/badges/problem-xiao-c6.json&style=flat-square&label=Problem%20version&labelColor=1f2328" height="20">
 
 
 
