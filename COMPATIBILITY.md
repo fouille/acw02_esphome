@@ -6,6 +6,7 @@ _This file is generated from issues labeled `Compatibility`._
 
 | Commercial Model | Ref Model | Status | Notes |
 |------------------|-----------|--------|-------|
+| 409913 | SMVH09B-2A2A3NG | ✅ Yes | I've just Discovery & Action but no return data displayed |
 | 409730 | SMVH09B-2A2A3NH(I) | ✅ Yes | _No response_ |
 | 409733 | SMVH12B-3A2A3NG(I) | ✅ Yes | _No response_ |
 | 409731 | SMVH12B-2A2A3NH(I) | ✅ Yes | _No response_ |
