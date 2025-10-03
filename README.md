@@ -48,7 +48,7 @@ A non-exhaustive list of tested models is available here:
 ## 📌 Contribute  
 
 Help improve this project by reporting your unit compatibility.  
-If your model is not referenced, please submit a report (**tested units only**):  
+If your model is not referenced, please submit a report (**tested units only**), If you encounter a problem, please post an issue before putting your incompatible model:  
 👉 [Submit your unit](https://github.com/devildant/acw02_esphome/issues/new?template=unit_report.yml)  
 
 ---
