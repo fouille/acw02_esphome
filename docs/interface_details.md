@@ -108,7 +108,7 @@
 ![webfr](images/FR-WEB.PNG)
 
 
-## 🧩 Optional: MQTT Only Without ESPHome HA Integration
+## 🧩 Optional: MQTT Only Without ESPHome HA Integration (ex not connect to ha with esphome or jeedom)
 
 ### 📄 In `yaml`
 
