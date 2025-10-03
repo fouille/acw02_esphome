@@ -1,21 +1,21 @@
-# Activation sous Jeedom
+# Activation on Jeedom
 
-**Pré-requis**
-* disposer d'un plugin broker MQTT
-* disposer du plugin MQTT Discovery (optionnel mais fortement recommandé)
+**Prerequisites**
+* Have an MQTT broker plugin
+* Have the MQTT Discovery plugin (optional but highly recommended)
 
-## 1. Installation de MQTT Discovery
-* Installer le plugin
-* Activer le plugin
-* Configurer (Configuration automatique si vous possèdez MQTT Manager)
-* Dans le plugin, activer la découverte automatique ou ajouter le topic de votre ESP `dev_name` ex. `acw02-salon`
+## 1. Installing MQTT Discovery
+* Install the plugin
+* Activate the plugin
+* Configure (Automatic configuration if you have MQTT Manager)
+* In the plugin, enable automatic discovery or add your ESP topic `dev_name` e.g. `acw02-salon`
 
-## 2. Depuis ESP Interface Web
-* Configurer le broker MQTT (cf [Documentation spécifique Jeedom](https://github.com/devildant/acw02_esphome/blob/main/docs/interface_details.md#-optional-mqtt-only-without-esphome-ha-integration-ex-not-connect-to-ha-with-esphome-or-jeedom))
+## 2. From ESP Web Interface
+* Configure the MQTT broker (see [Specific Jeedom Documentation](https://github.com/devildant/acw02_esphome/blob/main/docs/interface_details.md#-optional-mqtt-only-without-esphome-ha-integration-ex-not-connect-to-ha-with-esphome-or-jeedom))
 
-## 3. Depuis Jeedom
-* Contrôler l'ajout automatique du module  
+## 3. From Jeedom
+* Check the automatic addition of the module  
   ![jeedom](images/jeedom/jeedom-discovery.png)
 
-* Visualiser les commandes  
+* View the commands  
   ![jeedom](images/jeedom/jeedom-commands.png)
