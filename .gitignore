@@ -13,3 +13,7 @@ perso/
 3Dfiles/images/Thumbs.db
 
 *.bin
+
+# Add personnal YAML config file
+my-esphome-acw02-*.yaml
+secrets.yaml
