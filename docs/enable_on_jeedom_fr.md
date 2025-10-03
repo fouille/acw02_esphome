@@ -15,6 +15,6 @@
 
 ## 3. Depuis Jeedom
 * Contrôler l'ajout automatique du module
-    !(jeedom)[images/jeedom/jeedom-discovery.png]
+    ![jeedom](images/jeedom/jeedom-discovery.png)
 * Visualiser les commandes
-    !(jeedom)[images/jeedom/jeedom-commands.png]
+    ![jeedom](images/jeedom/jeedom-commands.png)
