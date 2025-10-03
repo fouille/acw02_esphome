@@ -16,4 +16,3 @@ perso/
 
 # Add personnal YAML config file
 my-esphome-acw02-*.yaml
-secrets.yaml

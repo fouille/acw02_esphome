@@ -161,6 +161,7 @@ wifi_password3: "testesp32"
 ## 🛠️ Build
 
 - [Build on Windows (native)](docs/install_from_windows_directly.md)  
+- [Build on MACOS (native)](docs/install_from_macos_directly.md)
 - [Build on Windows with Docker](docs/install_from_docker_win.md)
 - Build with ESPHome Builder (2025.7.5 minimum) with Home Assistant add-on:  
   Use the files in the [`HA-esphome-builder`](HA-esphome-builder) folder with the Home Assistant ESPHome add-on:  
@@ -177,6 +178,14 @@ wifi_password3: "testesp32"
 ## 🔍 Interface Details
 
 👉 [See Interface Details](docs/interface_details.md)
+
+---
+
+## 🏠 Bonus Jeedom Configuration
+
+> **Note:** Jeedom is **not officially supported**. This is provided as an **informational guide only**.
+
+- [Enable on Jeedom](docs/enable_on_jeedom.md)  
 
 ---
 

@@ -1,29 +1,48 @@
-# Installation depuis Macos
-Environnement testé 
-* Mac Mini 2018
-* 3 GHz Intel Core i5 6 cœurs
-* 8 Go 2667 MHz DDR4
-* MacOs 15.7 (24G222)
+# 🚀 Installation on macOS
 
-**Pré-requis :**
-1. cloner le repos
-2. copier `esphome-acw02-fr.yaml` vers `my-esphome-acw02-fr.yml`
-3. configurer `my-esphome-acw02-fr.yaml` et `secret.yml` 
+## 🖥️ Tested Environment
+- Mac Mini 2018
+- 3 GHz Intel Core i5 (6 cores)
+- 8 GB 2667 MHz DDR4
+- macOS 15.7 (24G222)
 
-# Installation Esphome, Build et Flash :** 
-## Installation de ESPHome
-```
-brew install esphome
-esphome version #doit retourner la version ESPHome validée par acw02
+## 📋 Prerequisites
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/devildant/acw02_esphome.git
+   ```
+2. Copy the YAML file for your preferred language, for example:
+   ```bash
+   cp esphome-acw02-fr.yaml my-esphome-acw02.yaml
+   ```
+   > ℹ️ The file can be `esphome-acw02-fr.yaml` or `esphome-acw02-en.yaml` depending on the language you want.
+3. Configure `my-esphome-acw02.yaml` and `secrets.yaml`.
+
+---
+
+# ⚡ ESPHome: Installation, Build, and Flash
+
+## 1️⃣ ESPHome Installation
+Install a specific ESPHome version via Homebrew:
+
+```bash
+brew install esphome@2025.9.3
+esphome version  # should return 2025.9.3
 ```
 
-## 2. Lancer le build
-```
-esphome run my-esphome-acw02-fr.yaml
+---
+
+## 2️⃣ Build and Run
+```bash
+esphome run my-esphome-acw02.yaml
 ```
 
-## 3. Flashage
-```
+---
+
+## 3️⃣ Choose Upload Method
+After compilation, ESPHome will show multiple upload options:
+
+```text
 INFO Package configuration completed successfully
 INFO Package configuration completed successfully
 INFO Successfully compiled program.
@@ -33,10 +52,15 @@ Found multiple options for uploading, please choose one:
   [3] Over The Air (MQTT IP lookup)
 (number): 1
 ```
-Choisir la méthode adaptée à votre situation
 
-## 4. Démarrage et connection au Wifi (être patient :slight_smile: )
-```
+- Select the number that fits your situation.
+
+---
+
+## 4️⃣ Startup and Wi-Fi Connection
+Be patient during the first connection:
+
+```text
 esptool v5.0.2
 Connected to ESP32 on /dev/cu.usbserial-0001:
 Chip type:          ESP32-D0WD-V3 (revision v3.1)
@@ -85,3 +109,5 @@ Configuring flash size...
 [22:51:04.388][W][component:326]: mqtt cleared Warning flag
 [22:51:04.389][I][mqtt:309]: Connected
 ```
+
+
