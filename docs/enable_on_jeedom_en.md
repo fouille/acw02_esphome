@@ -19,6 +19,3 @@
 
 * Visualiser les commandes  
   ![jeedom](images/jeedom/jeedom-commands.png)
-
-* Visualiser le module
-  ![jeedom](images/jeedom/jeedom-module.png)
