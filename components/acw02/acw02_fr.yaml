@@ -259,20 +259,40 @@ text_sensor:
     entity_category: "diagnostic"
     lambda: |-
       return { id(ac_ctrl).get_address() };
+    on_value:
+      - lambda: |-
+          id(ac_ctrl).entity_mdns_sync(id(address_sensor).state);
   - platform: wifi_info
     ip_address:
       name: "WiFi: IP"
       id: wifi__ip
+      on_value:
+       - lambda: |-
+          id(ac_ctrl).entity_wifi_ip_sync(id(wifi__ip).state);
     ssid:
       name: "WiFi: Point d'accès connecté"
       id: wifi__ssid
+      on_value:
+       - lambda: |-
+          id(ac_ctrl).entity_wifi_ssid_sync(id(wifi__ssid).state);
     bssid:
       name: "WiFi: BSSID"
       id: wifi__bssid
+      on_value:
+       - lambda: |-
+          id(ac_ctrl).entity_wifi_bssid_sync(id(wifi__bssid).state);
     mac_address:
       name: "WiFi: MAC"
+      id: wifi__mac
+      on_value:
+       - lambda: |-
+          id(ac_ctrl).entity_wifi_mac_sync(id(wifi__mac).state);
   - platform: version
     name: "ESP: Version"
+    id: esp__version
+    on_value:
+       - lambda: |-
+          id(ac_ctrl).entity_esp_version_sync(id(esp__version).state);
   - platform: template
     name: "Warn Info"
     icon: mdi:alert-circle-outline
@@ -289,10 +309,20 @@ sensor:
     name: "WiFi: Signal"
     id: wifi__signal
     update_interval: 20s
+    on_value:
+      - lambda: |-
+          char buf[16];
+          snprintf(buf, sizeof(buf), "%.0f", x);
+          id(ac_ctrl).entity_wifi_signal_sync(std::string(buf));
   - platform: internal_temperature
     name: "ESP: Température CPU"
     id: esp__temp
     update_interval: 20s
+    on_value:
+      - lambda: |-
+          char buf[16];
+          snprintf(buf, sizeof(buf), "%.1f", x);
+          id(ac_ctrl).entity_internal_temperature_sync(std::string(buf));
   - platform: template
     name: "ESP: Mémoire libre"
     id: esp__memory
@@ -301,6 +331,11 @@ sensor:
     unit_of_measurement: "kB"
     update_interval: 20s
     entity_category: "diagnostic"
+    on_value:
+      - lambda: |-
+          char buf[16];
+          snprintf(buf, sizeof(buf), "%.1f", x);
+          id(ac_ctrl).entity_esp_memory_sync(std::string(buf));
 
 binary_sensor:
   - platform: template

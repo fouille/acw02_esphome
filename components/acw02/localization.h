@@ -57,7 +57,16 @@ inline const std::map<std::string, std::map<std::string, std::string>>& _LOCALIZ
       {"presetSave","Z-Preset-4: Sauvegarder"},
       {"presetDelete","Z-Preset-5: Supprimer"},
       {"presetNone","Aucun"},
-      {"cmdFailureCounter","Compteur d'échec de cmd"}
+      {"cmdFailureCounter","Compteur d'échec de cmd"},
+      {"MDNS","WiFi: mDNS"},
+      {"WiFiIP","WiFi: IP"},
+      {"WiFiSSID","WiFi: Point d'accès connecté"},
+      {"WiFiBSSID","WiFi: BSSID"},
+      {"WiFiMAC","WiFi: MAC"},
+      {"ESPVERSION","ESP: Version"},
+      {"WiFiSIGNAL","WiFi: Signal"},
+      {"INTERNALTEMP","ESP: Température CPU"},
+      {"ESPMEMORY","ESP: Mémoire libre"}
     }},
     {"en", {
       {"climate","AC"},
@@ -102,7 +111,16 @@ inline const std::map<std::string, std::map<std::string, std::string>>& _LOCALIZ
       {"presetSave","Z-Preset-4: Save"},
       {"presetDelete","Z-Preset-5: Delete"},
       {"presetNone","Off"},
-      {"cmdFailureCounter","Cmd failure counter"}
+      {"cmdFailureCounter","Cmd failure counter"},
+      {"MDNS","WiFi: mDNS"},
+      {"WiFiIP","WiFi: IP"},
+      {"WiFiSSID","WiFi: Connected Access Point"},
+      {"WiFiBSSID","WiFi: BSSID"},
+      {"WiFiMAC","WiFi: MAC"},
+      {"ESPVERSION","ESP: Version"},
+      {"WiFiSIGNAL","WiFi: Signal"},
+      {"INTERNALTEMP","ESP: CPU Temperature"},
+      {"ESPMEMORY","ESP: Free Memory"}
     }}
   };
   return LN;

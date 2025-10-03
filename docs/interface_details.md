@@ -49,7 +49,7 @@
 | #  | Description |
 |---:|-------------|
 | 1  | Destroy and recreate the Climate entity to reflect options like eco |
-| 2  | Enable MQTT version of G1 command and Z-config exclusion (useful if not using ESPHome integration in Home Assistant) |
+| 2  | Enable MQTT version of G1 command, Z-config exclusion and diagnostic (useful if not using ESPHome integration in Home Assistant, or if you want use the module on jeedom) |
 | 3  | Mute all commands sent from ESP to the AC (except for clean action) |
 | 4  | Destroy and recreate all MQTT entities |
 | 5  | Request status update from AC |
