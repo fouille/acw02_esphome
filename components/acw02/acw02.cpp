@@ -1071,6 +1071,42 @@ namespace esphome {
 
     void ACW02::mqtt_callback(const std::string &topic, const std::string &payload) {
       ESP_LOGW(TAG, "mqtt_callback =====>>>> start !");
+      // --- Gestion des nouveaux topics individuels pour chaque mode ---
+      if (topic.find("/cmd_ac/mode_") != std::string::npos) {
+        std::string mode_key = topic.substr(topic.find("/cmd_ac/mode_") + 13);
+        std::transform(mode_key.begin(), mode_key.end(), mode_key.begin(), ::toupper);
+
+        ESP_LOGW(TAG, "MQTT individual mode command received: %s (payload: %s)", mode_key.c_str(), payload.c_str());
+
+        if (payload == "OFF" || payload == "0") {
+          ESP_LOGI(TAG, "Ignoring OFF payload for mode command: %s", mode_key.c_str());
+          return;
+        }
+
+        std::string mode_value;
+        if (mode_key == "OFF")
+          mode_value = "Éteint";
+        else if (mode_key == "AUTO")
+          mode_value = "Auto";
+        else if (mode_key == "COOL")
+          mode_value = "Froid";
+        else if (mode_key == "DRY")
+          mode_value = "Désumidificateur";
+        else if (mode_key == "HEAT")
+          mode_value = "Chauffage";
+        else if (mode_key == "FAN")
+          mode_value = "Ventilateur";
+        else {
+          ESP_LOGE(TAG, "Unknown individual mode command: %s", mode_key.c_str());
+          return;
+        }
+
+        // On appelle la logique complète de traitement comme si c’était une commande native
+        std::string simulated_topic = app_name_ + "/cmd_ac/mode";
+        mqtt_callback(simulated_topic, mode_value);
+        return;
+      }
+
       std::string cmd = topic.substr(topic.find_last_of('/') + 1);
       if (topic.find("/cmd_ac/") != std::string::npos) {
         ESP_LOGW(TAG, "mqtt_callback cmd type cmd_ac !");
@@ -1463,13 +1499,13 @@ namespace esphome {
 
     void ACW02::publish_discovery_mode_select(bool recreate) {
       if (!mqtt_)
-      return;
+        return;
 
       const std::string topic_base = app_name_;
       const std::string unique_id = app_sanitize_name_ + "_mqtt_mode";
 
+      // Sélecteur principal
       std::string config_topic = "homeassistant/select/" + topic_base + "-mode/config";
-
       std::string payload = R"({
         "name": ")" + get_localized_name(app_lang_, "mode") + R"(",
         "object_id": ")" + unique_id + R"(",
@@ -1493,7 +1529,50 @@ namespace esphome {
       } else {
         publish_async(config_topic, payload, 1, true);
       }
+
+      // --- Nouvelle section : publication de boutons individuels pour chaque mode ---
+      const auto &mode_dict = LOCALIZED.at(app_lang_).at("mode");
+
+      for (const auto &it : mode_dict) {
+        const std::string &key = it.first;
+        const std::string &label = it.second;
+
+        // On respecte les conditions de disponibilité
+        if ((key == "AUTO" && is_disable_mode_auto()) ||
+            (key == "DRY" && is_disable_mode_dry()) ||
+            (key == "HEAT" && is_disable_mode_heat()) ||
+            (key == "FAN" && is_disable_mode_fan()))
+          continue;
+
+        const std::string button_unique_id = app_sanitize_name_ + "_mqtt_mode_" + sanitize_name(key);
+        std::string button_config_topic = "homeassistant/button/" + topic_base + "-mode-" + sanitize_name(key) + "/config";
+
+        std::string button_payload = R"({
+          "name": ")" + label + R"(",
+          "object_id": ")" + button_unique_id + R"(",
+          "unique_id": ")" + button_unique_id + R"(",
+          "icon": "mdi:thermostat",
+          "cmd_t": ")" + topic_base + R"(/cmd_ac/mode_)" + sanitize_name(key) + R"(",
+          "entity_category": "config",
+          "avty_t": ")" + topic_base + R"(/status",
+          "pl_avail": "online",
+          "pl_not_avail": "offline")" +
+          build_common_config_suffix() + R"(
+        })";
+
+        if (recreate) {
+          publish_async(button_config_topic, std::string(""), 1, true);
+          set_timeout("mqtt_publish_discovery_mode_button_" + sanitize_name(key),
+                      mqtt_delay_rebuild_,
+                      [this, button_config_topic, button_payload]() {
+                        publish_async(button_config_topic, button_payload, 1, true);
+                      });
+        } else {
+          publish_async(button_config_topic, button_payload, 1, true);
+        }
+      }
     }
+
 
     void ACW02::publish_discovery_fan_select(bool recreate) {
       if (!mqtt_)
