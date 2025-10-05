@@ -54,10 +54,10 @@
 | 4  | Destroy and recreate all MQTT entities |
 | 5  | Request status update from AC |
 | 6  | Restart the ESP |
-| 7  | MQTT IP (auto-saved; the validate button only restarts the ESP) |
-| 8  | MQTT username (auto-saved; the validate button only restarts the ESP) |
-| 9  | MQTT password (auto-saved; the validate button only restarts the ESP) |
-| 10 | MQTT port (auto-saved; the validate button only restarts the ESP) |
+| 7  | **⚠️ MANDATORY**  MQTT IP (auto-saved; the validate button only restarts the ESP) |
+| 8  | **⚠️ MANDATORY**  MQTT username (auto-saved; the validate button only restarts the ESP) |
+| 9  | **⚠️ MANDATORY**  MQTT password (auto-saved; the validate button only restarts the ESP) |
+| 10 | **⚠️ MANDATORY**  MQTT port (auto-saved; the validate button only restarts the ESP) |
 | 11 | Restart ESP to apply MQTT access changes |
 | 12 | Disable "Auto" mode (auto-saved; validate button will recreate MQTT entities) |
 | 13 | Disable "Dry" mode (auto-saved; validate button will recreate MQTT entities) |
