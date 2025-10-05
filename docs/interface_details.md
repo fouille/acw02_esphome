@@ -54,10 +54,10 @@
 | 4  | Destroy and recreate all MQTT entities |
 | 5  | Request status update from AC |
 | 6  | Restart the ESP |
-| 7  | ![Mandatory](https://img.shields.io/badge/-MANDATORY-yellow?style=flat-square) MQTT IP (auto-saved; the validate button only restarts the ESP) |
-| 8  | ![Mandatory](https://img.shields.io/badge/-MANDATORY-yellow?style=flat-square) MQTT username (auto-saved; the validate button only restarts the ESP) |
-| 9  | ![Mandatory](https://img.shields.io/badge/-MANDATORY-yellow?style=flat-square) MQTT password (auto-saved; the validate button only restarts the ESP) |
-| 10 | ![Mandatory](https://img.shields.io/badge/-MANDATORY-yellow?style=flat-square) MQTT port (auto-saved; the validate button only restarts the ESP) |
+| 7  | ![Mandatory](https://img.shields.io/badge/-MANDATORY-darkred?style=flat-square) MQTT IP (auto-saved; the validate button only restarts the ESP) |
+| 8  | ![Mandatory](https://img.shields.io/badge/-MANDATORY-darkred?style=flat-square) MQTT username (auto-saved; the validate button only restarts the ESP) |
+| 9  | ![Mandatory](https://img.shields.io/badge/-MANDATORY-darkred?style=flat-square) MQTT password (auto-saved; the validate button only restarts the ESP) |
+| 10 | ![Mandatory](https://img.shields.io/badge/-MANDATORY-darkred?style=flat-square) MQTT port (auto-saved; the validate button only restarts the ESP) |
 | 11 | Restart ESP to apply MQTT access changes |
 | 12 | Disable "Auto" mode (auto-saved; validate button will recreate MQTT entities) |
 | 13 | Disable "Dry" mode (auto-saved; validate button will recreate MQTT entities) |
