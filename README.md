@@ -1,6 +1,6 @@
 # ACW02 ESPHome Module  
 
-Custom ESPHome component for **Teknopoint** and **Airton** AC units using the **Tuya ACW02 Wi-Fi module**.  
+Custom ESPHome component for **Teknopoint** and **Airton** (Airton ref: 409729) AC units using the **Tuya ACW02 Wi-Fi module**.
 
 ---
 
@@ -34,7 +34,8 @@ Custom ESPHome component for **Teknopoint** and **Airton** AC units using the **
 
 > **Important**  
 > - Works on most **Teknopoint** units *(unconfirmed but no known issues so far, see the [Community Compatibility List](#-community-compatibility-list))*.  
-> - Works on most **Airton** units *(unconfirmed but no known issues so far, see the [Community Compatibility List](#-community-compatibility-list))*.  
+> - Works on most **Airton** units, *(unconfirmed but no known issues so far, see the [Community Compatibility List](#-community-compatibility-list))*
+> - Exception **Airton**,  AC units using the module WIFI 409945 of Airton are not compatible with this module.  
 
 ---
 
