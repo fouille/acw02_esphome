@@ -34,7 +34,8 @@ Custom ESPHome component for **Teknopoint** and **Airton** AC units using the **
 
 > **Important**  
 > - Works on most **Teknopoint** units *(unconfirmed but no known issues so far, see the [Community Compatibility List](#-community-compatibility-list))*.  
-> - Works on most **Airton** units (except AC unit using the module WIFI 409945 of airton) *(unconfirmed but no known issues so far, see the [Community Compatibility List](#-community-compatibility-list))*.  
+> - Works on most **Airton** units, *(unconfirmed but no known issues so far, see the [Community Compatibility List](#-community-compatibility-list))*
+> - Exception **Airton**,  AC unit using the module WIFI 409945 of airton are not compatible with this module.  
 
 ---
 
