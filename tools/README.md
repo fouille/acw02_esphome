@@ -78,6 +78,7 @@ Images are written to `firmware/build/<name>/`: `<name>.ota.bin` for OTA updates
 (web interface or `esphome upload`) and `<name>.factory.bin` for the first USB flash.
 ESPHome 2026.7.0 or later is required (Python 3.12): the script uses `.venv/bin/esphome`
 at the repository root when present, otherwise `esphome` from the `PATH`, or `ESPHOME=/path/to/esphome`.
+See [the macOS installation guide](../docs/install_from_macos_directly.md) to create `.venv` (Intel Macs need Rust).
 
 ### Cross-Platform Usage
 ```bash

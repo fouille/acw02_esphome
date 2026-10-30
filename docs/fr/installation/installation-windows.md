@@ -24,13 +24,13 @@ pip install --upgrade pip
 
 ### Installation d'une Version Spécifique
 ```powershell
-pip install esphome==2026.7.0
+pip install esphome==2026.7.4
 ```
 
 ### Vérification de l'Installation
 ```powershell
 esphome version
-# Devrait afficher: Version 2026.7.0
+# Devrait afficher: Version 2026.7.4
 ```
 
 ---
@@ -110,7 +110,7 @@ esphome logs mon-esphome-acw02.yaml
 ### Problème : pip install échoue
 ```powershell
 # Utilisez l'option --user si les permissions sont insuffisantes
-pip install --user esphome==2026.7.0
+pip install --user esphome==2026.7.4
 ```
 
 ### Problème : Port série non détecté
@@ -141,7 +141,7 @@ pip install --upgrade esphome
 ### Installer une Version Spécifique
 ```powershell
 pip uninstall esphome
-pip install esphome==2026.7.0
+pip install esphome==2026.7.4
 ```
 
 ---

@@ -23,12 +23,21 @@
 # ⚡ ESPHome : Installation, Compilation et Flash
 
 ## 1️⃣ Installation d'ESPHome
-Installer une version spécifique d'ESPHome via Homebrew :
+Installer Python 3.12 et ESPHome dans un environnement virtuel à la racine du dépôt
+(`.venv/` est ignoré par git et utilisé par `tools/scripts/build-devices.sh`) :
 
 ```bash
-brew install esphome@2026.7.0
-esphome version  # devrait retourner 2026.7.0
+brew install python@3.12
+"$(brew --prefix python@3.12)/bin/python3.12" -m venv .venv
+.venv/bin/pip install --upgrade pip
+.venv/bin/pip install "esphome==2026.7.4"
+.venv/bin/esphome version  # devrait retourner 2026.7.4
 ```
+
+> ⚠️ **Mac Intel (x86_64)** : ESPHome 2026.x dépend de `cbor2`, qui n'a pas de paquet précompilé pour Mac Intel
+> et doit être compilé avec Rust. Installez Rust avant ([rustup.rs](https://rustup.rs), puis ouvrez un nouveau terminal),
+> ou compilez avec Docker (`tools/docker/`). ESPHome 2026.7.0 lui-même ne s'installe pas sur Mac Intel
+> (conflit `cryptography`, corrigé en 2026.7.1).
 
 ---
 
@@ -94,15 +103,9 @@ source ~/.bash_profile
 
 ## 📦 Mise à Jour d'ESPHome
 
-Pour mettre à jour ESPHome vers une version plus récente :
+Pour changer de version d'ESPHome dans l'environnement virtuel :
 ```bash
-brew upgrade esphome
-```
-
-Pour installer une version spécifique :
-```bash
-brew uninstall esphome
-brew install esphome@2026.7.0
+.venv/bin/pip install --upgrade "esphome==2026.7.4"
 ```
 
 ---
