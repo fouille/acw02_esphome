@@ -30,6 +30,7 @@ Choisissez votre méthode d'installation préférée :
 - **[Guide de dépannage](usage/troubleshooting.md)**
 
 ### 🔬 Fonctionnalités Avancées
+- **[Référence MQTT (topics et commandes)](advanced/mqtt-reference.md)**
 - **[Utilisation MQTT uniquement (sans intégration HA)](advanced/mqtt-only.md)**
 - **[Configuration de presets personnalisés](advanced/custom-presets.md)**
 - **[Intégration Jeedom](advanced/jeedom-integration.md)**

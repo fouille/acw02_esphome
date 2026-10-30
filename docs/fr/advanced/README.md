@@ -2,6 +2,10 @@
 
 Pour les utilisateurs expérimentés souhaitant exploiter pleinement les capacités du module ACW02.
 
+📡 **[Référence MQTT](mqtt-reference.md)** : tous les topics publiés et toutes les commandes acceptées par le module.
+
+> ⚠️ **Topics MQTT** : certains topics cités dans cette page (`homeassistant/climate/…/set`, `acw02_salon/…`) n'existent pas dans le firmware. La liste exacte des topics et des payloads est dans la [Référence MQTT](mqtt-reference.md).
+
 ---
 
 ## 🎯 Vue d'Ensemble

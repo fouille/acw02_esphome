@@ -2,6 +2,8 @@
 
 Explore advanced features and configurations for power users and specialized setups.
 
+📡 **[MQTT Reference](mqtt-reference.md)**: every topic published and every command accepted by the module.
+
 ## 🎯 Advanced Features Overview
 
 ### Available Advanced Configurations

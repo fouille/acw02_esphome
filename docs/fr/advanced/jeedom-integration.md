@@ -2,6 +2,8 @@
 
 Guide complet pour intégrer le module ACW02 avec Jeedom via MQTT.
 
+> ⚠️ **Topics MQTT** : certains topics cités dans cette page (`homeassistant/climate/…/set`, `acw02_salon/…`) n'existent pas dans le firmware. La liste exacte des topics et des payloads est dans la [Référence MQTT](mqtt-reference.md).
+
 ---
 
 ## 📋 Prérequis

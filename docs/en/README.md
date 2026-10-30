@@ -32,6 +32,7 @@ Welcome to the complete English documentation for the ACW02 project.
 
 ### Advanced Features
 - **[Advanced Configuration](advanced/README.md)** - Advanced features overview
+- **[MQTT Reference](advanced/mqtt-reference.md)** - Every topic and command
 - **[MQTT-Only Mode](advanced/mqtt-only.md)** - Configuration without Home Assistant
 - **[Jeedom Integration](advanced/jeedom.md)** - Integration with Jeedom
 - **[Custom Presets](advanced/custom-presets.md)** - Creating custom presets

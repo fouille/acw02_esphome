@@ -2,6 +2,8 @@
 
 Cette configuration permet d'utiliser le module ACW02 **uniquement via MQTT**, sans passer par l'intégration ESPHome native de Home Assistant. Idéal pour Jeedom, OpenHAB, ou autres systèmes domotiques.
 
+> ⚠️ **Topics MQTT** : certains topics cités dans cette page (`homeassistant/climate/…/set`, `acw02_salon/…`) n'existent pas dans le firmware. La liste exacte des topics et des payloads est dans la [Référence MQTT](mqtt-reference.md).
+
 ---
 
 ## 🎯 Cas d'Usage
