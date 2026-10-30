@@ -2,7 +2,7 @@
 
 ### 🐍 Python
 
-Install Python 3.11 from the Microsoft Store.
+Install Python 3.12 from the Microsoft Store.
 
 ---
 
@@ -17,7 +17,7 @@ pip install --upgrade pip
 ## 🧱 Install ESPHome
 
 ```powershell
-pip install esphome==2025.9.3
+pip install esphome==2026.7.0
 ```
 
 ---
