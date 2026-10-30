@@ -23,22 +23,22 @@ jobs:
       matrix:
         include:
           - id: d1-mini
-            path: test-build/builder-acw02-fr-d1-mini.yaml
+            path: other/test-build/builder-acw02-fr-d1-mini.yaml
           - id: lolin-c3
-            path: test-build/builder-acw02-fr-lolin-c3.yaml
+            path: other/test-build/builder-acw02-fr-lolin-c3.yaml
           - id: xiao-c3
-            path: test-build/builder-acw02-fr-xiao-c3.yaml
+            path: other/test-build/builder-acw02-fr-xiao-c3.yaml
           - id: xiao-c6
-            path: test-build/builder-acw02-fr-xiao-c6.yaml
+            path: other/test-build/builder-acw02-fr-xiao-c6.yaml
 
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Set up Python
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v6
         with:
-          python-version: '3.11'
+          python-version: '3.12'
 
       - name: Install latest ESPHome
         run: python -m pip install --upgrade esphome

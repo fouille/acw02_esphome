@@ -3,10 +3,10 @@ text:
     name: "MQTT: Broker"
     id: mqtt_broker_address_input
     entity_category: config
-    update_interval: never
+    update_interval: 60s
     mode: text
     lambda: |-
-      return id(ac_ctrl).get_mqtt_broker();
+      return std::string(id(ac_ctrl).get_mqtt_broker());
     set_action:
       then:
         - lambda: |-
@@ -17,10 +17,10 @@ text:
     name: "MQTT: Login"
     id: mqtt_login_input
     entity_category: config
-    update_interval: never
+    update_interval: 60s
     mode: text
     lambda: |-
-      return id(ac_ctrl).get_mqtt_username();
+      return std::string(id(ac_ctrl).get_mqtt_username());
     set_action:
       then:
         - lambda: |-
@@ -31,10 +31,10 @@ text:
     name: "MQTT: Password"
     id: mqtt_password_input
     entity_category: config
-    update_interval: never
+    update_interval: 60s
     mode: password
     lambda: |-
-      return id(ac_ctrl).get_mqtt_password();
+      return std::string(id(ac_ctrl).get_mqtt_password());
     set_action:
       then:
         - lambda: |-
@@ -44,11 +44,11 @@ text:
   - platform: template
     name: "MQTT: Port"
     id: mqtt_port_input
-    update_interval: never
+    update_interval: 60s
     mode: text
     entity_category: config
     lambda: |-
-      return id(ac_ctrl).int_to_string(id(ac_ctrl).get_mqtt_port());
+      return std::string(id(ac_ctrl).int_to_string(id(ac_ctrl).get_mqtt_port()));
     set_action:
       then:
         - lambda: |-
@@ -56,41 +56,41 @@ text:
             id(mqtt_port_input).update();
 
   - platform: template
-    name: "G1: Z-CMD Delay mute between cmd"
+    name: "G1: Z-CMD Delai cmd silencieuse"
     id: mute_next_cmd_delay
-    update_interval: never
+    update_interval: 60s
     icon: mdi:volume-off
     mode: text
     entity_category: config
     lambda: |-
-      return id(ac_ctrl).int_to_string(id(ac_ctrl).get_mute_next_cmd_delay());
+      return std::string(id(ac_ctrl).int_to_string(id(ac_ctrl).get_mute_next_cmd_delay()));
     set_action:
       then:
         - lambda: |-
             id(ac_ctrl).set_mute_next_cmd_delay_string(x);
   - platform: template
-    name: "G1: Z-CMD Delay mute next cmd after AC on"
+    name: "G1: Z-CMD Delai cmd silencieuse après un allumage"
     id: mute_next_cmd_after_on_delay
-    update_interval: never
+    update_interval: 60s
     icon: mdi:volume-off
     mode: text
     entity_category: config
     lambda: |-
-      return id(ac_ctrl).int_to_string(id(ac_ctrl).get_mute_next_cmd_after_on_delay());
+      return std::string(id(ac_ctrl).int_to_string(id(ac_ctrl).get_mute_next_cmd_after_on_delay()));
     set_action:
       then:
         - lambda: |-
             id(ac_ctrl).set_mute_next_cmd_after_on_delay_string(x);
-  
+
   - platform: template
-    name: "G1: Z-CMD Delai publish state after AC on"
+    name: "G1: Z-CMD Delai de publication de status apres un allumage"
     id: publish_stats_after_power_on_delay
-    update_interval: never
+    update_interval: 60s
     icon: mdi:publish
     mode: text
     entity_category: config
     lambda: |-
-      return id(ac_ctrl).int_to_string(id(ac_ctrl).get_publish_stats_after_power_on_delay());
+      return std::string(id(ac_ctrl).int_to_string(id(ac_ctrl).get_publish_stats_after_power_on_delay()));
     set_action:
       then:
         - lambda: |-
@@ -98,7 +98,7 @@ text:
 
 switch:
   - platform: template
-    name: "G1: MQTT version options"
+    name: "G1: Options version MQTT"
     id: g1_mqtt_options
     entity_category: "config"
     lambda: |-
@@ -109,7 +109,7 @@ switch:
       - lambda: id(ac_ctrl).set_g1_mqtt_options(false);
 
   - platform: template
-    name: "G1: Mute command"
+    name: "G1: Commande silencieuse"
     id: mute_commande_api
     icon: mdi:volume-off
     entity_category: "config"
@@ -121,7 +121,7 @@ switch:
       - lambda: id(ac_ctrl).set_mute(false);
 
   - platform: template
-    name: "Z-Config: Auto mode excluded"
+    name: "Z-Config: Exclu mode Auto"
     id: disable_mode_auto
     icon: "mdi:thermostat-cog"
     entity_category: "config"
@@ -133,7 +133,7 @@ switch:
       - lambda: id(ac_ctrl).set_disable_mode_auto(false);
 
   - platform: template
-    name: "Z-Config: Heat mode excluded"
+    name: "Z-Config: Exclu mode Chauffage"
     id: disable_mode_heat
     icon: "mdi:thermostat-cog"
     entity_category: "config"
@@ -145,7 +145,7 @@ switch:
       - lambda: id(ac_ctrl).set_disable_mode_heat(false);
 
   - platform: template
-    name: "Z-Config: Dry mode excluded"
+    name: "Z-Config: Exclu mode Déshumidification"
     id: disable_mode_dry
     icon: "mdi:thermostat-cog"
     entity_category: "config"
@@ -157,7 +157,7 @@ switch:
       - lambda: id(ac_ctrl).set_disable_mode_dry(false);
 
   - platform: template
-    name: "Z-Config: Fan mode excluded"
+    name: "Z-Config: Exclu mode Ventilation"
     id: disable_mode_fan
     icon: "mdi:thermostat-cog"
     entity_category: "config"
@@ -169,7 +169,7 @@ switch:
       - lambda: id(ac_ctrl).set_disable_mode_fan(false);
 
   - platform: template
-    name: "Z-Config: Swing vertical excluded"
+    name: "Z-Config: Exclu oscillation vertical"
     id: disable_swing_vertical
     icon: "mdi:thermostat-cog"
     entity_category: "config"
@@ -181,7 +181,7 @@ switch:
       - lambda: id(ac_ctrl).set_disable_swing_vertical(false);
 
   - platform: template
-    name: "Z-Config: Swing horizontal excluded"
+    name: "Z-Config: Exclu oscillation horizontal"
     id: disable_swing_horizontal
     icon: "mdi:thermostat-cog"
     entity_category: "config"
@@ -203,9 +203,9 @@ switch:
       - lambda: id(ac_ctrl).set_option_recalculate_climate(true);
     turn_off_action:
       - lambda: id(ac_ctrl).set_option_recalculate_climate(false);
-  
+
   - platform: template
-    name: "G1: Mode Off reset Eco/Purifier"
+    name: "G1: Mode éteint reset Eco⁄Purificateur"
     id: reset_eco_purifier_ac_off
     icon: mdi:lock-reset
     entity_category: "config"
@@ -218,15 +218,15 @@ switch:
 
 button:
   - platform: restart
-    name: "G1: Restart"
+    name: "G1: Redémarrer"
     id: restart_module_ac
 
   - platform: restart
-    name: "MQTT: Validate"
+    name: "MQTT: Valider"
     id: validate_mqtt
   
   - platform: template
-    name: "G1: Refresh data"
+    name: "G1: Actualiser data"
     id: get_status_button
     icon: mdi:cloud-refresh-variant
     entity_category: "config"
@@ -235,16 +235,16 @@ button:
           id(ac_ctrl).reload_ac_info();
 
   - platform: template
-    name: "G1: Rebuild MQTT entities"
+    name: "G1: Reconstruire les entitées MQTT"
     id: rebuild_mqtt_entities
     icon: mdi:cloud-refresh-variant
     entity_category: "config"
     on_press:
       - lambda: |-
           id(ac_ctrl).rebuild_mqtt_entity();
-
+  
   - platform: template
-    name: "Z-Config: Validate"
+    name: "Z-Config: Valider"
     id: apply_disable_settings
     icon: mdi:send
     entity_category: "config"
@@ -270,7 +270,7 @@ text_sensor:
        - lambda: |-
           id(ac_ctrl).entity_wifi_ip_sync(id(wifi__ip).state);
     ssid:
-      name: "WiFi: Connected Access Point"
+      name: "WiFi: Point d'accès connecté"
       id: wifi__ssid
       on_value:
        - lambda: |-
@@ -315,7 +315,7 @@ sensor:
           snprintf(buf, sizeof(buf), "%.0f", x);
           id(ac_ctrl).entity_wifi_signal_sync(std::string(buf));
   - platform: internal_temperature
-    name: "ESP: CPU Temperature"
+    name: "ESP: Température CPU"
     id: esp__temp
     update_interval: 20s
     on_value:
@@ -324,7 +324,7 @@ sensor:
           snprintf(buf, sizeof(buf), "%.1f", x);
           id(ac_ctrl).entity_internal_temperature_sync(std::string(buf));
   - platform: template
-    name: "ESP: Free Memory"
+    name: "ESP: Mémoire libre"
     id: esp__memory
     lambda: |-
       return heap_caps_get_free_size(MALLOC_CAP_INTERNAL) / 1024.0;
@@ -345,14 +345,14 @@ binary_sensor:
     entity_category: "diagnostic"
   - platform: template
     id: filter_dirty
-    name: "Filter to clean"
+    name: "Filtre à nettoyer"
     device_class: problem
     internal: true
   - platform: template
     id: warn_sensor
     name: "Warn"
-    internal: true
     device_class: problem
+    internal: true
   - platform: template
     id: error_sensor
     name: "Error"
@@ -390,9 +390,6 @@ interval:
           id(mute_next_cmd_after_on_delay).update();
           id(publish_stats_after_power_on_delay).update();
           id(address_sensor).update();
-          id(wifi__ip).update();
-          id(wifi__ssid).update();
-          id(wifi__bssid).update();
           id(wifi__signal).update();
           id(esp__temp).update();
           id(esp__memory).update();
